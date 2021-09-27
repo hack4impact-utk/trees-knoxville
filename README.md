@@ -22,10 +22,10 @@ Note: Running yarn build then yarn start will start the application in productio
 * Figma for mockups
 * Confluence for formal documents
 ## Code/PR Workflow
-* Create a new branch in the format `[GITHUB_USERNAME]/MUSE-[JIRA ISSUE NUMBER]-[SHORT_DESCRIPTION]` by running `git checkout -b [BRANCH NAME]`
+* Create a new branch in the format `[GITHUB_USERNAME]/TKW-[JIRA ISSUE NUMBER]-[SHORT_DESCRIPTION]` by running `git checkout -b [BRANCH NAME]`
   * This way the issues are closed on Jira when we merge the PR with that branch name
 ### Example Branch
-    rluberto/TK-12-init-project
+    rluberto/TKW-12-init-project
 
 * Be sure to lint, format, and type-check your code occasionally to catch errors by running `yarn lint`.
 * Commit changes.
