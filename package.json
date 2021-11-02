@@ -12,6 +12,9 @@
     "lint:eslint": "eslint '**/*.{tsx,ts,js,jsx,json}' --fix"
   },
   "dependencies": {
+    "@types/enzyme": "^3.10.10",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/jest": "^27.0.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
