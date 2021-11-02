@@ -14,7 +14,6 @@ export const TreeSchema = new Schema({
     },
 
     coordinates: {
-        required: true, 
 
         latitude: {
             type: Number,
