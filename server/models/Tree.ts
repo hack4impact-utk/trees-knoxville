@@ -11,6 +11,7 @@ export const TreeSchema = new Schema({
     age: {
         type: Number,
         required: true,
+        default: 0,
     },
 
     coordinates: {
@@ -29,16 +30,19 @@ export const TreeSchema = new Schema({
     adopted: {
         type: Boolean,
         required: true,
+        default: false,
     },
 
     watering: {
         type: Boolean,
         required: true,
+        default: false,
     },
 
     pruning: {
         type: Boolean,
         required: true,
+        default: false,
     },
 });
 
