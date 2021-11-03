@@ -3,11 +3,13 @@ import TreeSchema from "../../server/models/Tree";
 import { Tree } from "../../utils/types";
 import mongoose from "mongoose";
 
-describe("addTree() tests", () => {
+describe("addTree() tests", () => {  
+    afterAll(() => mongoose.disconnect());
+
     test("valid tree", async () => {
         const mockTree = {
             species: "test species",
-            age: 1234,
+            age: 222,
             coordinates: {
                 latitude: 12345,
                 longitude: 123456,
@@ -24,7 +26,4 @@ describe("addTree() tests", () => {
         expect(TreeSchema.create).lastCalledWith(mockTree);
         expect(TreeSchema.create).toHaveBeenCalledTimes(1);
     });
-    afterAll(async () => {
-        await mongoose.connection.close()
-      });
 });
