@@ -1,6 +1,7 @@
 import { addTree } from "../../server/actions/Tree";
 import TreeSchema from "../../server/models/Tree";
 import { Tree } from "../../utils/types";
+import mongoose from "mongoose";
 
 describe("addTree() tests", () => {
     test("valid tree", async () => {
@@ -23,4 +24,7 @@ describe("addTree() tests", () => {
         expect(TreeSchema.create).lastCalledWith(mockTree);
         expect(TreeSchema.create).toHaveBeenCalledTimes(1);
     });
+    afterAll(async () => {
+        await mongoose.connection.close()
+      });
 });
