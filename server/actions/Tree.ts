@@ -38,3 +38,4 @@ export const getTreesByVisibilityStatus = async function (visibilityStatus: bool
     await mongoDB();
     return await TreeSchema.find({published:visibilityStatus});
 }
+
