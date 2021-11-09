@@ -26,6 +26,8 @@
     "eslint-plugin-react": "^7.26.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-tsc": "^2.0.0",
+    "google-map-react": "^2.1.10",
+    "google-maps-react": "^2.0.6",
     "husky": "^7.0.2",
     "jest": "^27.2.2",
     "lint-staged": "^11.1.2",
