@@ -4,12 +4,15 @@ import MapContainer from "../components/Map";
 
 export default function HomePage() {
     return (
+    <div> 
+        <head>
+        <title>Trees Knoxville | Map</title>
+        </head>
+        <h1>Welcome to Trees Knoxville!</h1>
+        <br></br>
         <div>
-            <h1>Welcome to Trees Knoxville!</h1>
-            <div>
-                <MapContainer />
-            </div>        
-        </div>
-
+            <MapContainer />
+        </div>  
+    </div>
     );
 }
