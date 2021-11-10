@@ -1,7 +1,9 @@
 import React from "react";
-import { getTreesByVisibilityStatus } from "../../server/actions/Tree";
+import { addTree, getTreesByVisibilityStatus } from "../../server/actions/Tree";
 import MapContainer from "../components/Map";
 import { Tree } from "../../utils/types"
+
+// import Tree from "../../server/models/Tree";
 
 const mockTree: Tree = {
     species: "test species",
@@ -26,11 +28,14 @@ const mockTree2: Tree = {
     pruning: false,
 };
 export default function HomePage() {
+    // addTree(mockTree);
+    // addTree(mockTree2);
     // const gatherData = async () => {
     //     const trees = await getTreesByVisibilityStatus(true);
     //     return trees;
     // };
-    // let treeList = gatherData();
+    // console.log(gatherData());
+    // var treeList = gatherData();
     let treeList: Tree[] = [mockTree, mockTree2];
 
     return (
