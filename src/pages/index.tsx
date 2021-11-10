@@ -1,5 +1,6 @@
 import React from "react";
-import Filter from "../components/Filter/index"
+import Filter from "src/components/Filter/index"
+import MapContainer from "../components/Map";
 
 
 export default function HomePage() {
@@ -10,7 +11,9 @@ export default function HomePage() {
         </head>
         <h1>Welcome to Trees Knoxville!</h1>
         <Filter/>
-        <br></br> Map Goes Here
+        <div>
+            <MapContainer />
+        </div>  
     </div>
 
     );
