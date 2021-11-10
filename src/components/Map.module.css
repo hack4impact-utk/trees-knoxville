@@ -1,0 +1,7 @@
+.Map {
+    display: flex;
+    flex-direction: horizontal;
+    justify-content: center;
+    justify-self: center;
+    height: 550px;
+  }

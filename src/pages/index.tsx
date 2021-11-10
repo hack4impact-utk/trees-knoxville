@@ -1,4 +1,5 @@
 import React from "react";
+import MapContainer from "../components/Map";
 
 
 export default function HomePage() {
@@ -8,7 +9,10 @@ export default function HomePage() {
         <title>Trees Knoxville | Map</title>
         </head>
         <h1>Welcome to Trees Knoxville!</h1>
-        <br></br> Map Goes Here
+        <br></br>
+        <div>
+            <MapContainer />
+        </div>  
     </div>
     );
 }
