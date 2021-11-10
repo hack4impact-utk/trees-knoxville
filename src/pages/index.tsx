@@ -6,7 +6,7 @@ export default function HomePage() {
     return (
     <div> 
         <head>
-        <title>Trees Knoxville | Map</title>
+            <title>Map | Trees Knoxville</title>
         </head>
         <h1>Welcome to Trees Knoxville!</h1>
         <br></br>
