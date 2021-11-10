@@ -3,7 +3,8 @@ import { ChildComponentProps } from "google-map-react";
 
 
 const Marker: FunctionComponent<ChildComponentProps> = (): JSX.Element => {
-    return (
+    return (           
+        // SVG code for the tree marker. May need to change
         <div>
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="25.000000pt" height="21.750000pt" viewBox="0 0 300.000000 261.000000" preserveAspectRatio="xMidYMid meet">
                 <g transform="translate(0.000000,261.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">

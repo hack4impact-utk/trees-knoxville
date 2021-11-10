@@ -16,8 +16,9 @@ const MapContainer: FunctionComponent<Trees> = ({trees}) => {
             bootstrapURLKeys={{key: process.env.NEXT_PUBLIC_MAPS_API_KEY ?? ''}}
             defaultCenter={{ lat: 35.96, lng: -83.92 }}
             defaultZoom={11}>
-            <Marker lat={35.96} lng={-83.92} />
-
+                { trees.map( tree => (
+                    <Marker lat={tree.coordinates.latitude} lng={tree.coordinates.longitude} />
+                ))}
             </Map>
         </div>
     );
