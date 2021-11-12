@@ -1,13 +1,15 @@
-import mongoDB from "../index";
-import TreeSchema from "../models/Tree";
-import { Types } from "mongoose";
-import { Tree } from "../../utils/types";
+import mongoDB from "server/index";
+import TreeSchema from "server/models/Tree";
+import { Tree } from "utils/types";
+import urls from "utils/urls";
 
 /**
  * @param tree The tree to insert into our database.
  */
  export const addTree = async function (tree: Tree) {
     await mongoDB();
+    console.log("dbUrl: ", urls.dbUrl);
+
     if (!tree) {
         console.error("Could not add tree.");
         throw Error;

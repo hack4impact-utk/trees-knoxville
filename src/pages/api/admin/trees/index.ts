@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Tree } from "../../../../../utils/types"
-import { addTree, updateTree } from "../../../../../server/actions/Tree"
-import { format } from "prettier";
+import { Tree } from "utils/types"
+import { addTree, getTreesByVisibilityStatus } from "server/actions/Tree"
 
 
 
@@ -12,6 +11,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const form: Tree = JSON.parse(req.body);
             
             await addTree(form);
+            
+            console.log(await getTreesByVisibilityStatus(false));
 
         }
     } catch (error) {}

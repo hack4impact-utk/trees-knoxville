@@ -1,5 +1,5 @@
 import { model, models, Model, Schema, Document } from "mongoose";
-import { Tree } from "../../utils/types";
+import { Tree } from "utils/types";
 
 export const TreeSchema = new Schema({
 
