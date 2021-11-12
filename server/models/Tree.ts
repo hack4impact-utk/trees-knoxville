@@ -44,6 +44,12 @@ export const TreeSchema = new Schema({
         required: true,
         default: false,
     },
+
+    published: {
+        type: Boolean,
+        required: true,
+        default: false,
+    }
 });
 
 export interface TreeDocument extends Omit<Tree, "_id">, Document {}

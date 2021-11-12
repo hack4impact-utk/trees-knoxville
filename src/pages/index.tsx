@@ -1,8 +1,18 @@
 import React from "react";
+import MapContainer from "../components/Map";
 
 
 export default function HomePage() {
     return (
-    <h1>Welcome to Trees Knoxville!</h1>
+    <div> 
+        <head>
+            <title>Map | Trees Knoxville</title>
+        </head>
+        <h1>Welcome to Trees Knoxville!</h1>
+        <br></br>
+        <div>
+            <MapContainer />
+        </div>  
+    </div>
     );
 }

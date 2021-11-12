@@ -10,4 +10,5 @@ export interface Tree {
     adopted?: boolean;
     watering?: boolean;
     pruning?: boolean;
+    published?: boolean;
 }
