@@ -17,6 +17,22 @@ import { Tree } from "../../utils/types";
 };
 
 /**
+ * @param id The tree to delete from our database.
+ */
+export const deleteTree = async function (id: string) {
+    await mongoDB();
+    if (!id || id == "") {
+        console.error("Invalid ID");
+        throw Error;
+    }
+
+    const model = await TreeSchema.findByIdAndDelete(id);
+    if (!model) {
+        console.error("Tree not found");
+        throw Error;
+    }
+}
+/**
  * @param queryTree tree object containing only the ID
  * @param newTree new tree to replace the old one
  */
