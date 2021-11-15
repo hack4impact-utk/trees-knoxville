@@ -13,6 +13,7 @@ export default async () => {
         .connect(DB_URL)
         .catch((error: any) => {
             console.error("Database connection failed.");
+            console.error(error);
             throw error;
         });
 };

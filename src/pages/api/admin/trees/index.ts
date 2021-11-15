@@ -11,9 +11,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const form: Tree = JSON.parse(req.body);
             
             await addTree(form);
-            
-            console.log(await getTreesByVisibilityStatus(false));
 
+            res.status(200).json({
+                payload: {}
+             });
         }
     } catch (error) {}
 }
