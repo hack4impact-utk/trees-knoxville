@@ -8,7 +8,6 @@ import urls from "utils/urls";
  */
  export const addTree = async function (tree: Tree) {
     await mongoDB();
-    console.log("dbUrl: ", urls.dbUrl);
 
     if (!tree) {
         console.error("Could not add tree.");

@@ -8,10 +8,9 @@ const AddTreeForm = () => {
     const age = useRef<HTMLInputElement>(null);
     const latitude = useRef<HTMLInputElement>(null);
     const longitude = useRef<HTMLInputElement>(null);
-    const adopted = useRef(null);
-    const watering = useRef(null);
-    const pruning = useRef(null);
-
+    const [adopted, setAdopted] = React.useState<boolean>(false);
+    const [watering, setWatering] = React.useState<boolean>(false);
+    const [pruning, setPruning] = React.useState<boolean>(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -24,22 +23,28 @@ const AddTreeForm = () => {
                 latitude: parseFloat(latitude.current!.value),
                 longitude: parseFloat(longitude.current!.value),
             },
-            /*
-            adopted: adopted.current!,
-            watering: watering.current!,
-            pruning: pruning.current!,
-            */
-           adopted: false,
-           watering: true,
-           pruning: true,
+            adopted: adopted,
+            watering: watering,
+            pruning: pruning,
         }
 
         const r = await fetch(urls.api.trees, {
             method: "POST",
             body: JSON.stringify(tree),
-        });
-        
+        });  
     }
+
+    const handleAdoptedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setAdopted(e.target.checked);
+    };
+
+    const handleWateringChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setWatering(e.target.checked);
+    };
+
+    const handlePruningChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPruning(e.target.checked);
+    };
 
     return (
         <div>
@@ -80,7 +85,7 @@ const AddTreeForm = () => {
                 <input
                     type="checkbox"
                     name="adopted"
-                    ref={adopted}
+                    onChange={handleAdoptedChange}
                     placeholder="Adopted"
                     id="adoptedCheckbox"
                         />
@@ -88,7 +93,7 @@ const AddTreeForm = () => {
                 <input
                     type="checkbox"
                     name="watering"
-                    ref={watering}
+                    onChange={handleWateringChange}
                     placeholder="Watering"
                     id="wateringCheckbox"
                         />
@@ -96,7 +101,7 @@ const AddTreeForm = () => {
                 <input
                     type="checkbox"
                     name="pruning"
-                    ref={pruning}
+                    onChange={handlePruningChange}
                     placeholder="Pruning"
                     id="pruningCheckbox"
                         />
