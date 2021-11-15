@@ -13,8 +13,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             await addTree(form);
 
             res.status(200).json({
+                success: true,
                 payload: {}
              });
         }
-    } catch (error) {}
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            success: false,
+            message: error,
+        })
+    }
 }
