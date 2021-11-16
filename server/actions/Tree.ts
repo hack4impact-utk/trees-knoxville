@@ -17,6 +17,29 @@ import { Tree } from "../../utils/types";
 };
 
 /**
+ * @param queryTree tree object containing only ID of the 
+ * @returns a single tree
+ */
+export const getTree = async function(queryTree: Tree) {
+    await mongoDB();
+    
+    const keys = Object.keys(queryTree);
+    
+    if (!queryTree || keys.length != 1 || keys[0] != "_id") {
+        console.error("Invalid ID");
+        throw new Error("Invalid ID");
+    }
+
+    const tree = await TreeSchema.findById(queryTree);
+    if (!tree) {
+        console.error("Tree not found");
+        throw new Error("Tree not found");
+    }
+
+    return tree;
+}
+
+/**
  * @param id The tree to delete from our database.
  */
 export const deleteTree = async function (id: string) {
