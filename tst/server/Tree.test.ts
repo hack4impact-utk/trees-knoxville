@@ -97,7 +97,8 @@ describe("getTree() tests", () => {
             _id: "test-id1234"
         };
 
-        TreeSchema.findById = jest.fn().mockResolvedValue(undefined);
+        // findById returns null if a tree was not found
+        TreeSchema.findById = jest.fn().mockResolvedValue(null);
         
         expect(getTree(mockQueryTree)).rejects.toThrow("Tree not found");
     });
