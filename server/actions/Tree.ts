@@ -23,7 +23,7 @@ import { Tree } from "../../utils/types";
 export const getTree = async function(queryTree: Tree) {
     await mongoDB();
     
-    var keys = Object.keys(queryTree);
+    const keys = Object.keys(queryTree);
     
     if (!queryTree || keys.length != 1 || keys[0] != "_id") {
         console.error("Invalid ID");
