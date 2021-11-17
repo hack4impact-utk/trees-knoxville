@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { Tree } from "../../../utils/types";
-import urls from "../../../utils/urls";
+import { Tree } from "utils/types";
+import urls from "utils/urls";
 
 const AddTreeForm = () => {
 
