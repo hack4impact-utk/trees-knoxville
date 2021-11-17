@@ -4,8 +4,8 @@ export interface Tree {
     species?: string;
     age?: number;
     coordinates?: {
-        latitude?: number,
-        longitude?: number,
+        latitude?: string,
+        longitude?: string,
     };
     adopted?: boolean;
     watering?: boolean;

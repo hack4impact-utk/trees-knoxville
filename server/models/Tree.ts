@@ -17,12 +17,12 @@ export const TreeSchema = new Schema({
     coordinates: {
 
         latitude: {
-            type: Number,
+            type: String,
             required: true,
         },
 
         longitude: {
-            type: Number,
+            type: String,
             required: true,
         }
     },
