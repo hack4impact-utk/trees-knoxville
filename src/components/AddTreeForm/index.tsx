@@ -20,8 +20,8 @@ const AddTreeForm = () => {
             species: species.current!.value,
             age: parseInt(age.current!.value),
             coordinates: {
-                latitude: parseFloat(latitude.current!.value),
-                longitude: parseFloat(longitude.current!.value),
+                latitude: latitude.current!.value,
+                longitude: longitude.current!.value,
             },
             adopted: adopted,
             watering: watering,
