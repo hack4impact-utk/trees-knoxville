@@ -45,6 +45,11 @@ export const TreeSchema = new Schema({
         default: false,
     },
 
+    datePlanted: {
+        type: Date,
+        required: true,
+    },
+
     published: {
         type: Boolean,
         required: true,

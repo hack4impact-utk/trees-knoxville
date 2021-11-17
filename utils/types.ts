@@ -10,5 +10,6 @@ export interface Tree {
     adopted?: boolean;
     watering?: boolean;
     pruning?: boolean;
+    datePlanted?: Date;
     published?: boolean;
 }
