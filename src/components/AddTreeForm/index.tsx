@@ -8,6 +8,7 @@ const AddTreeForm = () => {
     const age = useRef<HTMLInputElement>(null);
     const latitude = useRef<HTMLInputElement>(null);
     const longitude = useRef<HTMLInputElement>(null);
+    const datePlanted = useRef<HTMLInputElement>(null);
     const [adopted, setAdopted] = React.useState<boolean>(false);
     const [watering, setWatering] = React.useState<boolean>(false);
     const [pruning, setPruning] = React.useState<boolean>(false);
@@ -23,6 +24,7 @@ const AddTreeForm = () => {
                 latitude: latitude.current!.value,
                 longitude: longitude.current!.value,
             },
+            datePlanted: new Date(Date.now()),
             adopted: adopted,
             watering: watering,
             pruning: pruning,
@@ -80,6 +82,13 @@ const AddTreeForm = () => {
                     placeholder="Longitude"
                     required
                     id="longitudeField"
+                        />
+                <input
+                    type="date"
+                    name="datePlanted"
+                    ref={datePlanted}
+                    placeholder="Date Planted"
+                    id="datePlantedField"
                         />
                 <label htmlFor="adopted">Adopted</label>
                 <input
