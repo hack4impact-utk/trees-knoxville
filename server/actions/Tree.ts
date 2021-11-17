@@ -41,6 +41,19 @@ export const getTree = async function(queryTree: Tree) {
 }
 
 /**
+ * @returns all trees in the database
+ */
+export const getTrees = async function() {
+    await mongoDB();
+
+    const trees = await TreeSchema.find({});
+    if (!trees) {
+        console.error("No trees found");
+        throw new Error("No trees found");
+    }
+}
+
+/**
  * @param id The tree to delete from our database.
  */
 export const deleteTree = async function (id: string) {
