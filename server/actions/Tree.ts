@@ -51,6 +51,8 @@ export const getTrees = async function() {
         console.error("No trees found");
         throw new Error("No trees found");
     }
+
+    return trees;
 }
 
 /**
