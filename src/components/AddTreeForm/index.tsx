@@ -20,6 +20,7 @@ const AddTreeForm = () => {
     const datePlanted = useRef<Date>(null);
     //const adopted = useRef<boolean>(null);
     /*
+    const datePlanted = useRef<HTMLInputElement>(null);
     const [adopted, setAdopted] = React.useState<boolean>(false);
     const [watering, setWatering] = React.useState<boolean>(false);
     const [pruning, setPruning] = React.useState<boolean>(false);
