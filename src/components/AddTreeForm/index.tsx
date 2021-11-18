@@ -2,15 +2,28 @@ import React, { useRef } from "react";
 import { Tree } from "utils/types";
 import urls from "utils/urls";
 
+interface stateInterface {
+    adopted?: boolean,
+    watering?: boolean,
+    pruning?: boolean,
+    datePlanted?: Date,
+}
+
 const AddTreeForm = () => {
+
+    const [values, setValues] = React.useState<stateInterface>({} as stateInterface);
 
     const species = useRef<HTMLInputElement>(null);
     const age = useRef<HTMLInputElement>(null);
     const latitude = useRef<HTMLInputElement>(null);
     const longitude = useRef<HTMLInputElement>(null);
+    const datePlanted = useRef<Date>(null);
+    //const adopted = useRef<boolean>(null);
+    /*
     const [adopted, setAdopted] = React.useState<boolean>(false);
     const [watering, setWatering] = React.useState<boolean>(false);
     const [pruning, setPruning] = React.useState<boolean>(false);
+    */
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -20,12 +33,13 @@ const AddTreeForm = () => {
             species: species.current!.value,
             age: parseInt(age.current!.value),
             coordinates: {
-                latitude: parseFloat(latitude.current!.value),
-                longitude: parseFloat(longitude.current!.value),
+                latitude: latitude.current!.value,
+                longitude: longitude.current!.value,
             },
-            adopted: adopted,
-            watering: watering,
-            pruning: pruning,
+            datePlanted: datePlanted.current ||new Date(Date.now()),
+            adopted: values.adopted,
+            watering: values.watering,
+            pruning: values.pruning,
         }
 
         const r = await fetch(urls.api.trees, {
@@ -34,6 +48,7 @@ const AddTreeForm = () => {
         });  
     }
 
+    /*
     const handleAdoptedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setAdopted(e.target.checked);
     };
@@ -45,6 +60,12 @@ const AddTreeForm = () => {
     const handlePruningChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPruning(e.target.checked);
     };
+    */
+    const onChange = (event: React.SyntheticEvent) => {
+        event.persist();
+        const target = event.target as HTMLInputElement;
+        setValues(values => ({...values, [target.name]: target.value}));
+    }
 
     return (
         <div>
@@ -81,11 +102,20 @@ const AddTreeForm = () => {
                     required
                     id="longitudeField"
                         />
+                <input
+                    type="date"
+                    name="datePlanted"
+                    onChange={onChange}
+                    value={values.datePlanted || null}
+                    placeholder="Date Planted"
+                    id="datePlantedField"
+                        />
                 <label htmlFor="adopted">Adopted</label>
                 <input
                     type="checkbox"
                     name="adopted"
-                    onChange={handleAdoptedChange}
+                    onChange={onChange}
+                    value={values.adopted || false}
                     placeholder="Adopted"
                     id="adoptedCheckbox"
                         />
@@ -93,7 +123,7 @@ const AddTreeForm = () => {
                 <input
                     type="checkbox"
                     name="watering"
-                    onChange={handleWateringChange}
+                    onChange={onChange}
                     placeholder="Watering"
                     id="wateringCheckbox"
                         />
@@ -101,7 +131,7 @@ const AddTreeForm = () => {
                 <input
                     type="checkbox"
                     name="pruning"
-                    onChange={handlePruningChange}
+                    onChange={onChange}
                     placeholder="Pruning"
                     id="pruningCheckbox"
                         />
