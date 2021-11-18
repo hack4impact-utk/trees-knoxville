@@ -3,6 +3,10 @@ import { Tree } from "utils/types";
 import urls from "utils/urls";
 
 interface stateInterface {
+    species?: string,
+    age?: number,
+    latitude?: string,
+    longitude?: string,
     adopted?: boolean,
     watering?: boolean,
     pruning?: boolean,
@@ -13,34 +17,22 @@ const AddTreeForm = () => {
 
     const [values, setValues] = React.useState<stateInterface>({} as stateInterface);
 
-    const species = useRef<HTMLInputElement>(null);
-    const age = useRef<HTMLInputElement>(null);
-    const latitude = useRef<HTMLInputElement>(null);
-    const longitude = useRef<HTMLInputElement>(null);
-    const datePlanted = useRef<Date>(null);
-    //const adopted = useRef<boolean>(null);
-    /*
-    const datePlanted = useRef<HTMLInputElement>(null);
-    const [adopted, setAdopted] = React.useState<boolean>(false);
-    const [watering, setWatering] = React.useState<boolean>(false);
-    const [pruning, setPruning] = React.useState<boolean>(false);
-    */
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
         // creates tree object
         const tree: Tree = {
-            species: species.current!.value,
-            age: parseInt(age.current!.value),
+            species: values.species,
+            age: values.age,
             coordinates: {
-                latitude: latitude.current!.value,
-                longitude: longitude.current!.value,
+                latitude: values.latitude,
+                longitude: values.longitude,
             },
-            datePlanted: datePlanted.current ||new Date(Date.now()),
-            adopted: values.adopted,
-            watering: values.watering,
-            pruning: values.pruning,
+            // defaults to current date
+            datePlanted: values.datePlanted || new Date(Date.now()),
+            adopted: values.adopted ? true : false,
+            watering: values.watering ? true : false,
+            pruning: values.pruning ? true : false,
         }
 
         const r = await fetch(urls.api.trees, {
@@ -49,19 +41,6 @@ const AddTreeForm = () => {
         });  
     }
 
-    /*
-    const handleAdoptedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setAdopted(e.target.checked);
-    };
-
-    const handleWateringChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setWatering(e.target.checked);
-    };
-
-    const handlePruningChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPruning(e.target.checked);
-    };
-    */
     const onChange = (event: React.SyntheticEvent) => {
         event.persist();
         const target = event.target as HTMLInputElement;
@@ -74,7 +53,6 @@ const AddTreeForm = () => {
                 <input
                     type="text"
                     name="species"
-                    ref={species}
                     placeholder="Species"
                     required
                     id="speciesField"
@@ -82,7 +60,6 @@ const AddTreeForm = () => {
                 <input
                     type="text"
                     name="age"
-                    ref={age}
                     placeholder="Age"
                     required
                     id="ageField"
@@ -90,7 +67,6 @@ const AddTreeForm = () => {
                 <input
                     type="text"
                     name="latitude"
-                    ref={latitude}
                     placeholder="Latitude"
                     required
                     id="latitudeField"
@@ -98,7 +74,6 @@ const AddTreeForm = () => {
                 <input
                     type="text"
                     name="longitude"
-                    ref={longitude}
                     placeholder="Longitude"
                     required
                     id="longitudeField"
@@ -107,7 +82,6 @@ const AddTreeForm = () => {
                     type="date"
                     name="datePlanted"
                     onChange={onChange}
-                    value={values.datePlanted || null}
                     placeholder="Date Planted"
                     id="datePlantedField"
                         />
@@ -116,7 +90,6 @@ const AddTreeForm = () => {
                     type="checkbox"
                     name="adopted"
                     onChange={onChange}
-                    value={values.adopted || false}
                     placeholder="Adopted"
                     id="adoptedCheckbox"
                         />
