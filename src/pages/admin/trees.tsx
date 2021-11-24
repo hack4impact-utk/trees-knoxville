@@ -1,14 +1,14 @@
 import React from "react";
 import { Tree } from "utils/types";
 import SingleTree from "src/components/SingleTree";
-import { GetStaticPropsContext } from "next";
+import { GetStaticPropsContext, NextPage } from "next";
 import { getTrees } from "server/actions/Tree";
 
 interface Props {
     trees: Tree[],
 }
 
-export default function AdminTrees() {
+const AdminTrees: NextPage<Props> = ({ trees }) => {
 
     return (
     <div>
@@ -24,7 +24,6 @@ export default function AdminTrees() {
 export async function getStaticProps(context: GetStaticPropsContext) {
     try {
         const trees: Tree[] = await getTrees();
-
         return {
             props: {
                 trees: JSON.parse(JSON.stringify(trees))  as Tree[],
@@ -40,3 +39,5 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         }
     }
 }
+
+export default AdminTrees;
