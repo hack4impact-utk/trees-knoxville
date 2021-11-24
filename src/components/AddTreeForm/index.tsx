@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { Tree } from "../../../utils/types";
-import urls from "../../../utils/urls";
+import { Tree } from "utils/types";
+import urls from "utils/urls";
 
 const AddTreeForm = () => {
 
@@ -8,6 +8,7 @@ const AddTreeForm = () => {
     const age = useRef<HTMLInputElement>(null);
     const latitude = useRef<HTMLInputElement>(null);
     const longitude = useRef<HTMLInputElement>(null);
+    const datePlanted = useRef<HTMLInputElement>(null);
     const [adopted, setAdopted] = React.useState<boolean>(false);
     const [watering, setWatering] = React.useState<boolean>(false);
     const [pruning, setPruning] = React.useState<boolean>(false);
@@ -20,9 +21,10 @@ const AddTreeForm = () => {
             species: species.current!.value,
             age: parseInt(age.current!.value),
             coordinates: {
-                latitude: parseFloat(latitude.current!.value),
-                longitude: parseFloat(longitude.current!.value),
+                latitude: latitude.current!.value,
+                longitude: longitude.current!.value,
             },
+            datePlanted: new Date(Date.now()),
             adopted: adopted,
             watering: watering,
             pruning: pruning,
@@ -80,6 +82,13 @@ const AddTreeForm = () => {
                     placeholder="Longitude"
                     required
                     id="longitudeField"
+                        />
+                <input
+                    type="date"
+                    name="datePlanted"
+                    ref={datePlanted}
+                    placeholder="Date Planted"
+                    id="datePlantedField"
                         />
                 <label htmlFor="adopted">Adopted</label>
                 <input
