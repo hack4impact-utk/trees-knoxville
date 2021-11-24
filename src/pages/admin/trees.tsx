@@ -17,7 +17,10 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
         </head>
         <h1>Admin Trees Page</h1>
         {trees.forEach((tree: Tree) => {
-            <SingleTree tree={tree} />
+            <div>
+                <SingleTree tree={tree} />
+                <br/><br/>
+            </div>
         })}
     </div>
     );
