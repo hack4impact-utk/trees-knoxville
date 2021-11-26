@@ -10,21 +10,20 @@ interface Props {
 
 const AdminTrees: NextPage<Props> = ({ trees }) => {
 
-    const renderTrees = () => {
-        return (
-            trees.forEach((tree: Tree) => {
-            <SingleTree tree={tree} />
-        }));        
-    }
-
     return (
     <div>
         <head>
             <title>Admin Trees | Trees Knoxville</title>
         </head>
         <h1>Admin Trees Page</h1>
+        {trees && trees.map((tree: Tree) => {
+            return (
+                <div>
+                    <SingleTree tree={tree} />
+                </div>
+            )
+        })}
         
-        {renderTrees()}
         
     </div>
     );
