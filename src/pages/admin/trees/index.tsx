@@ -10,18 +10,22 @@ interface Props {
 
 const AdminTrees: NextPage<Props> = ({ trees }) => {
 
+    const renderTrees = () => {
+        return (
+            trees.forEach((tree: Tree) => {
+            <SingleTree tree={tree} />
+        }));        
+    }
+
     return (
     <div>
         <head>
             <title>Admin Trees | Trees Knoxville</title>
         </head>
         <h1>Admin Trees Page</h1>
-        {trees.forEach((tree: Tree) => {
-            <div>
-                <SingleTree tree={tree} />
-                <br/><br/>
-            </div>
-        })}
+        
+        {renderTrees()}
+        
     </div>
     );
 }
@@ -29,9 +33,10 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
 export async function getStaticProps(context: GetStaticPropsContext) {
     try {
         const trees: Tree[] = await getTrees();
+        
         return {
             props: {
-                trees: JSON.parse(JSON.stringify(trees))  as Tree[],
+                trees: (JSON.parse(JSON.stringify(trees))) as Tree[],
             },
         };
     }
