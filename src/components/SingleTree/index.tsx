@@ -8,17 +8,21 @@ interface Props {
 
 const SingleTree: NextPage<Props> = ({ tree }) => {
 
+    
+
     return (
-        <div>
-            <span>ObjectID={tree._id}</span>
-            <span>Species={tree.species}</span>
-            <span>Coordinates={tree.coordinates?.latitude}, {tree.coordinates?.longitude}</span>
-            <span>Adpoted={tree.adopted}</span>
-            <span>Watering={tree.watering}</span>
-            <span>Pruning={tree.pruning}</span>
-            <span>Date Planted={tree.datePlanted}</span>
-            <span>published={tree.published}</span>
+        
+        <div >
+            <span>ObjectID={tree._id}</span><br/>
+            <span>Species={tree.species}</span><br/>
+            <span>Coordinates={tree.coordinates?.latitude}, {tree.coordinates?.longitude}</span><br/>
+            <span>Adpoted={tree.adopted}</span><br/>
+            <span>Watering={tree.watering}</span><br/>
+            <span>Pruning={tree.pruning}</span><br/>
+            <span>Date Planted={tree.datePlanted}</span><br/>
+            <span>published={tree.published}</span><br/>
         </div>
+  
     );
 }
 
