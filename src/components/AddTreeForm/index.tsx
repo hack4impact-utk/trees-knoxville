@@ -10,6 +10,7 @@ interface stateInterface {
     adopted?: boolean,
     watering?: boolean,
     pruning?: boolean,
+    publish?: boolean,
     datePlanted?: Date,
 }
 
@@ -33,6 +34,7 @@ const AddTreeForm = () => {
             adopted: values.adopted ? true : false,
             watering: values.watering ? true : false,
             pruning: values.pruning ? true : false,
+            published: values.publish ? true : false,
         }
 
         const r = await fetch(urls.api.trees, {
@@ -55,6 +57,7 @@ const AddTreeForm = () => {
                     name="species"
                     placeholder="Species"
                     required
+                    onChange={onChange}
                     id="speciesField"
                         />
                 <input
@@ -62,6 +65,7 @@ const AddTreeForm = () => {
                     name="age"
                     placeholder="Age"
                     required
+                    onChange={onChange}
                     id="ageField"
                         />
                 <input
@@ -69,12 +73,14 @@ const AddTreeForm = () => {
                     name="latitude"
                     placeholder="Latitude"
                     required
+                    onChange={onChange}
                     id="latitudeField"
                         />
                 <input
                     type="text"
                     name="longitude"
                     placeholder="Longitude"
+                    onChange={onChange}
                     required
                     id="longitudeField"
                         />
@@ -108,6 +114,14 @@ const AddTreeForm = () => {
                     onChange={onChange}
                     placeholder="Pruning"
                     id="pruningCheckbox"
+                        />
+                <label htmlFor="publish">Publish?</label>
+                <input
+                    type="checkbox"
+                    name="publish"
+                    onChange={onChange}
+                    placeholder="Publish?"
+                    id="publishCheckbox"
                         />
                 <input type="submit" value="Add Tree"></input>
             </form>
