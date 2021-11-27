@@ -3,12 +3,19 @@ import { Tree } from "utils/types";
 import SingleTree from "src/components/SingleTree";
 import { GetStaticPropsContext, NextPage } from "next";
 import { getTrees } from "server/actions/Tree";
+import urls from "utils/urls";
+import styles from "../trees.module.css";
 
 interface Props {
     trees: Tree[],
 }
 
 const AdminTrees: NextPage<Props> = ({ trees }) => {
+    
+    // reroutes to specific tree page
+    const onClick = (treeId: string) => {
+        window.location.replace(urls.pages.updateTree(treeId));
+    };
 
     return (
     <div>
@@ -16,15 +23,17 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
             <title>Admin Trees | Trees Knoxville</title>
         </head>
         <h1>Admin Trees Page</h1>
+        
+
         {trees && trees.map((tree: Tree) => {
             return (
-                <div>
+                <div  >
                     <SingleTree tree={tree} />
+                    <button type="button" onClick={() => onClick(tree._id!)}/>
+                    <br/>
                 </div>
             )
-        })}
-        
-        
+        })}  
     </div>
     );
 }
