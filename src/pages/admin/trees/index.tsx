@@ -4,7 +4,6 @@ import SingleTree from "src/components/SingleTree";
 import { GetStaticPropsContext, NextPage } from "next";
 import { getTrees } from "server/actions/Tree";
 import urls from "utils/urls";
-import styles from "../trees.module.css";
 
 interface Props {
     trees: Tree[],

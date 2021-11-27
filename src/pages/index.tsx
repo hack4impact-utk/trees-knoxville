@@ -1,6 +1,6 @@
 import React from "react";
 import AllTrees from "src/components/AllTrees";
-import AddTreeForm from "src/components/AddTreeForm";
+import UpsertTreeForm from "src/components/UpsertTreeForm";
 import MapContainer from "src/components/Map";
 
 
@@ -15,7 +15,7 @@ export default function HomePage() {
         <div>
             <MapContainer />
             <br /><br />
-            <AddTreeForm />
+            <UpsertTreeForm />
         </div>  
     </div>
     );

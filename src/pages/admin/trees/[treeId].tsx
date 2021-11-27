@@ -2,6 +2,7 @@ import { NextPage, NextPageContext } from "next";
 import { Tree } from "utils/types";
 import React from "react";
 import { getTree } from "server/actions/Tree";
+import UpsertTreeForm from "src/components/UpsertTreeForm";
 
 interface Props {
     tree: Tree,

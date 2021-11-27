@@ -14,7 +14,7 @@ interface stateInterface {
     datePlanted?: Date,
 }
 
-const AddTreeForm = () => {
+const UpsertTreeForm = () => {
 
     const [values, setValues] = React.useState<stateInterface>({} as stateInterface);
 
@@ -129,4 +129,4 @@ const AddTreeForm = () => {
     )
 }
 
-export default AddTreeForm;
+export default UpsertTreeForm;
