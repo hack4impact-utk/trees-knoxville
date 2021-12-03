@@ -26,7 +26,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
 
         {trees && trees.map((tree: Tree) => {
             return (
-                <div  >
+                <div key={tree._id} >
                     <SingleTree tree={tree} />
                     <button type="button" onClick={() => onClick(tree._id!)}/>
                     <br/>
