@@ -9,6 +9,9 @@ export default {
         updateTree: (treeId: string) => `/admin/trees/${treeId}`,
     },
     api: {
-        trees: "/api/admin/trees"
+        trees: {
+            index: "/api/admin/trees",
+            updateTree: (treeId: string) => `/api/admin/trees/${treeId}`,
+        },
     },
 }

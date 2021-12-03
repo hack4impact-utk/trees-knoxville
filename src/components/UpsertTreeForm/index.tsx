@@ -43,14 +43,14 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
 
         // if an existing tree is being updated
         if (upsertTree) {
-            const r = await fetch(urls.api.updateTree(upsertTree._id as string), {
+            const r = await fetch(urls.api.trees.updateTree(upsertTree._id as string), {
                 method: "PUT",
                 body: JSON.stringify(newTree),
             });
         }
         // if a new tree is being added
         else {
-            const r = await fetch(urls.api.trees, {
+            const r = await fetch(urls.api.trees.index, {
                 method: "POST",
                 body: JSON.stringify(newTree),
             }); 
