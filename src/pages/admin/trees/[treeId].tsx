@@ -15,6 +15,7 @@ const AdminEdit: NextPage<Props> = ({ tree }) => {
             <title>Admin Edit | Trees Knoxville</title>
         </head>
         <h1>Admin Edit Page</h1>
+        <UpsertTreeForm upsertTree={tree} />
     </div>
     );
 }
@@ -23,7 +24,7 @@ const AdminEdit: NextPage<Props> = ({ tree }) => {
 export async function getServerSideProps(context: NextPageContext) {
     try {
 
-        // get eventId from url by using context
+        // get treeId from url by using context
         const treeId = context.query.treeId as string;
 
         // this func is run on server-side, so we can safely fetch the event directly
