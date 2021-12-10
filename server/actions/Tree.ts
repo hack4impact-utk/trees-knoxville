@@ -58,17 +58,20 @@ export const getTrees = async function() {
 /**
  * @param id The tree to delete from our database.
  */
-export const deleteTree = async function (id: string) {
+export const deleteTree = async function (queryTree: Tree) {
     await mongoDB();
-    if (!id || id == "") {
+    
+    const keys = Object.keys(queryTree);
+
+    if (!queryTree || keys.length != 1 || keys[0] != "_id") {
         console.error("Invalid ID");
-        throw Error;
+        throw new Error("Invalid ID");
     }
 
-    const model = await TreeSchema.findByIdAndDelete(id);
+    const model = await TreeSchema.findByIdAndDelete(queryTree);
     if (!model) {
         console.error("Tree not found");
-        throw Error;
+        throw Error("Tree not found");
     }
 }
 /**
