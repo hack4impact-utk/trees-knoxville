@@ -17,7 +17,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
     };
 
     return (
-    <div>
+    <div>    
         <head>
             <title>Admin Trees | Trees Knoxville</title>
         </head>
@@ -26,13 +26,19 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
 
         {trees && trees.map((tree: Tree) => {
             return (
-                <div key={tree._id} >
-                    <SingleTree tree={tree} />
-                    <button type="button" onClick={() => onClick(tree._id!)}/>
+                <div key={tree._id} className="singleTree" >
+                    <SingleTree tree={tree}  />
+                    <button type="button" onClick={() => onClick(tree._id!)}>Edit</button>
                     <br/>
                 </div>
             )
-        })}  
+        })}
+
+        <style jsx global>{`
+            .singleTree {
+                padding-bottom: 30px;
+            }
+      `}</style> 
     </div>
     );
 }
