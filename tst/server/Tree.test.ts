@@ -13,12 +13,14 @@ describe("addTree() tests", () => {
             species: "test species",
             age: 222,
             coordinates: {
-                latitude: 12345,
-                longitude: 123456,
+                latitude: "12345",
+                longitude: "123456",
             },
             adopted: true,
             watering: true,
             pruning: false,
+            published: false,
+            datePlanted: new Date(Date.now()),
         };
 
         TreeSchema.create = jest.fn().mockImplementation(async (tree: Tree) => tree);
@@ -38,12 +40,14 @@ describe("deleteTree() tests", () => {
             species: "test species",
             age: 222,
             coordinates: {
-                latitude: 12345,
-                longitude: 123456,
+                latitude: "12345",
+                longitude: "123456",
             },
             adopted: true,
             watering: true,
             pruning: false,
+            published: false,
+            datePlanted: new Date(Date.now()),
         };
         TreeSchema.findOneAndDelete = jest.fn().mockImplementation(async (tree: Tree) => tree);
 
@@ -75,12 +79,14 @@ describe("getTree() tests", () => {
             species: "test species",
             age: 222,
             coordinates: {
-                latitude: 12345,
-                longitude: 123456,
+                latitude: "12345",
+                longitude: "123456",
             },
             adopted: true,
             watering: true,
             pruning: false,
+            published: false,
+            datePlanted: new Date(Date.now()),
         };
         
         const mockQueryTree: Tree = {
@@ -136,12 +142,14 @@ describe("getTrees() tests", () => {
             species: "test species",
             age: 222,
             coordinates: {
-                latitude: 12345,
-                longitude: 123456,
+                latitude: "12345",
+                longitude: "123456",
             },
             adopted: true,
             watering: true,
             pruning: false,
+            published: false,
+            datePlanted: new Date(Date.now()),
         };
 
         const mockTree2: Tree = {
@@ -149,12 +157,14 @@ describe("getTrees() tests", () => {
             species: "test species2",
             age: 2222,
             coordinates: {
-                latitude: 123452,
-                longitude: 1234562,
+                latitude: "123452",
+                longitude: "1234562",
             },
             adopted: false,
             watering: false,
             pruning: true,
+            published: false,
+            datePlanted: new Date(Date.now()),
         };
 
         TreeSchema.find = jest.fn().mockResolvedValue([mockTree, mockTree2]);
