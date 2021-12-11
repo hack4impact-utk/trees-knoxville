@@ -47,6 +47,9 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                 method: "PUT",
                 body: JSON.stringify(newTree),
             });
+
+            // redirects to adminTrees
+            window.location.replace(urls.pages.adminTrees);
         }
         // if a new tree is being added
         else {
