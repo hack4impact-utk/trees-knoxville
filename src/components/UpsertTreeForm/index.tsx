@@ -35,10 +35,10 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
             },
             // defaults to current date
             datePlanted: values.datePlanted || new Date(Date.now()),
-            adopted: values.adopted ? true : false,
-            watering: values.watering ? true : false,
-            pruning: values.pruning ? true : false,
-            published: values.publish ? true : false,
+            adopted: (values.adopted ? true : false) || (upsertTree.adopted ? true : false),
+            watering: (values.watering ? true : false) || (upsertTree.watering ? true : false),
+            pruning: (values.pruning ? true : false) || (upsertTree.pruning ? true : false),
+            published: (values.publish ? true : false) || (upsertTree.published ? true : false),
         }
 
         // if an existing tree is being updated
