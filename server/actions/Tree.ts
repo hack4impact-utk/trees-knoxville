@@ -68,7 +68,7 @@ export const deleteTree = async function (queryTree: Tree) {
         throw new Error("Invalid ID");
     }
 
-    const model = await TreeSchema.findByIdAndDelete(queryTree);
+    const model = await TreeSchema.findOneAndDelete(queryTree);
     if (!model) {
         console.error("Tree not found");
         throw Error("Tree not found");

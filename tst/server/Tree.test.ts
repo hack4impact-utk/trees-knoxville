@@ -45,12 +45,12 @@ describe("deleteTree() tests", () => {
             watering: true,
             pruning: false,
         };
-        TreeSchema.findByIdAndDelete = jest.fn().mockImplementation(async (tree: Tree) => tree);
+        TreeSchema.findOneAndDelete = jest.fn().mockImplementation(async (tree: Tree) => tree);
 
         await addTree(mockTree);
-        await deleteTree("test-id123");
-        expect(TreeSchema.findByIdAndDelete).lastCalledWith("test-id123");
-        expect(TreeSchema.findByIdAndDelete).toHaveBeenCalledTimes(1);
+        await deleteTree({ _id: "test-id123" });
+        expect(TreeSchema.findOneAndDelete).lastCalledWith({ _id: "test-id123" });
+        expect(TreeSchema.findOneAndDelete).toHaveBeenCalledTimes(1);
     });
 });
 
