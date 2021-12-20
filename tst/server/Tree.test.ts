@@ -1,4 +1,4 @@
-import { addTree, deleteTree, getTree } from "../../server/actions/Tree";
+import { addTree, deleteTree, getTree, getTrees } from "../../server/actions/Tree";
 import TreeSchema from "../../server/models/Tree";
 import { Tree } from "../../utils/types";
 import mongoose from "mongoose";
@@ -13,12 +13,14 @@ describe("addTree() tests", () => {
             species: "test species",
             age: 222,
             coordinates: {
-                latitude: 12345,
-                longitude: 123456,
+                latitude: "12345",
+                longitude: "123456",
             },
             adopted: true,
             watering: true,
             pruning: false,
+            published: false,
+            datePlanted: new Date(Date.now()),
         };
 
         TreeSchema.create = jest.fn().mockImplementation(async (tree: Tree) => tree);
@@ -38,19 +40,21 @@ describe("deleteTree() tests", () => {
             species: "test species",
             age: 222,
             coordinates: {
-                latitude: 12345,
-                longitude: 123456,
+                latitude: "12345",
+                longitude: "123456",
             },
             adopted: true,
             watering: true,
             pruning: false,
+            published: false,
+            datePlanted: new Date(Date.now()),
         };
-        TreeSchema.findByIdAndDelete = jest.fn().mockImplementation(async (tree: Tree) => tree);
+        TreeSchema.findOneAndDelete = jest.fn().mockImplementation(async (tree: Tree) => tree);
 
         await addTree(mockTree);
-        await deleteTree("test-id123");
-        expect(TreeSchema.findByIdAndDelete).lastCalledWith("test-id123");
-        expect(TreeSchema.findByIdAndDelete).toHaveBeenCalledTimes(1);
+        await deleteTree({ _id: "test-id123" });
+        expect(TreeSchema.findOneAndDelete).lastCalledWith({ _id: "test-id123" });
+        expect(TreeSchema.findOneAndDelete).toHaveBeenCalledTimes(1);
     });
 });
 
@@ -75,12 +79,14 @@ describe("getTree() tests", () => {
             species: "test species",
             age: 222,
             coordinates: {
-                latitude: 12345,
-                longitude: 123456,
+                latitude: "12345",
+                longitude: "123456",
             },
             adopted: true,
             watering: true,
             pruning: false,
+            published: false,
+            datePlanted: new Date(Date.now()),
         };
         
         const mockQueryTree: Tree = {
@@ -117,5 +123,59 @@ describe("getTree() tests", () => {
 
         expect(getTree(mockQueryTree)).rejects.toThrow("Invalid ID");
         expect(getTree(mockQueryTree2)).rejects.toThrow("Invalid ID");
+    });
+});
+
+describe("getTrees() tests", () => {
+    test("valid call", async () => {
+
+        TreeSchema.find = jest.fn().mockImplementation(async (tree: Tree) => tree);
+
+        await getTrees();
+        expect(TreeSchema.find).toHaveBeenCalledTimes(1);
+    });
+
+    test("trees found", async () => {
+
+        const mockTree: Tree = {
+            _id: "test-id1234",
+            species: "test species",
+            age: 222,
+            coordinates: {
+                latitude: "12345",
+                longitude: "123456",
+            },
+            adopted: true,
+            watering: true,
+            pruning: false,
+            published: false,
+            datePlanted: new Date(Date.now()),
+        };
+
+        const mockTree2: Tree = {
+            _id: "test-id12345",
+            species: "test species2",
+            age: 2222,
+            coordinates: {
+                latitude: "123452",
+                longitude: "1234562",
+            },
+            adopted: false,
+            watering: false,
+            pruning: true,
+            published: false,
+            datePlanted: new Date(Date.now()),
+        };
+
+        TreeSchema.find = jest.fn().mockResolvedValue([mockTree, mockTree2]);
+
+        expect(getTrees()).resolves.toEqual([mockTree, mockTree2]);
+    });
+
+    test("no trees found", async () => {
+
+        TreeSchema.find = jest.fn().mockResolvedValue(null);
+
+        expect(getTrees()).rejects.toThrow("No trees found");
     });
 });
