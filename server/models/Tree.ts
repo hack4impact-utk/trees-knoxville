@@ -1,5 +1,5 @@
 import { model, models, Model, Schema, Document } from "mongoose";
-import { Tree } from "../../utils/types";
+import { Tree } from "utils/types";
 
 export const TreeSchema = new Schema({
 
@@ -17,12 +17,12 @@ export const TreeSchema = new Schema({
     coordinates: {
 
         latitude: {
-            type: Number,
+            type: String,
             required: true,
         },
 
         longitude: {
-            type: Number,
+            type: String,
             required: true,
         }
     },
@@ -43,6 +43,11 @@ export const TreeSchema = new Schema({
         type: Boolean,
         required: true,
         default: false,
+    },
+
+    datePlanted: {
+        type: Date,
+        required: true,
     },
 
     published: {
