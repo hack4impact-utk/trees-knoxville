@@ -1,7 +1,9 @@
 import mongoDB from "server/index";
 import TreeSchema from "server/models/Tree";
+import { Types } from "mongoose";
 import { Tree } from "utils/types";
-import urls from "utils/urls";
+import TreeModel from "server/models/Tree";
+
 
 /**
  * @param tree The tree to insert into our database.
@@ -16,6 +18,13 @@ import urls from "utils/urls";
 
     await TreeSchema.create(tree);
 };
+
+
+export const filterTrees = async function (filterTree: Tree) {
+    await mongoDB();
+    const trees = await TreeSchema.find(filterTree);
+    return trees;
+}
 
 /**
  * @param queryTree tree object containing only ID of the 
@@ -96,4 +105,5 @@ export const getTreesByVisibilityStatus = async function (visibilityStatus: bool
     await mongoDB();
     return await TreeSchema.find({published:visibilityStatus});
 }
+
 
