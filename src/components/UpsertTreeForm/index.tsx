@@ -15,7 +15,7 @@ interface stateInterface {
 }
 
 interface Props {
-    upsertTree: Tree,
+    upsertTree?: Tree,
 }
 
 const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
@@ -35,8 +35,8 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
             species: values.species,
             age: values.age,
             coordinates: {
-                latitude: values.latitude || upsertTree.coordinates?.latitude,
-                longitude: values.longitude || upsertTree.coordinates?.longitude,
+                latitude: values.latitude || upsertTree?.coordinates?.latitude,
+                longitude: values.longitude || upsertTree?.coordinates?.longitude,
             },
             // defaults to current date
             datePlanted: values.datePlanted || new Date(Date.now()),
