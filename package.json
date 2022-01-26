@@ -18,8 +18,10 @@
   "dependencies": {
     "@types/enzyme": "^3.10.10",
     "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/formidable": "^2.0.0",
     "@types/jest": "^27.0.2",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "contentful-management": "^7.45.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
@@ -27,6 +29,7 @@
     "eslint-plugin-react": "^7.26.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-tsc": "^2.0.0",
+    "formidable": "^2.0.1",
     "google-map-react": "^2.1.10",
     "google-maps-react": "^2.0.6",
     "husky": "^7.0.2",

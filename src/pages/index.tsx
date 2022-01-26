@@ -9,20 +9,23 @@ interface Props {
     trees: Tree[],
 }
 
+
 const HomePage: NextPage<Props> = ({ trees }) => {
+
     return (
     <div> 
         <head>
             <title>Map | Trees Knoxville</title>
         </head>
         <h1>Welcome to Trees Knoxville!</h1>
-        <br></br>
+        <Filter/>
         <div>
             <MapContainer trees={trees} />
             <br /><br />
             <UpsertTreeForm />
         </div>  
     </div>
+
     );
 }
 
