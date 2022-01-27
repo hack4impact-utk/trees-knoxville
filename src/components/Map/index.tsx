@@ -11,16 +11,18 @@ interface Trees {
 
 const MapContainer: FunctionComponent<Trees> = ({ trees }) => {
     return (
-        <div>
+        <main className={styles.main}>
             <Navigation/>
-            <Map
-            bootstrapURLKeys={{key: process.env.NEXT_PUBLIC_MAPS_API_KEY ?? ''}}
-            defaultCenter={{ lat: 35.96, lng: -83.92 }}
-            defaultZoom={11}>
-                {trees && trees.map((tree: Tree) => 
-                    <Marker lat={Number(tree.coordinates?.latitude)} lng={Number(tree.coordinates?.longitude)} />)}
-            </Map>
-        </div>
+            <div className={styles.map}>
+                <Map
+                bootstrapURLKeys={{key: process.env.NEXT_PUBLIC_MAPS_API_KEY ?? ''}}
+                defaultCenter={{ lat: 35.96, lng: -83.92 }}
+                defaultZoom={11}>
+                    {trees && trees.map((tree: Tree) => 
+                        <Marker lat={Number(tree.coordinates?.latitude)} lng={Number(tree.coordinates?.longitude)} />)}
+                </Map>
+            </div>
+        </main>
     )
 }
 

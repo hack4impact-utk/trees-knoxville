@@ -17,11 +17,9 @@ const HomePage: NextPage<Props> = ({ trees }) => {
         <head>
             <title>Map | Trees Knoxville</title>
         </head>
-        <h1>Welcome to Trees Knoxville!</h1>
         <div>
             <MapContainer trees={trees} />
-            <br /><br />
-            <UpsertTreeForm />
+            {/* <UpsertTreeForm /> */}
         </div>  
     </div>
 

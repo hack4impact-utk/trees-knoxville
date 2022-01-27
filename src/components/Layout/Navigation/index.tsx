@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 const Navigation: FC = () => {
     return (
     <nav className={styles.navigation}>
-        <h3>This is the navigation.</h3>
+        <img src='tklogo.png' alt="Trees Knoxville Logo" />
     </nav>
     );
 };

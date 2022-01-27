@@ -1,0 +1,9 @@
+@use 'abstracts' as abs;
+
+
+.navigation {
+    & > img {
+        width: 239px;
+        height: 93px;
+    }
+}
