@@ -1,9 +1,9 @@
 import { Tree } from "utils/types";
 import Map from "google-map-react";
-import styles from "../Map.module.css"
 import { FunctionComponent } from "react";
 import Marker from "src/components/Marker"
-
+import styles from "./styles.module.scss";
+import Navigation from "src/components/Layout/Navigation";
 interface Trees {
     trees: Tree[];
 }
@@ -11,7 +11,8 @@ interface Trees {
 
 const MapContainer: FunctionComponent<Trees> = ({ trees }) => {
     return (
-        <div className = {styles.Map} >
+        <div>
+            <Navigation/>
             <Map
             bootstrapURLKeys={{key: process.env.NEXT_PUBLIC_MAPS_API_KEY ?? ''}}
             defaultCenter={{ lat: 35.96, lng: -83.92 }}

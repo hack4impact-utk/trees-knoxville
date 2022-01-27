@@ -1,0 +1,7 @@
+@use 'abstracts';
+html, body {
+    margin: 0;
+    font-family: map-get(abstracts.$fonts, 'primary');
+    padding: 0;
+    color: map-get(map-get(abstracts.$colors, 'text'), 'primary');
+}
