@@ -15,12 +15,17 @@ interface stateInterface {
 }
 
 interface Props {
-    upsertTree: Tree,
+    upsertTree?: Tree,
 }
 
 const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
 
     const [values, setValues] = React.useState<stateInterface>({} as stateInterface);
+
+    const [adopted, setAdopted] = React.useState(upsertTree ? upsertTree.adopted : false);
+    const [watering, setWatering] = React.useState(upsertTree ? upsertTree.watering : false);
+    const [pruning, setPruning] = React.useState(upsertTree ? upsertTree.pruning : false);
+    const [published, setPublished] = React.useState(upsertTree ? upsertTree.published : false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -30,15 +35,15 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
             species: values.species,
             age: values.age,
             coordinates: {
-                latitude: values.latitude || upsertTree.coordinates?.latitude,
-                longitude: values.longitude || upsertTree.coordinates?.longitude,
+                latitude: values.latitude || upsertTree?.coordinates?.latitude,
+                longitude: values.longitude || upsertTree?.coordinates?.longitude,
             },
             // defaults to current date
             datePlanted: values.datePlanted || new Date(Date.now()),
-            adopted: (values.adopted ? true : false) || (upsertTree.adopted ? true : false),
-            watering: (values.watering ? true : false) || (upsertTree.watering ? true : false),
-            pruning: (values.pruning ? true : false) || (upsertTree.pruning ? true : false),
-            published: (values.publish ? true : false) || (upsertTree.published ? true : false),
+            adopted: adopted,
+            watering: watering,
+            pruning: pruning,
+            published: published,
         }
 
         // if an existing tree is being updated
@@ -60,12 +65,19 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
         }  
     }
 
+    // handles all states except the checkboxes
     const onChange = (event: React.SyntheticEvent) => {
         event.persist();
         const target = event.target as HTMLInputElement;
         setValues(values => ({...values, [target.name]: target.value}));
     }
 
+    // handles the checkbox states
+    const handleAdopted   = () => { setAdopted(adopted => !adopted) }
+    const handleWatering  = () => { setWatering(watering => !watering) }
+    const handlePruning   = () => { setPruning(pruning => !pruning) }
+    const handlePublished = () => { setPublished(published => !published) }
+    
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -117,7 +129,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                 <input
                     type="checkbox"
                     name="adopted"
-                    onChange={onChange}
+                    onChange={handleAdopted}
                     placeholder="Adopted"
                     defaultChecked={upsertTree ? upsertTree.adopted : false}
                     id="adoptedCheckbox"
@@ -126,7 +138,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                 <input
                     type="checkbox"
                     name="watering"
-                    onChange={onChange}
+                    onChange={handleWatering}
                     placeholder="Watering"
                     defaultChecked={upsertTree ? upsertTree.watering : false}
                     id="wateringCheckbox"
@@ -135,7 +147,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                 <input
                     type="checkbox"
                     name="pruning"
-                    onChange={onChange}
+                    onChange={handlePruning}
                     placeholder="Pruning"
                     defaultChecked={upsertTree ? upsertTree.pruning : false}
                     id="pruningCheckbox"
@@ -144,7 +156,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                 <input
                     type="checkbox"
                     name="publish"
-                    onChange={onChange}
+                    onChange={handlePublished}
                     placeholder="Publish?"
                     id="publishCheckbox"
                     defaultChecked={upsertTree ? upsertTree.published : false}
