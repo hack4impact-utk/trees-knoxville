@@ -24,8 +24,8 @@ const HomePage: NextPage<Props> = ({ trees }) => {
         </head>
         <h1>Welcome to Trees Knoxville!</h1>
         <Auth0Provider
-            domain="dev-hlplfn89.us.auth0.com"
-            clientId="K4Re9tjJI2SBqENKrsIdcrQ8bY3zxE9r"
+            domain={process.env.NEXT_PUBLIC_REACT_APP_AUTH0_DOMAIN}
+            clientId={process.env.NEXT_PUBLIC_REACT_APP_AUTH0_CLIENT_ID}
             redirectUri="http://localhost:3000"> 
             <LoginButton> </LoginButton>
             <LogoutButton> </LogoutButton>
