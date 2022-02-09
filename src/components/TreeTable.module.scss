@@ -11,13 +11,15 @@
 
 .headerRow {
     display: flex;   
+    justify-content: space-between;
+    align-items: center;
     background-color: #DBF8BE;
     border-radius: 10px 10px 0 0;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .headerItem {
-    width: 120px;
+    width: calc(100% / 6);
     height: 35px;
     display: inline-flex;
     align-items: center;

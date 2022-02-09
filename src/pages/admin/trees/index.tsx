@@ -59,7 +59,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
             }
 
             .table {
-                width: 720px;
+                //width: 720px;
             }
       `}</style> 
     </div>

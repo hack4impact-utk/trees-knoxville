@@ -23,11 +23,12 @@ const TreeTable: NextPage<Props> = ({ trees }) => {
             </div>
             {trees && trees.map((tree: Tree) => {
             return (
-                <div key={tree._id} >
-                    <SingleTree tree={tree}  />
+                <div key={tree._id}>
+                    <SingleTree tree={tree} />
                     {/*<button type="button" onClick={() => onClick(tree._id!)}>Edit</button>*/}
                     <div className={styles.line} />
                 </div>
+                
             )
         })}
         </div>
