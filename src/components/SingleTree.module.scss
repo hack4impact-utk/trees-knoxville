@@ -1,6 +1,76 @@
+
+.container {
+    @media (max-width: 600px) {
+        display: flex;
+        align-items: center;
+    }
+}
+
 .row {
     display: flex;
     height: 59.5px;
+    flex-wrap: wrap; //THIS IS THE KEY!!
+    width: 100%;
+    
+}
+
+.hiddenText {
+    @media (min-width: 600px) {
+        display: none !important;
+    }
+}
+
+.placeholderImage {
+    min-width: 50px;
+    min-height: 50px;
+    background-color: gray;
+    border-radius: 50%;
+    margin-right: 10px;
+
+    @media (min-width: 600px) {
+        display: none;
+        
+    }
+}
+
+.mobileInfo1 {
+    @media (max-width: 600px) {
+        width: 50% !important;
+        order: 2; // THIS IS ALSO THE KEY!!
+    }
+}
+
+.mobileInfo2 {
+    @media (max-width: 600px) {
+        display: none !important;
+    }
+}
+
+.mobileInfo3 {
+    @media (max-width: 600px) {
+        order: 4;
+        width: 100% !important;
+    }
+}
+
+.mobileInfo4 {
+    @media (max-width: 600px) {
+        order: 3;
+        width: 100% !important;
+    }
+}
+
+.mobileInfo5 {
+    @media (max-width: 600px) {
+        display: none !important;
+    }
+}
+
+.mobileInfo6 {
+    @media (max-width: 600px) {
+        width: 50% !important;
+        order: 1;
+    }
 }
 
 .info {
@@ -8,7 +78,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    
     font-family: "Arial";
-    //max-width: 120px;
+
+    @media (max-width: 600px) {
+        width: 30%;
+    }
 }

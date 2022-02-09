@@ -18,7 +18,7 @@ const HomePage: NextPage<Props> = ({ trees }) => {
             <title>Map | Trees Knoxville</title>
         </head>
         <h1>Welcome to Trees Knoxville!</h1>
-        <Filter/>
+
         <div>
             <MapContainer trees={trees} />
             <br /><br />

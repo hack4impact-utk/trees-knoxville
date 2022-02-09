@@ -57,10 +57,6 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
                 padding-right: 4px;
                 color: #219076;
             }
-
-            .table {
-                //width: 720px;
-            }
       `}</style> 
     </div>
     );

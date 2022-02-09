@@ -12,16 +12,17 @@ const SingleTree: NextPage<Props> = ({ tree }) => {
     
 
     return (
-        
-        <div className={styles.row}>
-            <span className={styles.info}>{tree.datePlanted?.toString().split("T")[0]}</span><br/>
-            <span className={styles.info}>TREE_NAME</span>
-            <span className={styles.info}>FORESTER</span>
-            <span className={styles.info}>{tree.coordinates?.latitude}, {tree.coordinates?.longitude}</span><br/>
-            <span className={styles.info}>NUMBER?</span>
-            <span className={styles.info}>{tree.species}</span><br/>
+    <div className={styles.container}>
+        <div className={styles.placeholderImage}></div>
+        <div className={styles.row}>   
+            <span className={`${styles.info} ${styles.mobileInfo1}`}>{tree.datePlanted?.toString().split("T")[0]}</span>
+            <span className={`${styles.info} ${styles.mobileInfo2}`}>TREE_NAME</span>
+            <span className={`${styles.info} ${styles.mobileInfo3}`}><span className={styles.hiddenText}>Volunteer Forester:&#160;</span>FORESTER</span>
+            <span className={`${styles.info} ${styles.mobileInfo4}`}>{tree.coordinates?.latitude}, {tree.coordinates?.longitude}</span><br/>
+            <span className={`${styles.info} ${styles.mobileInfo5}`}>NUMBER?</span>
+            <span className={`${styles.info} ${styles.mobileInfo6}`}>{tree.species}</span>
         </div>
-  
+    </div>
     );
 }
 
