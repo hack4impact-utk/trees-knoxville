@@ -26,7 +26,7 @@ const TreeTable: NextPage<Props> = ({ trees }) => {
                 <div key={tree._id} >
                     <SingleTree tree={tree}  />
                     {/*<button type="button" onClick={() => onClick(tree._id!)}>Edit</button>*/}
-                    <hr className={styles.line}/>
+                    <div className={styles.line} />
                 </div>
             )
         })}

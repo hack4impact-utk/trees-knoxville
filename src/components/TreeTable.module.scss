@@ -1,7 +1,7 @@
 
 .line {
-    width: 720px;
-    align-self: left;
+    height: 0.5px;
+    background-color: #676767;;
 }
 
 .container {
@@ -18,13 +18,11 @@
 
 .headerItem {
     width: 120px;
-    height: 50px;
+    height: 35px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
-    width: 100px;
     font-family: "Arial";
-    font-size: auto;
     overflow: hidden;
 }
