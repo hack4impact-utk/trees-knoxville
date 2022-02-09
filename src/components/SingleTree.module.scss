@@ -1,0 +1,13 @@
+.row {
+    display: flex;
+}
+
+.info {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 100px;
+    font-family: "Roboto";
+}
