@@ -4,11 +4,10 @@ import MapContainer from "src/components/Map";
 import { GetStaticPropsContext, NextPage } from "next";
 import { Tree } from "utils/types";
 import { getTreesByVisibilityStatus } from "server/actions/Tree";
-import  Filter  from "src/components/Filter";
-import { Auth0Provider } from "@auth0/auth0-react";
-import LoginButton from "src/components/LoginButton";
-import LogoutButton from "src/components/LogoutButton";
+import Filter  from "src/components/Filter";
 import Profile from "src/components/Profile/Profile";
+import {UserProvider} from '@auth0/nextjs-auth0';
+import AuthComponent from "src/components/Auth"; 
 
 interface Props {
     trees: Tree[],
@@ -16,20 +15,16 @@ interface Props {
 
 
 const HomePage: NextPage<Props> = ({ trees }) => {
+	
 
     return (
+    <UserProvider>
     <div> 
         <head>
             <title>Map | Trees Knoxville</title>
         </head>
         <h1>Welcome to Trees Knoxville!</h1>
-        <Auth0Provider
-            domain={process.env.NEXT_PUBLIC_REACT_APP_AUTH0_DOMAIN}
-            clientId={process.env.NEXT_PUBLIC_REACT_APP_AUTH0_CLIENT_ID}
-            redirectUri="http://localhost:3000/admin"> 
-            <LoginButton> </LoginButton>
-            <LogoutButton> </LogoutButton>
-        </Auth0Provider>
+	<AuthComponent/>
         <Filter/>
         <div>
             <MapContainer trees={trees} />
@@ -38,7 +33,7 @@ const HomePage: NextPage<Props> = ({ trees }) => {
         </div>  
         
     </div>
-
+    </UserProvider>
     );
 }
 
