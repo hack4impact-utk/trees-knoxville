@@ -5,8 +5,7 @@ import { GetStaticPropsContext, NextPage } from "next";
 import { Tree } from "utils/types";
 import { getTreesByVisibilityStatus } from "server/actions/Tree";
 import Filter  from "src/components/Filter";
-import Profile from "src/components/Profile/Profile";
-import {UserProvider} from '@auth0/nextjs-auth0';
+import { UserProvider } from '@auth0/nextjs-auth0';
 import AuthComponent from "src/components/Auth"; 
 
 interface Props {
