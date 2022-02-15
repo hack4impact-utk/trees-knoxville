@@ -1,0 +1,43 @@
+@use 'abstracts' as ab;
+
+.wrapper {
+    display:flex;
+    flex-direction:column;
+}
+
+.form {
+    width: 100%;
+    max-width: 1200px;
+    display:flex;
+    flex-direction:column;
+    align-self:center;
+    & > input {
+        margin: 10px 10px;
+    }
+}
+
+.buttons {
+    display: flex;
+    flex-direction:row;
+    width: 100%;
+}
+
+.submitBtn {
+    margin-left: auto;
+    outline: none;
+    border: none;
+    background: map-get(ab.$colors, 'theme', 'secondary');
+    font-family: map-get(ab.$fonts, 'primary');
+    font-weight: bold;
+    border-radius: 10px;
+    text-align:center;
+    color: white;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.arrowLeft {
+    width: 24px;
+    height: 24px;
+}

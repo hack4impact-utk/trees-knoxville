@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
 import { Tree } from "utils/types";
 import urls from "utils/urls";
+import styles from "./styles.module.scss";
+import {BsArrowLeftShort} from "react-icons/bs";
+import Link from "next/link";
 
 interface stateInterface {
     species?: string,
@@ -79,8 +82,13 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
     const handlePublished = () => { setPublished(published => !published) }
     
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className={styles.wrapper}>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.buttons}>
+                    <Link href='/admin/trees'><BsArrowLeftShort className={styles.arrowLeft} /></Link>
+                    <input type="submit" value={upsertTree ? "Edit" : "Add Tree"} className={styles.submitBtn}></input>
+                </div>
+                <label htmlFor="speciesField">Species</label>
                 <input
                     type="text"
                     name="species"
@@ -90,6 +98,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                     defaultValue={upsertTree ? upsertTree.species : ""}
                     id="speciesField"
                         />
+                <label htmlFor="ageField">Age</label>
                 <input
                     type="text"
                     name="age"
@@ -99,6 +108,8 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                     defaultValue={upsertTree ? upsertTree.age : ""}
                     id="ageField"
                         />
+
+                <label htmlFor="latitudeField">Latitude</label>
                 <input
                     type="text"
                     name="latitude"
@@ -108,6 +119,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                     defaultValue={upsertTree ? upsertTree.coordinates?.latitude : ""}
                     id="latitudeField"
                         />
+                <label htmlFor="longitudeField">Longitude</label>
                 <input
                     type="text"
                     name="longitude"
@@ -117,6 +129,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                     defaultValue={upsertTree ? upsertTree.coordinates?.longitude : ""}
                     id="longitudeField"
                         />
+                <label htmlFor="datePlantedField">Date Planted</label>
                 <input
                     type="date"
                     name="datePlanted"
@@ -161,7 +174,6 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                     id="publishCheckbox"
                     defaultChecked={upsertTree ? upsertTree.published : false}
                         />
-                <input type="submit" value={upsertTree ? "Update Tree" : "Add Tree"}></input>
             </form>
         </div>
     )
