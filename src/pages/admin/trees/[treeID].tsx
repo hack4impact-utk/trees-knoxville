@@ -42,4 +42,4 @@ export async function getServerSideProps(context: NextPageContext) {
     }
 }
 
-export default AdminEdit;
+export default AdminEdit; 

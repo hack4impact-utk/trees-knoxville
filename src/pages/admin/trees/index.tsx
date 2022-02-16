@@ -10,7 +10,7 @@ interface Props {
 }
 
 const AdminTrees: NextPage<Props> = ({ trees }) => {
-    
+
     // reroutes to specific tree page
     const onClick = (treeId: string) => {
         window.location.replace(urls.pages.updateTree(treeId));
@@ -22,7 +22,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
             <title>Admin Trees | Trees Knoxville</title>
         </head>
         <h1>Admin Trees Page</h1>
-        
+
 
         {trees && trees.map((tree: Tree) => {
             return (
@@ -46,7 +46,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
 export async function getStaticProps(context: GetStaticPropsContext) {
     try {
         const trees: Tree[] = await getTrees();
-        
+
         return {
             props: {
                 trees: (JSON.parse(JSON.stringify(trees))) as Tree[],
@@ -63,4 +63,4 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     }
 }
 
-export default AdminTrees;
+export default AdminTrees; 

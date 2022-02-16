@@ -10,4 +10,4 @@ export default function AdminDashboard() {
         <h1>Admin Dashboard Page</h1>
     </div>
     );
-}
+} 
