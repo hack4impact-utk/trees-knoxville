@@ -16,6 +16,7 @@
     "secrets:sync": "bw sync && bw get item 62e79ac9-098d-4e43-813b-adcf00e6e901 | fx .notes > \".env.local\""
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^1.7.0",
     "@types/enzyme": "^3.10.10",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/formidable": "^2.0.0",

@@ -4,6 +4,9 @@ import MapContainer from "src/components/Map";
 import { GetStaticPropsContext, NextPage } from "next";
 import { Tree } from "utils/types";
 import { getTreesByVisibilityStatus } from "server/actions/Tree";
+import Filter  from "src/components/Filter";
+import { UserProvider } from '@auth0/nextjs-auth0';
+import AuthComponent from "src/components/Auth"; 
 
 interface Props {
     trees: Tree[],
@@ -11,19 +14,24 @@ interface Props {
 
 
 const HomePage: NextPage<Props> = ({ trees }) => {
+	
 
     return (
+    <UserProvider>
     <div> 
         <head>
             <title>Map | Trees Knoxville</title>
         </head>
         <h1>Welcome to Trees Knoxville!</h1>
+	<AuthComponent/>
+        <Filter/>
         <div>
             <MapContainer trees={trees} />
             <br /><br />
         </div>  
+        
     </div>
-
+    </UserProvider>
     );
 }
 
