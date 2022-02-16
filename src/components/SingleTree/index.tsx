@@ -31,7 +31,6 @@ const SingleTree: NextPage<Props> = ({ tree }) => {
         <div className={styles.row}>   
             <div className={`${styles.info} ${styles.mobileInfo2}`}>
                 <span className={`${styles.hiddenText}`}>{`${tree.datePlanted ? "Planted on" : ""}`}&nbsp;</span>
-                {/*<span>{tree.datePlanted?.toString().split("T")[0]}</span>*/}
                 <span>{GetFormattedDate(tree.datePlanted!)}</span>
             </div>
             <span className={`${styles.info} ${styles.mobileInfo3}`}>{tree.coordinates?.latitude}, {tree.coordinates?.longitude}</span>

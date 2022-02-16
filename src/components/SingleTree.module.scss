@@ -9,11 +9,14 @@
 
 .row {
     display: flex;
-    height: 59.5px;
-    flex-wrap: wrap; //THIS IS THE KEY!!
+    min-height: 59.5px;
+    flex-wrap: wrap;
     width: 100%;
-    padding: 0 10px 0 10px;
     align-items: center;
+
+    @media (max-width: 600px) {
+        padding: 0 10px 0 10px;
+    }
 }
 
 .hiddenText {
@@ -28,7 +31,7 @@
     background-color: gray;
     border-radius: 50%;
     margin-right: 10px;
-
+    
     @media (min-width: 600px) {
         display: none;
         
@@ -39,7 +42,7 @@
     // species
     @media (max-width: 600px) {
         width: 50% !important;
-        order: 1; // THIS IS ALSO THE KEY!!
+        order: 1;
         display: block !important;
         text-align: left !important;
         overflow-wrap: break-word; 
@@ -74,11 +77,6 @@
 .info {
     width: calc(100% / 3);
     display: inline-flex;
-    align-items: center;
     justify-content: center;
     font-family: "Arial";
-
-    @media (max-width: 600px) {
-        width: 30%;
-    }
 }

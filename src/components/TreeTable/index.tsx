@@ -28,7 +28,6 @@ const TreeTable: NextPage<Props> = ({ trees }) => {
             return (
                 <div key={tree._id} style={{cursor: "pointer"}} onClick={() => onClick(tree._id!)}>
                     <SingleTree tree={tree} />
-                    {/*<button type="button" onClick={() => onClick(tree._id!)}>Edit</button>*/}
                     <div className={styles.line} />
                 </div>
                 
