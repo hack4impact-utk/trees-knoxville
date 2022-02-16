@@ -3,6 +3,7 @@
     @media (max-width: 600px) {
         display: flex;
         align-items: center;
+        padding: 7px 0 7px 0;
     }
 }
 
@@ -11,7 +12,8 @@
     height: 59.5px;
     flex-wrap: wrap; //THIS IS THE KEY!!
     width: 100%;
-    
+    padding: 0 10px 0 10px;
+    align-items: center;
 }
 
 .hiddenText {
@@ -34,47 +36,43 @@
 }
 
 .mobileInfo1 {
+    // species
     @media (max-width: 600px) {
         width: 50% !important;
-        order: 2; // THIS IS ALSO THE KEY!!
+        order: 1; // THIS IS ALSO THE KEY!!
+        display: block !important;
+        text-align: left !important;
+        overflow-wrap: break-word; 
     }
 }
 
 .mobileInfo2 {
+    // date
     @media (max-width: 600px) {
-        display: none !important;
+        width: 50% !important;
+        order: 2;   
+        display: block !important;
+        text-align: right !important;
+        font-size: 80%;
+        white-space: nowrap;
     }
 }
 
 .mobileInfo3 {
-    @media (max-width: 600px) {
-        order: 4;
-        width: 100% !important;
-    }
-}
-
-.mobileInfo4 {
+    // location
     @media (max-width: 600px) {
         order: 3;
-        width: 100% !important;
-    }
-}
-
-.mobileInfo5 {
-    @media (max-width: 600px) {
-        display: none !important;
-    }
-}
-
-.mobileInfo6 {
-    @media (max-width: 600px) {
         width: 50% !important;
-        order: 1;
+        font-size: 85%;
+        display: block !important;
+        text-align: left !important;
     }
 }
+
+
 
 .info {
-    width: calc(100% / 6);
+    width: calc(100% / 3);
     display: inline-flex;
     align-items: center;
     justify-content: center;
