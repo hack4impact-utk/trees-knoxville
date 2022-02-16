@@ -28,7 +28,6 @@ const HomePage: NextPage<Props> = ({ trees }) => {
         <div>
             <MapContainer trees={trees} />
             <br /><br />
-            <UpsertTreeForm />
         </div>  
         
     </div>
