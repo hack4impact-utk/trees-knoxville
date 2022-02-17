@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import { Tree } from "utils/types";
 import urls from "utils/urls";
 import SingleTree from "../SingleTree";
-import styles from "src/components/TreeTable.module.scss"
+import styles from "src/components/TreeTable/TreeTable.module.scss"
 
 
 interface Props {

@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import React, { useRef, useEffect } from "react";
 import { Tree } from "utils/types";
-import styles from "src/components/SingleTree.module.scss"
+import styles from "src/components/SingleTree/SingleTree.module.scss"
 
 interface Props {
     tree: Tree,
