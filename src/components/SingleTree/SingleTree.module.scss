@@ -1,6 +1,7 @@
+@use 'abstracts' as ab;
 
 .container {
-    @media (max-width: 600px) {
+    @include ab.respond-to('large') {
         display: flex;
         align-items: center;
         padding: 7px 0 7px 0;
@@ -14,13 +15,13 @@
     width: 100%;
     align-items: center;
 
-    @media (max-width: 600px) {
+    @include ab.respond-to('large') {
         padding: 0 10px 0 10px;
     }
 }
 
 .hiddenText {
-    @media (min-width: 600px) {
+    @include ab.respond-to('small') {
         display: none !important;
     }
 }
@@ -32,7 +33,7 @@
     border-radius: 50%;
     margin-right: 10px;
     
-    @media (min-width: 600px) {
+    @include ab.respond-to('small') {
         display: none;
         
     }
@@ -40,7 +41,7 @@
 
 .mobileInfo1 {
     // species
-    @media (max-width: 600px) {
+    @include ab.respond-to('large') {
         width: 50% !important;
         order: 1;
         display: block !important;
@@ -51,7 +52,7 @@
 
 .mobileInfo2 {
     // date
-    @media (max-width: 600px) {
+    @include ab.respond-to('large') {
         width: 50% !important;
         order: 2;   
         display: block !important;
@@ -63,7 +64,7 @@
 
 .mobileInfo3 {
     // location
-    @media (max-width: 600px) {
+    @include ab.respond-to('large') {
         order: 3;
         width: 50% !important;
         font-size: 85%;
@@ -78,5 +79,5 @@
     width: calc(100% / 3);
     display: inline-flex;
     justify-content: center;
-    font-family: "Arial";
+    font-family: map-get(ab.$fonts, 'tertiary');
 }
