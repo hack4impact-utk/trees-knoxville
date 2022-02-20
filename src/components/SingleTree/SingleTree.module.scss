@@ -1,47 +1,52 @@
 @use 'abstracts' as ab;
 
 .container {
-    @include ab.respond-to('large') {
-        display: flex;
-        align-items: center;
-        padding: 7px 0 7px 0;
-    }
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 7px 0 7px 0;
 }
 
 .row {
     display: flex;
     min-height: 59.5px;
-    flex-wrap: wrap;
-    width: 100%;
+    width: 100%;    
     align-items: center;
 
-    @include ab.respond-to('large') {
+    @include ab.respond-to('small') {
+        flex-wrap: wrap;
+        width: 75%;
         padding: 0 10px 0 10px;
     }
 }
 
-.hiddenText {
+.imageContainer {
+    width: 10%;
+    min-width: 50px;
+    margin: 0 10px 0 0;
+    display: flex;
+    justify-content: center;
+
     @include ab.respond-to('small') {
+        margin-left: 10px;
+    }
+}
+
+.hiddenText {
+    @include ab.respond-to('large') {
         display: none !important;
     }
 }
 
 .placeholderImage {
     min-width: 50px;
-    min-height: 50px;
-    background-color: gray;
-    border-radius: 50%;
-    margin-right: 10px;
-    
-    @include ab.respond-to('small') {
-        display: none;
-        
-    }
+    width: 50%;
+    height: auto;
 }
 
 .mobileInfo1 {
     // species
-    @include ab.respond-to('large') {
+    @include ab.respond-to('small') {
         width: 50% !important;
         order: 1;
         display: block !important;
@@ -52,7 +57,7 @@
 
 .mobileInfo2 {
     // date
-    @include ab.respond-to('large') {
+    @include ab.respond-to('small') {
         width: 50% !important;
         order: 2;   
         display: block !important;
@@ -64,7 +69,7 @@
 
 .mobileInfo3 {
     // location
-    @include ab.respond-to('large') {
+    @include ab.respond-to('small') {
         order: 3;
         width: 50% !important;
         font-size: 85%;

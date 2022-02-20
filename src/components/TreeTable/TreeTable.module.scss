@@ -1,37 +1,40 @@
 @use 'abstracts' as ab;
 
-.line {
-    height: 0.5px;
-    background-color: map-get(map-get(ab.$colors, "text"), "tertiary");
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
 .headerRow {
     display: flex;   
-    justify-content: space-between;
-    align-items: center;
     background-color: map-get(map-get(ab.$colors, "theme"), "LGreen");
     border-radius: 10px 10px 0 0;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
    
-    @include ab.respond-to('large') {
+    @include ab.respond-to('small') {
         display: none;
+    }  
+}
+
+.placeholderDiv {
+    width: 10%;
+}
+
+.treeRow {
+    cursor: "pointer";
+}
+
+.line {
+    height: 0.5px;
+    background-color: map-get(map-get(ab.$colors, "text"), "tertiary");
+    margin: auto;
+
+    @include ab.respond-to('small') {
+        width: 95%;
     }
-    
 }
 
 .headerItem {
-    width: calc(100% / 3);
+    width: 30%;
     height: 35px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
-    overflow: hidden;
     font-family: map-get(ab.$fonts, 'tertiary');
 }
