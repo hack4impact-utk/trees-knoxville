@@ -24,12 +24,12 @@ $colors: (
 
 $breakpoints: (
   "large": (
-    max-width: 600px,
+    min-width: 600px,
   ),
   "medium": (
     min-width: 1000px,
   ),
   "small": (
-    min-width: 600px,
+    max-width: 600px,
   ),
 );
