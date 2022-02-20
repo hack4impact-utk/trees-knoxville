@@ -27,8 +27,11 @@ const SingleTree: NextPage<Props> = ({ tree }) => {
 
     return (
     <div className={styles.container}>
-        <div className={styles.placeholderImage}></div>
-        <div className={styles.row}>   
+        <div className={styles.imageContainer}>
+                <img className={styles.placeholderImage} src="/defaultTreeImage.png"/>
+        </div>
+        <div className={styles.row}>  
+            
             <div className={`${styles.info} ${styles.mobileInfo2}`}>
                 <span className={`${styles.hiddenText}`}>{`${tree.datePlanted ? "Planted on" : ""}`}&nbsp;</span>
                 <span>{GetFormattedDate(tree.datePlanted!)}</span>

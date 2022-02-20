@@ -18,19 +18,20 @@ const TreeTable: NextPage<Props> = ({ trees }) => {
     };
 
     return (
-        <div className={styles.container}>
+        <div>
             <div className={styles.headerRow}>
+                <div className={styles.placeholderDiv}></div>
                 <span className={styles.headerItem}>Date</span><br/>
                 <span className={styles.headerItem}>Location</span><br/>
                 <span className={styles.headerItem}>Type of Tree</span><br/>
             </div>
+            <div className={styles.line} />
             {trees && trees.map((tree: Tree) => {
             return (
-                <div key={tree._id} style={{cursor: "pointer"}} onClick={() => onClick(tree._id!)}>
+                <div key={tree._id} className={styles.treeRow} onClick={() => onClick(tree._id!)}>
                     <SingleTree tree={tree} />
                     <div className={styles.line} />
                 </div>
-                
             )
         })}
         </div>
