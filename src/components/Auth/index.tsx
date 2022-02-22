@@ -1,5 +1,6 @@
 
 import { useUser } from '@auth0/nextjs-auth0';
+import { setSyntheticTrailingComments } from 'typescript';
 
 
 const AuthComponent = () => {
@@ -17,7 +18,7 @@ const AuthComponent = () => {
 		);
 	}
 
-	return <a href="/api/auth/login">Login</a>
+	return <a href="/api/auth/login"><p>Login</p></a>
 };
 
 export default AuthComponent;
