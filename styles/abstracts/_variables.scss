@@ -4,6 +4,10 @@
 $fonts: (
     primary: #{"Open Sans", sans-serif},
     secondary: #{"Philosopher", sans-serif},
+<<<<<<< HEAD
+=======
+    tertiary: #{"Roboto", sans-serif},
+>>>>>>> a948d411197b31c86264285c56f3e036c2834b62
 );
 
 //Values can be retrieved with map-get(map-get($colors, 'SECTION_NAME'), 'COLOR')
@@ -12,6 +16,10 @@ $colors: (
         primary: #358623,
         secondary: #69C4E0,
         tertiary: #E3E3E3,
+<<<<<<< HEAD
+=======
+        LGreen: #DBF8BE,
+>>>>>>> a948d411197b31c86264285c56f3e036c2834b62
     ),
     text: (
         primary: #000000,
@@ -21,7 +29,19 @@ $colors: (
 );
 
 $breakpoints: (
+<<<<<<< HEAD
   "medium": (
     min-width: 1000px,
   ),
+=======
+  "large": (
+    min-width: 600px,
+  ),
+  "medium": (
+    min-width: 1000px,
+  ),
+  "small": (
+    max-width: 600px,
+  ),
+>>>>>>> a948d411197b31c86264285c56f3e036c2834b62
 );

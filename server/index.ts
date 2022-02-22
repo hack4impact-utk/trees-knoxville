@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import urls from "utils/urls";
-
 // load the models before we start using them or else they wont
 // be defined and we get a MissingSchemaError
 require("./models/Tree");

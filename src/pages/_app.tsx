@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import App from "next/app";
 import type { AppProps /*, AppContext */ } from 'next/app'
 import 'styles/main.scss';
@@ -19,3 +20,16 @@ function MyApp({ Component, pageProps }: AppProps) {
 // }
 
 export default MyApp
+=======
+import React from 'react';
+import 'styles/main.scss';
+import { UserProvider } from '@auth0/nextjs-auth0';
+
+export default function App({ Component, pageProps }) {
+  return (
+    <UserProvider>
+      <Component {...pageProps} />
+    </UserProvider>
+  );
+}
+>>>>>>> a948d411197b31c86264285c56f3e036c2834b62

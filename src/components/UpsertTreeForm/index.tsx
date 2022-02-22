@@ -135,7 +135,8 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                     name="datePlanted"
                     onChange={onChange}
                     placeholder="Date Planted"
-                    defaultValue={upsertTree ? upsertTree.datePlanted?.toString().split("T")[0] : ""}
+                    defaultValue={upsertTree ? upsertTree.datePlanted?.
+                        toString().split("T")[0] : ""}
                     id="datePlantedField"
                         />
                 <label htmlFor="adopted">Adopted</label>
