@@ -77,7 +77,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
     const handleWatering  = () => { setWatering(watering => !watering) }
     const handlePruning   = () => { setPruning(pruning => !pruning) }
     const handlePublished = () => { setPublished(published => !published) }
-    
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -153,6 +153,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                     id="pruningCheckbox"
                         />
                 <label htmlFor="publish">Publish?</label>
+                
                 <input
                     type="checkbox"
                     name="publish"
@@ -161,6 +162,10 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                     id="publishCheckbox"
                     defaultChecked={upsertTree ? upsertTree.published : false}
                         />
+                
+                <label htmlFor="file">Upload Photo</label>
+                <input type="file" id="file" name="file" accept="image/*"></input>
+
                 <input type="submit" value={upsertTree ? "Update Tree" : "Add Tree"}></input>
             </form>
         </div>
