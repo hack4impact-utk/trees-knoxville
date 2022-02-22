@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import React, { useRef, useEffect } from "react";
 import { Tree } from "utils/types";
+import styles from "src/components/SingleTree/SingleTree.module.scss"
 
 interface Props {
     tree: Tree,
@@ -8,21 +9,37 @@ interface Props {
 
 const SingleTree: NextPage<Props> = ({ tree }) => {
 
-    
+    function GetFormattedDate(date: Date) {
+
+        // in case the tree does not have a date
+        if (!date) return "";
+
+        // YYYY-MM-DD format
+        const dateString = date.toString().split("T")[0];
+
+        const [year, month, day] = dateString.split('-');
+
+        // MM/DD/YYYY format
+        const formattedDate = [month, day, year].join('/');
+
+        return formattedDate;
+    }
 
     return (
-        
-        <div >
-            <span>ObjectID={tree._id}</span><br/>
-            <span>Species={tree.species}</span><br/>
-            <span>Coordinates={tree.coordinates?.latitude}, {tree.coordinates?.longitude}</span><br/>
-            <span>Adpoted={tree.adopted == true ? "true" : "false"}</span><br/>
-            <span>Watering={tree.watering == true ? "true" : "false"}</span><br/>
-            <span>Pruning={tree.pruning == true ? "true" : "false"}</span><br/>
-            <span>Date Planted={tree.datePlanted?.toString().split("T")[0]}</span><br/>
-            <span>published={tree.published == true ? "true" : "false"}</span><br/>
+    <div className={styles.container}>
+        <div className={styles.imageContainer}>
+                <img className={styles.placeholderImage} src="/defaultTreeImage.png"/>
         </div>
-  
+        <div className={styles.row}>  
+            
+            <div className={`${styles.info} ${styles.mobileInfo2}`}>
+                <span className={`${styles.hiddenText}`}>{`${tree.datePlanted ? "Planted on" : ""}`}&nbsp;</span>
+                <span>{GetFormattedDate(tree.datePlanted!)}</span>
+            </div>
+            <span className={`${styles.info} ${styles.mobileInfo3}`}>{tree.coordinates?.latitude}, {tree.coordinates?.longitude}</span>
+            <span className={`${styles.info} ${styles.mobileInfo1}`}>{tree.species}</span>
+        </div>
+    </div>
     );
 }
 
