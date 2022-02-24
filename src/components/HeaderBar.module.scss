@@ -28,13 +28,14 @@
     padding: 5px;
     height: 30px;
     background-color: #E3E3E3;
-    width: 67%;
+    width: 60%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     border-radius: 2px;
     margin-left: 15px;
+    margin-right: 7px;
   }
   .TKlogo {
     font-size: 4rem;
@@ -52,6 +53,6 @@
     width: 28px;
     background-color: #039941;
     border-radius: 100%;
-    margin: 4px;
+    margin: 8px;
   }
 }

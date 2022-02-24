@@ -13,10 +13,12 @@ class HeaderBar extends React.Component {
         <Image src={logo} alt="logo" width={80} height={35} />
         
         <div className = {styles.SearchContainer}>
-          <Image src={menu} alt="menu icon" height={30} width={25} />
+          
           <input type="text" alt="search box" placeholder="Search here" className={styles.SearchBox}/>
           <div className={styles.Profile} />
+          
         </div>
+        <Image src={menu} alt="menu icon" height={27} width={27} />
       </div>
     )
   }
