@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "../HeaderBar.module.scss"
+import styles from "./HeaderBar.module.scss"
 import Image from 'next/image'
 import AuthComponent from "src/components/Auth"; 
 import logo from "public/tklogo.png"
