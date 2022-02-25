@@ -3,6 +3,11 @@ import { Tree } from "utils/types"
 import { updateTree } from "server/actions/Tree"
 import formidable from "formidable";
 import { uploadImage } from "server/actions/Contentful";
+export const config = {
+    api: {
+        bodyParser: false,
+    },
+};
 
 
 
@@ -21,6 +26,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 // ensures coordinates are valid
                 const numberLat = Number(tree.coordinates?.latitude);
                 const numberLong = Number(tree.coordinates?.longitude);
+                //FIXME
+                console.log(numberLat);
+                console.log(numberLong);
                 if (!numberLat ||  numberLat < -90 || numberLat > 90 ) {
                     throw Error ("Invalid Latitude");
                 }
@@ -30,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
                 // uploads the image to contentful
                 if (files.image) {
-                    tree.image = await uploadImage(files.image);
+                    tree.image = await uploadImage(files.image as formidable.File);
                 }
 
                 await updateTree({ _id: id }, tree);
