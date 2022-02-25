@@ -13,5 +13,8 @@ export default {
             index: "/api/admin/trees",
             updateTree: (treeId: string) => `/api/admin/trees/${treeId}`,
         },
+        auth: {
+            index: () => `/api/auth/users/`,
+        },
     },
 }
