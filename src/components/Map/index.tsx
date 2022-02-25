@@ -1,6 +1,6 @@
 import { Tree } from "utils/types";
 import Map from "google-map-react";
-import styles from "../Map.module.css"
+import styles from "./Map.module.css"
 import { FunctionComponent } from "react";
 import Marker from "src/components/Marker"
 

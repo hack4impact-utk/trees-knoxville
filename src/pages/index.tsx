@@ -1,6 +1,7 @@
 import React from "react";
 import UpsertTreeForm from "src/components/UpsertTreeForm";
 import MapContainer from "src/components/Map";
+import HeaderBar from "src/components/HeaderBar"
 import { GetStaticPropsContext, NextPage } from "next";
 import { Tree } from "utils/types";
 import { getTreesByVisibilityStatus } from "server/actions/Tree";
@@ -22,15 +23,30 @@ const HomePage: NextPage<Props> = ({ trees }) => {
         <head>
             <title>Map | Trees Knoxville</title>
         </head>
-        <h1>Welcome to Trees Knoxville!</h1>
-	<AuthComponent/>
-        <Filter/>
+        <div className="header">
+            {/* <AuthComponent/> */}
+            <HeaderBar/>
+        </div>
+
+	    
         <div>
             <MapContainer trees={trees} />
             <br /><br />
         </div>  
         
     </div>
+    <style jsx>{`
+
+    `}</style>
+
+    <style>{`
+        .header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100vw;
+        }
+    `}</style>
     </UserProvider>
     );
 }
