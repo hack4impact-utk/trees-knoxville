@@ -65,8 +65,8 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
             else {
                 fd.append(key, newTree[key] as Blob);
             }
-            
         }
+        fd.append("image", values.image as Blob);
         console.log(values.image);
 
         // if an existing tree is being updated
