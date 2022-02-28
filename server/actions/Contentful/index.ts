@@ -41,7 +41,7 @@ export async function uploadImage(image: formidable.File) {
         throw new Error("Asset creation unsuccessful.");
     } else {
         //Delete image from local storage before ending upload
-        fs.unlinkSync(image.path);
+        fs.unlinkSync(image.filepath);
         //The url is returned without the http/https, so it's added here.
         return { url: "https:" + asset.fields.file["en-US"].url, assetID: asset.sys.id };
     }

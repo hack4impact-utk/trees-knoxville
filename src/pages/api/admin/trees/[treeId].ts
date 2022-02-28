@@ -21,14 +21,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const id = req.query.treeId as string;
 
             form.parse(req, async (err: string, fields: formidable.Fields, files: formidable.Files) => {
-                const tree: Tree = fields;
+                
+                
 
+                const updateTree: Tree = {
+                    species: fields.species,
+                    age: fields.age,
+                    coordinates: {
+                        latitude: fields.latitude,
+                        longitude: fields.longitude,
+                    },
+                    datePlanted: fields.datePlanted,
+                    adopted: fields.adopted,
+                    watering: fields.watering,
+                    pruning: fields.pruning,
+                    published: fields.published,
+                    
+                }
+                
+                console.log(files.image)
+                
                 // ensures coordinates are valid
-                const numberLat = Number(tree.coordinates?.latitude);
-                const numberLong = Number(tree.coordinates?.longitude);
-                //FIXME
-                console.log(numberLat);
-                console.log(numberLong);
+                const numberLat = Number(updateTree.coordinates?.latitude);
+                const numberLong = Number(updateTree.coordinates?.longitude);
+
                 if (!numberLat ||  numberLat < -90 || numberLat > 90 ) {
                     throw Error ("Invalid Latitude");
                 }
@@ -38,20 +54,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
                 // uploads the image to contentful
                 if (files.image) {
-                    tree.image = await uploadImage(files.image as formidable.File);
+                    updateTree.image = await uploadImage(files.image as formidable.File);
                 }
-
-                await updateTree({ _id: id }, tree);
+                console.log(updateTree)
+                
 
                 res.status(200).json({
                     success: true,
                     payload: {}
                 });
-            });
-
-            //const tree: Tree = JSON.parse(req.body);
-
-            
+            });            
         }
         
     } catch (error) {

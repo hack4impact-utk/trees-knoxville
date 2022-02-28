@@ -13,7 +13,7 @@ interface stateInterface {
     publish?: boolean,
     datePlanted?: Date,
     image?: File,
-    [key: string]: string | number | boolean | Date | File | null | undefined,
+    [key: string]: string | Blob | boolean | number | Date | File | null | undefined,
 }
 
 interface Props {
@@ -32,11 +32,11 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
-        /*
+        
         // creates tree object
         const newTree: Tree = {
-            species: values.species,
-            age: values.age,
+            species: values.species || upsertTree?.species,
+            age: values.age || upsertTree?.age,
             coordinates: {
                 latitude: values.latitude || upsertTree?.coordinates?.latitude,
                 longitude: values.longitude || upsertTree?.coordinates?.longitude,
@@ -48,19 +48,26 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
             pruning: pruning,
             published: published,
         }
-        */
+        
 
         const fd = new FormData();
-        
         let key: string;
-        for (key in values) {
-            if (typeof values[key] === "string") {
-                fd.append(key, values[key] as string);
+        let key2: string;
+        for (key in newTree ) {
+            if (typeof newTree[key] === "string") {
+                fd.append(key, newTree[key] as string);
+            }
+            else if (key === "coordinates") {
+                for (key2 in newTree[key]) {
+                    fd.append(key2, newTree[key][key2] as string);
+                }
             }
             else {
-                fd.append(key, values[key] as Blob)
+                fd.append(key, newTree[key] as Blob);
             }
+            
         }
+        console.log(values.image);
 
         // if an existing tree is being updated
         if (upsertTree) {
@@ -92,6 +99,8 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
         else {
             setValues(values => ({...values, [target.name]: target.value}));
         }
+
+        
     }
 
     // handles the checkbox states
