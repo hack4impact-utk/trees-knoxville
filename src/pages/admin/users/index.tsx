@@ -5,6 +5,7 @@ import { GetStaticPropsContext, NextPage } from "next";
 import { getTrees } from "server/actions/Tree";
 import urls from "utils/urls";
 import UserTable from "src/components/UserTable";
+import { getUsers } from "server/actions/User";
 
 interface Props {
     users: [],
@@ -34,24 +35,13 @@ const AdminTrees: NextPage<Props> = ({ users }) => {
 export async function getStaticProps(context: GetStaticPropsContext) {
     try {
 
-        var axios = require("axios").default;
+        
 
-        var options = {
-        method: 'GET',
-        url: 'https://YOUR_DOMAIN/api/v2/users',
-        params: {q: 'email:"*@*"', search_engine: 'v3'},
-        headers: {authorization: 'Bearer YOUR_MGMT_API_ACCESS_TOKEN'}
-        };
-
-        axios.request(options).then(function (response: { data: any; }) {
-            const users = response.data;
-        })
-
-        const trees: Tree[] = await getTrees();
+        const users: [] = await getUsers();
 
         return {
             props: {
-                users: (JSON.parse(JSON.stringify(trees))) //as Tree[], this was previously on here
+                users: (JSON.parse(JSON.stringify(users))) 
             },
         };
     }
