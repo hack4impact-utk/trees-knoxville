@@ -95,7 +95,8 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
 
         if (target.name == "image" && target.files != null) {
             setValues(values => ({ ...values, [target.name]: target.files?.item(0) }));
-        }
+            values.imageURL= URL.createObjectURL(target.files[0]);
+        }       
         else {
             setValues(values => ({...values, [target.name]: target.value}));
         }
@@ -194,11 +195,12 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                     defaultChecked={upsertTree ? upsertTree.published : false}
                         />
                 
-                <label htmlFor="file">Upload Photo</label>
+                <label htmlFor="image">Upload Photo</label>
                 <input type="file" id="image" name="image" accept="image/*" capture="environment" onChange={onChange}></input>
-
                 <input type="submit" value={upsertTree ? "Update Tree" : "Add Tree"}></input>
             </form>
+            <br></br>
+            <img  id="existingImage" src={values.imageURL as string || upsertTree?.image?.url} />
         </div>
     )
 }
