@@ -1,19 +1,67 @@
-.Content {
-  background-color: #ffffff;
-  height: 80px;
-  display: flex;
-  margin: 0;
+@use 'abstracts' as ab;
+
+.container {
+  width: 100%;
+  display:flex;
+  flex-direction:column;
+  position: fixed;
+  top: 0;
+  background: white;
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
-@media screen and (max-width: 1000px) {
-  .Content {
-    height: 60px;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding-left: 10px;
+.menuBtn {
+  @include ab.respond-to("medium") {
+    display:none;
   }
-  
+}
+.content { 
+    width:90%;
+    height: 60px;
+    align-self:center;
+    display: flex; 
+    flex-direction: row;
+    align-items:center;
+}
+
+.logo {
+  width: 120px;
+  height: 100%;
+}
+
+.searchContainer {
+  padding: 5px;
+  height: 30px;
+  background-color: #E3E3E3;
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 20px;
+  border-radius: 2px;
+  & > input {
+    width: 100%;
+    padding: 5px;
+    outline: none;
+    background: none;
+    border: none;
+    font-family: map-get(ab.$fonts, "primary");
+  }
+}
+
+.menuBtn {
+  margin-left: auto;
+  width: 25px;
+  height:25px;
+  cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+ 
   .LogoContainer {
     width: 10%;  
     height: 20px;
@@ -24,29 +72,8 @@
       height: unset !important;
     }
   }
-  .SearchContainer {
-    padding: 5px;
-    height: 30px;
-    background-color: #E3E3E3;
-    width: 60%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    border-radius: 2px;
-    margin-left: 15px;
-    margin-right: 7px;
-  }
   .TKlogo {
     font-size: 4rem;
-  }
-  .SearchBox {
-    width: 70%;
-    margin: 8px;
-    height: 20px;
-    border: none;
-    background: none;
-    font-size: 1em;
   }
   .Profile {
     height: 28px;

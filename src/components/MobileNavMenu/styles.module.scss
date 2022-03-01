@@ -1,0 +1,20 @@
+@use 'abstracts' as ab;
+
+.navigation {
+    width: 100%;
+    height: calc(100vh - 60px);
+    top: 61px;
+    background:white;
+    border-top: 2px solid map-get(ab.$colors,"theme", "primary");
+    display:flex;
+    flex-direction: column;
+    transition: 0.3s ease;
+    position:absolute;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
+    & > a {
+        width:90%;
+        align-self:center;
+        text-decoration:none;
+        margin: 10px 0;
+    }
+}
