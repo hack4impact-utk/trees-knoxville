@@ -3,7 +3,7 @@
 .navigation {
     width: 100%;
     height: calc(100vh - 60px);
-    top: 61px;
+    top: 60px;
     background:white;
     border-top: 2px solid map-get(ab.$colors,"theme", "primary");
     display:flex;
@@ -16,5 +16,9 @@
         align-self:center;
         text-decoration:none;
         margin: 10px 0;
+        text-align:right;
+        font-size: 1.2rem;
+        color: map-get(ab.$colors, "text", "secondary");
+        font-weight: 500;
     }
 }
