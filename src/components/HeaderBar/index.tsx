@@ -22,7 +22,7 @@ const HeaderBar: React.FC = () => {
         </div>
         <GiHamburgerMenu className={styles.menuBtn} onClick={() => setOpen(!open)} />
       </div>
-      <MobileNavMenu open={open} />
+      <MobileNavMenu open={open} setOpen={setOpen} />
     </div>
   )
 }
