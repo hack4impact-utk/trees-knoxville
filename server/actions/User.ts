@@ -16,13 +16,13 @@ import TreeModel from "server/models/Tree";
 
     var options = {
       method: 'POST',
-      url: `https://${process.env.AUTH0_BASE_URL}/api/v2/jobs/users-exports`,
+      url: `https://${process.env.AUTH0_DOMAIN}/api/v2/jobs/users-exports`,
       headers: {
-        authorization: 'Bearer YOUR_MGMT_API_ACCESS_TOKEN',
+        authorization: `Bearer ${process.env.AUTO0_MGMT_API_ACCESS_TOKEN}`,
         'content-type': 'application/json'
       },
       data: {
-        connection_id: 'YOUR_CONNECTION_ID',
+        connection_id: `${process.env.AUTH0_CONNECTION_ID}`,
         format: 'json',
         limit: 5,
         fields: [{name: 'email'}, {name: 'user_metadata.consent'}]
