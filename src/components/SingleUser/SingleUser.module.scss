@@ -1,0 +1,21 @@
+@use 'abstracts' as ab;
+
+.row {
+    display: flex;
+    min-height: 59.5px;
+    width: 100%;    
+    align-items: center;
+
+    @include ab.respond-to('small') {
+        flex-wrap: wrap;
+        width: 75%;
+        padding: 0 10px 0 10px;
+    }
+}
+
+.info {
+    width: calc(100% / 3);
+    display: inline-flex;
+    justify-content: center;
+    font-family: map-get(ab.$fonts, 'tertiary');
+}
