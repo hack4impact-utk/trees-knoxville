@@ -31,7 +31,9 @@ const HomePage: NextPage<Props> = ({ trees }) => {
         </div>  
         
     </div>
+        <UpsertTreeForm />
     </UserProvider>
+    
     );
 }
 

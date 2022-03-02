@@ -28,7 +28,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
     const [watering, setWatering] = React.useState(upsertTree ? upsertTree.watering : false);
     const [pruning, setPruning] = React.useState(upsertTree ? upsertTree.pruning : false);
     const [published, setPublished] = React.useState(upsertTree ? upsertTree.published : false);
-
+    
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
@@ -53,7 +53,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
         const fd = new FormData();
         let key: string;
         let key2: string;
-        for (key in newTree ) {
+        for (key in newTree) {
             if (typeof newTree[key] === "string") {
                 fd.append(key, newTree[key] as string);
             }
@@ -67,7 +67,6 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
             }
         }
         fd.append("image", values.image as Blob);
-        console.log(values.image);
 
         // if an existing tree is being updated
         if (upsertTree) {

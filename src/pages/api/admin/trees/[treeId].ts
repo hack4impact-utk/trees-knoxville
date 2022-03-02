@@ -10,7 +10,6 @@ export const config = {
     },
 };
 
-
 // @route   PUT  /api/events/admin/trees/[treeId] - Updates a tree from form data
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
@@ -22,8 +21,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             form.parse(req, async (err: string, fields: formidable.Fields, files: formidable.Files) => {
                 
-                
-
                 const updatedTree: Tree = {
                     species: fields.species,
                     age: fields.age,
@@ -37,8 +34,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     pruning: fields.pruning,
                     published: fields.published,   
                 }
-                
-                
                 
                 // ensures coordinates are valid
                 const numberLat = Number(updatedTree.coordinates?.latitude);
@@ -54,12 +49,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 // uploads the image to contentful
                 if (files.image) {
                     updatedTree.image = await uploadImage(files.image as formidable.File);
-                    console.log(updatedTree);
                 }
                 
                 await updateTree({ _id: id }, updatedTree);
                 
-
                 res.status(200).json({
                     success: true,
                     payload: {}
