@@ -21,6 +21,9 @@
 }
 
 .content { 
+  @include ab.respond-to("small") {
+    width: 95%;
+  }
     width:90%;
     height: 60px;
     align-self:center;
@@ -32,6 +35,7 @@
 .logo {
   width: 120px;
   height: 100%;
+  cursor: pointer;
 }
 
 .desktopLinks {
@@ -39,8 +43,9 @@
   @include ab.respond-to("medium") {
     display: flex;
     flex-direction:row;
-    justify-content:center;
-    width: 20%;
+    width: 40%;
+    margin-left: 20px;
+    margin-right: auto;
     & > a {
       text-decoration: none;
       margin: 0 20px;
@@ -54,12 +59,11 @@
   height: 40px;
   background-color: #E3E3E3;
   display: flex;
-  width: 60%;
+  width: 45%;
   margin: 0 auto;
   @include ab.respond-to("medium") {
-    width: 80%;
-    max-width: 1200px;
-    margin-left: auto;
+    width: 100%;
+    max-width: 400px;
     margin-right: 0;
     justify-content: none;
   }
@@ -93,7 +97,9 @@
 }
  
 .profile {
+  min-height: 20px;
   height: 28px;
+  min-width: 20px;
   width: 28px;
   background-color: #039941;
   border-radius: 100%;

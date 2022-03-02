@@ -10,7 +10,7 @@ const HeaderBar: React.FC = () => {
   return(
     <div className={styles.container}>
       <div className = {styles.content}>
-        <img src="/tklogo.png" className={styles.logo} />
+        <Link href='/'><img src="/tklogo.png" className={styles.logo} /></Link>
         <div className={styles.desktopLinks}>
           <Link href="#">Tree Map</Link>
           <Link href="#">Tree Statistics</Link>
