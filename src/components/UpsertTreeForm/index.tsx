@@ -28,6 +28,8 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
     const [watering, setWatering] = React.useState(upsertTree ? upsertTree.watering : false);
     const [pruning, setPruning] = React.useState(upsertTree ? upsertTree.pruning : false);
     const [published, setPublished] = React.useState(upsertTree ? upsertTree.published : false);
+
+    const existingImage = useRef<HTMLImageElement>(null);
     
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -95,6 +97,8 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
         if (target.name == "image" && target.files != null) {
             setValues(values => ({ ...values, [target.name]: target.files?.item(0) }));
             values.imageURL= URL.createObjectURL(target.files[0]);
+            console.log(values.imageURL);
+            existingImage.current!.src = values.imageURL;
         }       
         else {
             setValues(values => ({...values, [target.name]: target.value}));
@@ -199,7 +203,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                 <input type="submit" value={upsertTree ? "Update Tree" : "Add Tree"}></input>
             </form>
             <br></br>
-            <img  id="existingImage" src={values.imageURL as string || upsertTree?.image?.url} />
+            <img  id="existingImage" ref={existingImage} src={values.imageURL as string || upsertTree?.image?.url} />
         </div>
     )
 }
