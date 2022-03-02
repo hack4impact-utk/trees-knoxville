@@ -11,10 +11,6 @@
     }  
 }
 
-.placeholderDiv {
-    width: 10%;
-}
-
 .userRow {
     cursor: pointer;
 }
@@ -30,7 +26,7 @@
 }
 
 .headerItem {
-    width: 30%;
+    width: calc(100% / 3);
     height: 35px;
     display: inline-flex;
     align-items: center;

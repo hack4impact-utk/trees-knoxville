@@ -39,8 +39,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             throw new Error ("No users found");
         }
 
-        const users: [] = await getUsers();
-
         return {
             props: {
                 users: (JSON.parse(JSON.stringify(users))) 
