@@ -11,12 +11,7 @@ interface Props {
     users: [],
 }
 
-const AdminTrees: NextPage<Props> = ({ users }) => {
-
-    // reroutes to specific tree page
-    const onClick = (treeId: string) => {
-        window.location.replace(urls.pages.updateTree(treeId));
-    };
+const AdminUsers: NextPage<Props> = ({ users }) => {
 
     return (
     <div>    
@@ -35,7 +30,14 @@ const AdminTrees: NextPage<Props> = ({ users }) => {
 export async function getStaticProps(context: GetStaticPropsContext) {
     try {
 
+        const users = await getUsers();
         
+        if (users) {
+            console.log(JSON.parse(JSON.stringify(users)));
+        }
+        else {
+            throw new Error ("No users found");
+        }
 
         const users: [] = await getUsers();
 
@@ -55,4 +57,4 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     }
 }
 
-export default AdminTrees; 
+export default AdminUsers; 

@@ -1,18 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Tree } from "utils/types"
-import { addTree, getTrees } from "server/actions/Tree"
+import { getUsers } from "server/actions/User";
 
 
-// @route   GET  /api/auth/users - Returns all users from auth0
+// @route   POST  /api/auth/users - Returns all users from auth0
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
 
         if (req.method === "GET") {
-            const trees: Tree[] = await getTrees()
+            const users = await getUsers()
 
             res.status(200).json({
                 success: true,
-                payload: trees,
+                payload: users,
             });
         }       
     } catch (error) {
