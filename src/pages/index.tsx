@@ -1,5 +1,5 @@
 import React from "react";
-import UpsertTreeForm from "src/components/UpsertTreeForm";
+import Head from "next/head";
 import MapContainer from "src/components/Map";
 import HeaderBar from "src/components/HeaderBar"
 import { GetStaticPropsContext, NextPage } from "next";
@@ -16,9 +16,9 @@ const HomePage: NextPage<Props> = ({ trees }) => {
 
     return (
     <main> 
-    <head>
+    <Head>
         <title>Map | Trees Knoxville</title>
-    </head>
+    </Head>
             <HeaderBar/> 
             <MapContainer trees={trees} /> 
     </main>

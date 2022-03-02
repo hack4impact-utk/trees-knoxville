@@ -18,7 +18,7 @@ const MapContainer: FunctionComponent<Trees> = ({ trees }) => {
             defaultZoom={11}
             options={{fullscreenControl: false}}>
                 {trees && trees.map((tree: Tree) => 
-                    <Marker lat={Number(tree.coordinates?.latitude)} lng={Number(tree.coordinates?.longitude)} />)}
+                    <Marker key={tree._id} lat={Number(tree.coordinates?.latitude)} lng={Number(tree.coordinates?.longitude)} />)}
             </Map>
         </div>
     )
