@@ -13,3 +13,11 @@ export interface Tree {
     datePlanted?: Date;
     published?: boolean;
 }
+
+export interface User {
+    id?: string;
+    name?: string;
+    email?: string;
+    phone?: string;
+    trees?: string[],
+}
