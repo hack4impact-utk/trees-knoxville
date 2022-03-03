@@ -9,7 +9,6 @@ import TreeModel from "server/models/Tree";
  * @returns all users in auth0
  */
  export const getUsers = async function() {
-   
   var axios = require("axios").default;
 
   var options = {

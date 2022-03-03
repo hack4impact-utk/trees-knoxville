@@ -2,14 +2,48 @@
 
 .row {
     display: flex;
-    min-height: 59.5px;
+    min-height: 73.5px;
     width: 100%;    
     align-items: center;
 
     @include ab.respond-to('small') {
         flex-wrap: wrap;
-        width: 75%;
-        padding: 0 10px 0 10px;
+        width: 90%;
+        padding: 0 0px 0 20px;
+    }
+}
+
+.mobileInfo1 {
+    // name
+    @include ab.respond-to('small') {
+        width: 50% !important;
+        order: 1;
+        display: block !important;
+        text-align: left !important;
+        overflow-wrap: break-word; 
+    }
+}
+
+.mobileInfo2 {
+    // phone number
+    @include ab.respond-to('small') {
+        width: 50% !important;
+        order: 2;   
+        display: block !important;
+        text-align: right !important;
+        //font-size: 80%;
+        white-space: nowrap;
+    }
+}
+
+.mobileInfo3 {
+    // email
+    @include ab.respond-to('small') {
+        order: 3;
+        width: 50% !important;
+        font-size: 90%;
+        display: block !important;
+        text-align: left !important;
     }
 }
 
@@ -18,4 +52,9 @@
     display: inline-flex;
     justify-content: center;
     font-family: map-get(ab.$fonts, 'tertiary');
+    
+    @include ab.respond-to('small') {
+        width: 50% !important;
+        
+    }
 }
