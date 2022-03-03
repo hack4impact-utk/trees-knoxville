@@ -11,22 +11,10 @@ interface Props {
 }
 
 const UserTable: NextPage<Props> = ({ users }) => {
-    const newUser: User = {
-        id: "123",
-        name: "testName",
-    };
-
-    const newUser2: User = {
-        id: "456",
-        name: "testName2",
-        phone: "123-456-7989"
-    }
-
-    const userArray: User[] = [newUser, newUser2];
-
-    // reroutes to specific tree page
+  
+    // reroutes to specific user page
     const onClick = (userId: string) => {
-        
+        window.location.replace(urls.pages.getUser(userId));
     };
 
     return (
@@ -37,16 +25,14 @@ const UserTable: NextPage<Props> = ({ users }) => {
                 <span className={styles.headerItem}>Phone Number</span><br/>
             </div>
             <div className={styles.line} />
-            {userArray && userArray.map((user: User) => {
+            {users && users.map((user: User) => {
             return (
-                <div key={user.id} className={styles.userRow} onClick={() => onClick(user.id!)}>
+                <div key={user.user_id} className={styles.userRow} onClick={() => onClick(user.user_id!)}>
                     <SingleUser user={user} />
                     <div className={styles.line} />
                 </div>
             )
         })}
-            
-        
         </div>
     );
     
