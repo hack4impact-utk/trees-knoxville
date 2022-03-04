@@ -17,7 +17,7 @@ const AuthComponent = () => {
 		);
 	}
 
-	return <a href="/api/auth/login">Login</a>
+	return <a href="/api/auth/login"><p>Login</p></a>
 };
 
 export default AuthComponent;
