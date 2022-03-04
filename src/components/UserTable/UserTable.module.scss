@@ -20,6 +20,7 @@
     height: 0.5px;
     background-color: map-get(map-get(ab.$colors, "text"), "tertiary");
     margin: auto;
+    width: 95%;
 
     @include ab.respond-to('large') {
         display: none;
