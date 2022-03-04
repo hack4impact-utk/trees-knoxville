@@ -1,5 +1,5 @@
 import { createClient } from "contentful-management";
-import { File } from "formidable";
+import formidable from "formidable";
 import fs from "fs";
 //Code comes directly from https://github.com/hack4impact-utk/mindversity-website/blob/develop/server/actions/Contentful.ts
 const client = createClient({
@@ -12,13 +12,13 @@ const client = createClient({
  * @returns An object containing the uploaded image's asset ID and url.
  * @throws  Error if resource creation is unsuccessful
  */
-export async function uploadImage(image: File) {
+export async function uploadImage(image: formidable.File) {
     const space = await client.getSpace(process.env.CONTENTFUL_SPACE as string);
     const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT as string);
     let asset = await environment.createAssetFromFiles({
         fields: {
             title: {
-                "en-US": image.name,
+                "en-US": <string>image.originalFilename,
             },
             description: {
                 //We don't really need this field, but it is required to publish
@@ -26,9 +26,9 @@ export async function uploadImage(image: File) {
             },
             file: {
                 "en-US": {
-                    contentType: image.type,
-                    fileName: image.name,
-                    file: fs.readFileSync(image.path),
+                    contentType: <string>image.mimetype,
+                    fileName: <string>image.originalFilename,
+                    file: fs.readFileSync(image.filepath),
                 },
             },
         },
@@ -41,7 +41,7 @@ export async function uploadImage(image: File) {
         throw new Error("Asset creation unsuccessful.");
     } else {
         //Delete image from local storage before ending upload
-        fs.unlinkSync(image.path);
+        fs.unlinkSync(image.filepath);
         //The url is returned without the http/https, so it's added here.
         return { url: "https:" + asset.fields.file["en-US"].url, assetID: asset.sys.id };
     }
