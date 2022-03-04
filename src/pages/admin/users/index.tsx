@@ -18,7 +18,7 @@ const AdminUsers: NextPage<Props> = ({ users }) => {
         <head>
             <title>Admin Trees | Trees Knoxville</title>
         </head>
-        <h1>Admin Trees Page</h1>
+        <h1>Admin Users Page</h1>
         
         <div>
             <UserTable users={users}/>
