@@ -1,27 +1,30 @@
 import React from 'react'
 import styles from "./HeaderBar.module.scss"
-import Image from 'next/image'
-import AuthComponent from "src/components/Auth"; 
-import logo from "public/tklogo.png"
-import menu from "public/menu-icon.svg"
+import { GiHamburgerMenu } from "react-icons/gi";
+import MobileNavMenu from 'src/components/MobileNavMenu';
+import Link from 'next/link';
 
-class HeaderBar extends React.Component {
-  render() {
-    return(
-      <div className = {styles.Content}>
-        {/* <AuthComponent/> */}
-        <Image src={logo} alt="logo" width={80} height={35} />
-        
-        <div className = {styles.SearchContainer}>
-          
+
+const HeaderBar: React.FC = () => { 
+  const [open, setOpen] = React.useState(false);
+  return(
+    <div className={styles.container}>
+      <div className = {styles.content}>
+        <Link href='/'><img src="/tklogo.png" className={styles.logo} /></Link>
+        <div className={styles.desktopLinks}>
+          <Link href="#">Tree Map</Link>
+          <Link href="#">Tree Statistics</Link>
+          <Link href="#">Want to Adopt?</Link>
+        </div> 
+        <div className = {styles.searchContainer}> 
           <input type="text" alt="search box" placeholder="Search here" className={styles.SearchBox}/>
-          <div className={styles.Profile} />
-          
+          <div className={styles.profile} /> 
         </div>
-        <Image src={menu} alt="menu icon" height={27} width={27} />
+        <GiHamburgerMenu className={styles.menuBtn} onClick={() => setOpen(!open)} />
       </div>
-    )
-  }
+      <MobileNavMenu open={open} setOpen={setOpen} />
+    </div>
+  )
 }
 
 export default HeaderBar;
