@@ -24,7 +24,7 @@ const UserTable: NextPage<Props> = ({ users }) => {
                 <span className={styles.headerItem}>Email</span><br/>
                 <span className={styles.headerItem}>Phone Number</span><br/>
             </div>
-            <div className={styles.line} />
+            <div className={styles.firstLine} />
             {users && users.map((user: User) => {
             return (
                 <div key={user.user_id} className={styles.userRow} onClick={() => onClick(user.user_id!)}>

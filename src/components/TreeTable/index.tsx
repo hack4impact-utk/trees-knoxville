@@ -25,7 +25,7 @@ const TreeTable: NextPage<Props> = ({ trees }) => {
                 <span className={styles.headerItem}>Location</span><br/>
                 <span className={styles.headerItem}>Type of Tree</span><br/>
             </div>
-            <div className={styles.line} />
+            <div className={styles.firstLine} />
             {trees && trees.map((tree: Tree) => {
             return (
                 <div key={tree._id} className={styles.treeRow} onClick={() => onClick(tree._id!)}>

@@ -2,7 +2,7 @@
 
 .headerRow {
     display: flex;   
-    background-color: map-get(map-get(ab.$colors, "theme"), "LGreen");
+    background-color: map-get(map-get(ab.$colors, "theme"), "primary");
     border-radius: 10px 10px 0 0;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
    
@@ -13,6 +13,16 @@
 
 .userRow {
     cursor: pointer;
+}
+
+.firstLine {
+    height: 0.5px;
+    background-color: map-get(map-get(ab.$colors, "text"), "tertiary");
+    margin: auto;
+
+    @include ab.respond-to('large') {
+        display: none;
+    }
 }
 
 .line {

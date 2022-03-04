@@ -19,6 +19,16 @@
     cursor: pointer;
 }
 
+.firstLine {
+    height: 0.5px;
+    background-color: map-get(map-get(ab.$colors, "text"), "tertiary");
+    margin: auto;
+
+    @include ab.respond-to('large') {
+        display: none;
+    }
+}
+
 .line {
     height: 0.5px;
     background-color: map-get(map-get(ab.$colors, "text"), "tertiary");

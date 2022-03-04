@@ -2,12 +2,12 @@
 
 .row {
     display: flex;
-    min-height: 73.5px;
-    width: 100%;    
+    min-height: 59.5px;    
     align-items: center;
 
     @include ab.respond-to('small') {
         flex-wrap: wrap;
+        min-height: 73.5px;
         width: 90%;
         padding: 0 0px 0 20px;
     }
@@ -16,7 +16,6 @@
 .mobileInfo1 {
     // name
     @include ab.respond-to('small') {
-        width: 50% !important;
         order: 1;
         display: block !important;
         text-align: left !important;
@@ -27,11 +26,9 @@
 .mobileInfo2 {
     // phone number
     @include ab.respond-to('small') {
-        width: 50% !important;
         order: 2;   
         display: block !important;
         text-align: right !important;
-        //font-size: 80%;
         white-space: nowrap;
     }
 }
@@ -40,7 +37,6 @@
     // email
     @include ab.respond-to('small') {
         order: 3;
-        width: 50% !important;
         font-size: 90%;
         display: block !important;
         text-align: left !important;
