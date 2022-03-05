@@ -32,10 +32,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
         const users = await getUsers();
         
-        if (users) {
-            console.log(JSON.parse(JSON.stringify(users)));
-        }
-        else {
+        if (!users) {
             throw new Error ("No users found");
         }
 

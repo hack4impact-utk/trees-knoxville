@@ -9,9 +9,9 @@ import TreeModel from "server/models/Tree";
  * @returns all users in auth0
  */
  export const getUsers = async function() {
-  var axios = require("axios").default;
+  const axios = require("axios").default;
 
-  var options = {
+  const options = {
     method: 'GET',
     url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users`,
     params: {q: 'name:*', search_engine: 'v3'},
@@ -27,9 +27,9 @@ import TreeModel from "server/models/Tree";
  * @returns a single user
  */
 export const getUser = async function(id: string) {
-  var axios = require("axios").default;
+  const axios = require("axios").default;
 
-  var options = {
+  const options = {
     method: 'GET',
     url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${id}`,
     headers: {authorization: `Bearer ${process.env.AUTH0_MGMT_API_ACCESS_TOKEN}`}
