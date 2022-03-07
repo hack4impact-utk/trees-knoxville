@@ -20,4 +20,10 @@ export interface User {
     email?: string;
     phone?: string;
     trees?: string[],
+    image?: ContentfulImage;
+}
+
+export interface ContentfulImage {
+    assetID: string;
+    url: string;
 }

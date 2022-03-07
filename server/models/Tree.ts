@@ -1,5 +1,6 @@
 import { model, models, Model, Schema, Document } from "mongoose";
 import { Tree } from "utils/types";
+import ContentfulImageSchema from "./ContentfulImageSchema";
 
 export const TreeSchema = new Schema({
 
@@ -54,7 +55,12 @@ export const TreeSchema = new Schema({
         type: Boolean,
         required: true,
         default: false,
-    }
+    },
+
+    image: {
+        type: ContentfulImageSchema,
+        required: false,
+    },
 });
 
 export interface TreeDocument extends Omit<Tree, "_id">, Document {}
