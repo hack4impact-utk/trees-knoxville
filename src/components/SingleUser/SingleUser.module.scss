@@ -1,0 +1,56 @@
+@use 'abstracts' as ab;
+
+.row {
+    display: flex;
+    min-height: 59.5px;    
+    align-items: center;
+
+    @include ab.respond-to('small') {
+        flex-wrap: wrap;
+        min-height: 73.5px;
+        width: 90%;
+        padding: 0 0px 0 20px;
+    }
+}
+
+.mobileInfo1 {
+    // name
+    @include ab.respond-to('small') {
+        order: 1;
+        display: block !important;
+        text-align: left !important;
+        overflow-wrap: break-word; 
+    }
+}
+
+.mobileInfo2 {
+    // phone number
+    @include ab.respond-to('small') {
+        order: 2;   
+        display: block !important;
+        text-align: right !important;
+        white-space: nowrap;
+    }
+}
+
+.mobileInfo3 {
+    // email
+    @include ab.respond-to('small') {
+        order: 3;
+        font-size: 90%;
+        display: block !important;
+        text-align: left !important;
+    }
+}
+
+.info {
+    width: calc(100% / 3);
+    display: inline-flex;
+    justify-content: center;
+    font-family: map-get(ab.$fonts, 'tertiary');
+    
+    @include ab.respond-to('small') {
+        width: 50% !important;
+        
+    }
+}

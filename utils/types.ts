@@ -12,6 +12,14 @@ export interface Tree {
     pruning?: boolean;
     datePlanted?: Date;
     published?: boolean;
+}
+
+export interface User {
+    user_id?: string;
+    name?: string;
+    email?: string;
+    phone?: string;
+    trees?: string[],
     image?: ContentfulImage;
 }
 
