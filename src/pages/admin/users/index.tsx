@@ -1,9 +1,5 @@
 import React from "react";
-import { Tree } from "utils/types";
-import SingleTree from "src/components/SingleTree";
 import { GetStaticPropsContext, NextPage } from "next";
-import { getTrees } from "server/actions/Tree";
-import urls from "utils/urls";
 import UserTable from "src/components/UserTable";
 import { getUsers } from "server/actions/User";
 
@@ -32,10 +28,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
         const users = await getUsers();
         
-        if (users) {
-            console.log(JSON.parse(JSON.stringify(users)));
-        }
-        else {
+        if (!users) {
             throw new Error ("No users found");
         }
 

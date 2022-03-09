@@ -14,7 +14,7 @@ const UserTable: NextPage<Props> = ({ users }) => {
   
     // reroutes to specific user page
     const onClick = (userId: string) => {
-        window.location.replace(urls.pages.getUser(userId));
+        window.location.replace(urls.pages.user(userId));
     };
 
     return (
