@@ -15,9 +15,11 @@ export interface Tree {
 }
 
 export interface User {
+    user_metadata?: {
+        phone?: string,
+        trees?: string[],
+    };
     user_id?: string;
     name?: string;
     email?: string;
-    phone?: string;
-    trees?: string[],
 }
