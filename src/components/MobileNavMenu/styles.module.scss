@@ -1,0 +1,32 @@
+@use 'abstracts' as ab;
+
+.navigation {
+    width: 100%;
+    height: calc(100vh - 60px);
+    top: 60px;
+    background:white;
+    border-top: 2px solid map-get(ab.$colors,"theme", "primary");
+    display:flex;
+    flex-direction: column;
+    transition: 0.3s ease;
+    position:absolute;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
+    & > a {
+        width:90%;
+        align-self:center;
+        text-decoration:none;
+        margin: 10px 0;
+        font-size: 1.2rem;
+        color: map-get(ab.$colors, "text", "secondary");
+        font-weight: 500;
+    }
+    z-index: 2;
+}
+.overlay {
+    position: absolute; 
+    top: 60px;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.2);
+    transition: 0.3s ease;
+}

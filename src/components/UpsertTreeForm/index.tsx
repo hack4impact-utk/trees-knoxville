@@ -12,6 +12,8 @@ interface stateInterface {
     pruning?: boolean,
     publish?: boolean,
     datePlanted?: Date,
+    image?: File,
+    [key: string]: string | Blob | boolean | number | Date | File | null | undefined,
 }
 
 interface Props {
@@ -27,13 +29,16 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
     const [pruning, setPruning] = React.useState(upsertTree ? upsertTree.pruning : false);
     const [published, setPublished] = React.useState(upsertTree ? upsertTree.published : false);
 
+    const existingImage = useRef<HTMLImageElement>(null);
+    
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
+        
         // creates tree object
         const newTree: Tree = {
-            species: values.species,
-            age: values.age,
+            species: values.species || upsertTree?.species,
+            age: values.age || upsertTree?.age,
             coordinates: {
                 latitude: values.latitude || upsertTree?.coordinates?.latitude,
                 longitude: values.longitude || upsertTree?.coordinates?.longitude,
@@ -45,12 +50,31 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
             pruning: pruning,
             published: published,
         }
+        
+
+        const fd = new FormData();
+        let key: string;
+        let key2: string;
+        for (key in newTree) {
+            if (typeof newTree[key] === "string") {
+                fd.append(key, newTree[key] as string);
+            }
+            else if (key === "coordinates") {
+                for (key2 in newTree[key]) {
+                    fd.append(key2, newTree[key][key2] as string);
+                }
+            }
+            else {
+                fd.append(key, newTree[key] as Blob);
+            }
+        }
+        fd.append("image", values.image as Blob);
 
         // if an existing tree is being updated
         if (upsertTree) {
             const r = await fetch(urls.api.trees.updateTree(upsertTree._id as string), {
                 method: "PUT",
-                body: JSON.stringify(newTree),
+                body: fd,
             });
 
             // redirects to adminTrees
@@ -60,7 +84,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
         else {
             const r = await fetch(urls.api.trees.index, {
                 method: "POST",
-                body: JSON.stringify(newTree),
+                body: fd,
             }); 
         }  
     }
@@ -69,7 +93,18 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
     const onChange = (event: React.SyntheticEvent) => {
         event.persist();
         const target = event.target as HTMLInputElement;
-        setValues(values => ({...values, [target.name]: target.value}));
+
+        if (target.name == "image" && target.files != null) {
+            setValues(values => ({ ...values, [target.name]: target.files?.item(0) }));
+            values.imageURL= URL.createObjectURL(target.files[0]);
+            console.log(values.imageURL);
+            existingImage.current!.src = values.imageURL;
+        }       
+        else {
+            setValues(values => ({...values, [target.name]: target.value}));
+        }
+
+        
     }
 
     // handles the checkbox states
@@ -77,7 +112,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
     const handleWatering  = () => { setWatering(watering => !watering) }
     const handlePruning   = () => { setPruning(pruning => !pruning) }
     const handlePublished = () => { setPublished(published => !published) }
-    
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -153,6 +188,7 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                     id="pruningCheckbox"
                         />
                 <label htmlFor="publish">Publish?</label>
+                
                 <input
                     type="checkbox"
                     name="publish"
@@ -161,8 +197,13 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                     id="publishCheckbox"
                     defaultChecked={upsertTree ? upsertTree.published : false}
                         />
+                
+                <label htmlFor="image">Upload Photo</label>
+                <input type="file" id="image" name="image" accept="image/*" capture="environment" onChange={onChange}></input>
                 <input type="submit" value={upsertTree ? "Update Tree" : "Add Tree"}></input>
             </form>
+            <br></br>
+            <img  id="existingImage" ref={existingImage} src={values.imageURL as string || upsertTree?.image?.url} />
         </div>
     )
 }

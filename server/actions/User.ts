@@ -1,6 +1,5 @@
 import { User } from "utils/types";
 
-
 /**
  * @returns all users in auth0
  */
@@ -15,6 +14,7 @@ import { User } from "utils/types";
   };
 
   const response = await axios.request(options);
+
   return response.data;
 }
 

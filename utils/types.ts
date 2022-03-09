@@ -23,3 +23,8 @@ export interface User {
     name?: string;
     email?: string;
 }
+
+export interface ContentfulImage {
+    assetID: string;
+    url: string;
+}

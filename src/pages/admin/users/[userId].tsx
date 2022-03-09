@@ -29,7 +29,6 @@ export async function getServerSideProps(context: NextPageContext) {
         // get userId from url by using context
         const userId = context.query.userId as string;
 
-
         // this func is run on server-side, so we can safely fetch the user directly
         const user: User = await getUser(userId);
 
