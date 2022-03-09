@@ -1,11 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getUsers } from "server/actions/User";
 
-
-// @route   POST  /api/auth/users - Returns all users from auth0
+// @route   GET  /api/auth/users - Returns all users from auth0
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-
+        
         if (req.method === "GET") {
             const users = await getUsers()
 
@@ -13,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 success: true,
                 payload: users,
             });
-        }       
+        } 
     } catch (error) {
         console.log(error);
 
