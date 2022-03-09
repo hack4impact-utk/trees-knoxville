@@ -4,6 +4,7 @@ import React from "react";
 import { getTree } from "server/actions/Tree";
 import UpsertTreeForm from "src/components/UpsertTreeForm";
 import { getUser } from "server/actions/User";
+import UpdateUserForm from "src/components/UpdateUserForm";
 
 interface Props {
     user: User,
@@ -16,9 +17,7 @@ const AdminEdit: NextPage<Props> = ({ user }) => {
             <title>Admin Edit | Trees Knoxville</title>
         </head>
         <h1>Admin User Page</h1>
-        <span>Name: {user.name || "NO NAME"}</span><br/>
-        <span>Email: {user.email || "NO EMAIL"}</span><br/>
-        <span>Phone Number: {user.phone || "NO PHONE"}</span>
+        <UpdateUserForm user={user}/>
     </div>
     );
 }
@@ -31,7 +30,7 @@ export async function getServerSideProps(context: NextPageContext) {
         const userId = context.query.userId as string;
 
 
-        // this func is run on server-side, so we can safely fetch the event directly
+        // this func is run on server-side, so we can safely fetch the user directly
         const user: User = await getUser(userId);
 
         return {
