@@ -1,8 +1,4 @@
-import mongoDB from "server/index";
-import TreeSchema from "server/models/Tree";
-import { Types } from "mongoose";
-import { Tree, User } from "utils/types";
-import TreeModel from "server/models/Tree";
+import { User } from "utils/types";
 
 
 /**
@@ -36,7 +32,6 @@ export const getUser = async function(id: string) {
   };
 
   const response = await axios.request(options);
-
   return response.data;
 }
 
@@ -49,14 +44,18 @@ export const updateUser = async function(updatedUser: User) {
   const options = {
     method: 'PATCH',
     url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${updatedUser.user_id}`,
-    headers: {authorization: `Bearer ${process.env.AUTH0_MGMT_API_ACCESS_TOKEN}`},
-    body: {
+    headers: {authorization: `Bearer ${process.env.AUTH0_MGMT_API_ACCESS_TOKEN}`,
+    'content-type': 'application/json',},
+    
+    data: {
       name: updatedUser.name,
       email: updatedUser.email,
-      phone_number: updatedUser.phone,
-      trees: updatedUser.trees,
+      user_metadata: {
+        phone: updatedUser.user_metadata!.phone || "",
+        trees: updatedUser.user_metadata!.trees || [],
+    },
     },
   };
 
-  await axios.request(options);
+  const response = await axios.request(options);
 }
