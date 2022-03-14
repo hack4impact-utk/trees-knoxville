@@ -1,10 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import { ChildComponentProps } from 'google-map-react';
+import googleMapReact, { ChildComponentProps } from 'google-map-react';
+import { isConstructorTypeNode } from 'typescript';
 //import './styles.css';
-
-const Marker: FunctionComponent<ChildComponentProps> = (): JSX.Element => {
+interface props {
+  onClick(): void;
+  showInfo: boolean;
+  lat: number;
+  lng: number;
+}
+const Marker: FunctionComponent<props> = ({onClick}): JSX.Element => {
   return (
-    <div id="body">
+    <div id="body" onClick={onClick}>
       {/* <h1 id="text">Sample Text</h1> */}
       {/* <img alt={Pin} id="svg_pin" /> */}
       <svg

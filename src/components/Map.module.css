@@ -3,5 +3,6 @@
     flex-direction: horizontal;
     justify-content: center;
     justify-self: center;
+    position: relative;
     height: 550px;
   }
