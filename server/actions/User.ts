@@ -1,9 +1,4 @@
-import mongoDB from "server/index";
-import TreeSchema from "server/models/Tree";
-import { Types } from "mongoose";
-import { Tree } from "utils/types";
-import TreeModel from "server/models/Tree";
-
+import { User } from "utils/types";
 
 /**
  * @returns all users in auth0
@@ -18,7 +13,8 @@ import TreeModel from "server/models/Tree";
     headers: {authorization: `Bearer ${process.env.AUTH0_MGMT_API_ACCESS_TOKEN}`}
   };
 
-  const response = await axios.request(options)
+  const response = await axios.request(options);
+
   return response.data;
 }
 
@@ -35,7 +31,31 @@ export const getUser = async function(id: string) {
     headers: {authorization: `Bearer ${process.env.AUTH0_MGMT_API_ACCESS_TOKEN}`}
   };
 
-  const response = await axios.request(options)
-
+  const response = await axios.request(options);
   return response.data;
+}
+
+/**
+ * @param updatedUser A user with updated fields
+ */
+export const updateUser = async function(updatedUser: User) {
+  const axios = require("axios").default;
+
+  const options = {
+    method: 'PATCH',
+    url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${updatedUser.user_id}`,
+    headers: {authorization: `Bearer ${process.env.AUTH0_MGMT_API_ACCESS_TOKEN}`,
+    'content-type': 'application/json',},
+    
+    data: {
+      name: updatedUser.name,
+      email: updatedUser.email,
+      user_metadata: {
+        phone: updatedUser.user_metadata!.phone || "",
+        trees: updatedUser.user_metadata!.trees || [],
+    },
+    },
+  };
+
+  const response = await axios.request(options);
 }

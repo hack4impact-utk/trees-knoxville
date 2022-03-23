@@ -6,8 +6,9 @@ export default {
         adminHome: "/admin",
         addTree: "/admin/create",
         adminTrees: "/admin/trees",
+        adminUsers: "/admin/users",
         updateTree: (treeId: string) => `/admin/trees/${treeId}`,
-        getUser: (userId: string) => `/admin/users/${userId}`
+        user: (userId: string) => `/admin/users/${userId}`
     },
     api: {
         trees: {
@@ -16,7 +17,7 @@ export default {
         },
         users: {
             index: () => `/api/auth/users/`,
-            getUser: (userId: string) => `/api/auth/users/${userId}`
+            user: (userId: string) => `/api/auth/users/${userId}`
         },
     },
 }

@@ -14,7 +14,7 @@ const SingleUser: NextPage<Props> = ({ user }) => {
         <div className={styles.row}>
             <span className={`${styles.info} ${styles.mobileInfo1}`}>{user.name || "NO NAME"}</span>
             <span className={`${styles.info} ${styles.mobileInfo3}`}>{user.email || "NO EMAIL"}</span>
-            <span className={`${styles.info} ${styles.mobileInfo2}`}>{user.phone || "NO PHONE"}</span>            
+            <span className={`${styles.info} ${styles.mobileInfo2}`}>{user.user_metadata!.phone || "NO PHONE"}</span>            
         </div>
     </div>
     );
