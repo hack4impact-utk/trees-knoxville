@@ -59,3 +59,10 @@ export const updateUser = async function(updatedUser: User) {
 
   const response = await axios.request(options);
 }
+
+/**
+ * @param user The user to insert into auth0
+ */
+export const addUser = async function(user: User) {
+  
+}

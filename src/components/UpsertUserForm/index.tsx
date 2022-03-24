@@ -47,7 +47,10 @@ const UpdateUserForm: React.FC<Props> = ({ user }) => {
         // if a new user is being added
         else {
             // creates the user in auth0
-            
+            const r = await fetch(urls.api.users.index, {
+                method: "POST",
+                body: JSON.stringify(newUser),
+            });
         }
         
 
