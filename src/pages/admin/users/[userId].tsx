@@ -1,10 +1,8 @@
 import { NextPage, NextPageContext } from "next";
-import { Tree, User } from "utils/types";
+import { User } from "utils/types";
 import React from "react";
-import { getTree } from "server/actions/Tree";
-import UpsertTreeForm from "src/components/UpsertTreeForm";
 import { getUser } from "server/actions/User";
-import UpdateUserForm from "src/components/UpdateUserForm";
+import UpsertUserForm from "src/components/UpsertUserForm";
 
 interface Props {
     user: User,
@@ -17,7 +15,7 @@ const AdminEdit: NextPage<Props> = ({ user }) => {
             <title>Admin Edit | Trees Knoxville</title>
         </head>
         <h1>Admin User Page</h1>
-        <UpdateUserForm user={user}/>
+        <UpsertUserForm user={user}/>
     </div>
     );
 }
