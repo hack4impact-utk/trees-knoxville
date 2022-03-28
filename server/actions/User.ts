@@ -64,5 +64,35 @@ export const updateUser = async function(updatedUser: User) {
  * @param user The user to insert into auth0
  */
 export const addUser = async function(user: User) {
-  
+
+  // randomly generates a password
+  const generator = require('generate-password');
+  const userPassword = generator.generate({
+                    length: 10,
+                    numbers: true,
+                    symbols: true,
+                  });
+
+  const axios = require("axios").default;
+
+  const options = {
+    method: 'POST',
+    url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users`,
+    headers: {authorization: `Bearer ${process.env.AUTH0_MGMT_API_ACCESS_TOKEN}`,
+    'content-type': 'application/json',},
+    
+    data: {
+      name: user.name,
+      email: user.email,
+      user_metadata: {
+        phone: user.user_metadata!.phone || "",
+        trees: user.user_metadata!.trees || [],
+    },
+    
+      connection:"Username-Password-Authentication",
+      password: userPassword,
+    },
+  };
+
+  const response = await axios.request(options);
 }
