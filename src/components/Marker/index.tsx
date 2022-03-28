@@ -1,12 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import { ChildComponentProps } from 'google-map-react';
+import {Tree} from "utils/types";
 //import './styles.css';
+interface Props extends ChildComponentProps {
+  tree: Tree;
+  handleTreeDisplay(tree: Tree): void;
+}
 
-const Marker: FunctionComponent<ChildComponentProps> = (): JSX.Element => {
+const Marker: FunctionComponent<Props> = ({tree, handleTreeDisplay}): JSX.Element => {
   return (
-    <div id="body">
-      {/* <h1 id="text">Sample Text</h1> */}
-      {/* <img alt={Pin} id="svg_pin" /> */}
+    <div id="body" onClick={() => handleTreeDisplay(tree)}>
       <svg
         className="svg_pin"
         xmlns="http://www.w3.org/2000/svg"
