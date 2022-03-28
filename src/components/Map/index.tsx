@@ -1,7 +1,7 @@
+import React from 'react';
 import { Tree } from "utils/types";
 import Map from "google-map-react";
 import Marker from "src/components/Marker"
-import React from "react";
 import TreeInfoComponent from "src/components/TreeInfoComponent";
 import styles from "./styles.module.scss";
 
