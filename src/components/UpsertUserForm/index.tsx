@@ -36,7 +36,8 @@ const UpdateUserForm: React.FC<Props> = ({ user }) => {
         // if an existing user is being updated
         if (user) {
             // updates the user in auth0
-            const r = await fetch(urls.api.users.user(user.user_id!), {
+            newUser.user_id = user.user_id;
+            const r = await fetch(urls.api.users.user(newUser.user_id!), {
                 method: "PATCH",
                 body: JSON.stringify(newUser),
             });
@@ -44,6 +45,7 @@ const UpdateUserForm: React.FC<Props> = ({ user }) => {
             // redirects to adminUsers
             window.location.replace(urls.pages.adminUsers);
         }
+
         // if a new user is being added
         else {
             // creates the user in auth0
@@ -51,10 +53,7 @@ const UpdateUserForm: React.FC<Props> = ({ user }) => {
                 method: "POST",
                 body: JSON.stringify(newUser),
             });
-        }
-        
-
-        
+        }     
     }
 
     const handleAddTree = async (e: React.FormEvent<HTMLFormElement>) => {
