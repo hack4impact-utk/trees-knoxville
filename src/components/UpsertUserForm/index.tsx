@@ -53,6 +53,12 @@ const UpdateUserForm: React.FC<Props> = ({ user }) => {
                 method: "POST",
                 body: JSON.stringify(newUser),
             });
+
+            // sends a set password link
+            const r2 = await fetch(urls.api.users.user(newUser.user_id!), {
+                method: "POST",
+                body: JSON.stringify(newUser),
+            });
         }     
     }
 
