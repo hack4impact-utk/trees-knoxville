@@ -6,7 +6,7 @@ import { getTrees } from "server/actions/Tree";
 import urls from "utils/urls";
 import TreeTable from "src/components/TreeTable";
 import { MdOutlineSort, MdWatchLater } from "react-icons/md"
-
+import AdminNavigation from "src/components/AdminNavigation";
 interface Props {
     trees: Tree[],
 }
@@ -19,7 +19,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
     };
 
     return (
-    <div>    
+    <AdminNavigation>    
         <head>
             <title>Admin Trees | Trees Knoxville</title>
         </head>
@@ -28,7 +28,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
         <div>
             <TreeTable trees={trees}/>
         </div>
-    </div>
+    </AdminNavigation>
     );
 }
 

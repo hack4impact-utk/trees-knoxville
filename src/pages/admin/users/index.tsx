@@ -2,7 +2,7 @@ import React from "react";
 import { GetStaticPropsContext, NextPage } from "next";
 import UserTable from "src/components/UserTable";
 import { getUsers } from "server/actions/User";
-
+import AdminNavigation from "src/components/AdminNavigation";
 interface Props {
     users: [],
 }
@@ -10,7 +10,7 @@ interface Props {
 const AdminUsers: NextPage<Props> = ({ users }) => {
 
     return (
-    <div>    
+    <AdminNavigation>    
         <head>
             <title>Admin Trees | Trees Knoxville</title>
         </head>
@@ -19,7 +19,7 @@ const AdminUsers: NextPage<Props> = ({ users }) => {
         <div>
             <UserTable users={users}/>
         </div>
-    </div>
+    </AdminNavigation>
     );
 }
 
