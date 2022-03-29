@@ -17,12 +17,18 @@ const TreeInfoComponent: React.FC<Props> = ({tree, displayingTree, setDisplaying
     });
     return (
         <div className={`${styles.treeInfo} ${displayingTree ? styles.open : styles.closed}`}>
-            <button onClick={() => setDisplayingTree(false)}>Close Window</button>
-            <p>Tree id: {tree && tree._id}</p>
-            <p>Tree age: {tree && tree.age}</p>
-            <p>Tree adopted status: {tree && tree.adopted ? "true": "false"}</p>
-            <p>Date planted: {tree && date}</p>
-            <p>Species: {tree && tree.species}</p>
+            <button className={styles.closeButton} onClick={() => setDisplayingTree(false)}>Close Window</button>
+            <img src={tree && tree.image && tree.image.url} alt={tree.species} className={styles.treeImage} />
+            <div className={styles.treeText}>
+                <h3>Coordinates</h3>
+                <p>{tree && tree.coordinates?.latitude}, {tree && tree.coordinates.longitude}</p>
+                <h3>Date Planted</h3>
+                <p>{tree && date}</p>
+                <h3>Species</h3>
+                <p>{tree && tree.species}</p>  
+                <h3>Age</h3>
+                <p>{tree && tree.age}</p>
+            </div>
         </div>
     );
 }

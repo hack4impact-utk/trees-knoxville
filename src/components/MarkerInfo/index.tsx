@@ -3,7 +3,6 @@ import styles from "./markerInfo.module.scss"
 import { FunctionComponent } from "react";
 import { Tree } from "utils/types";
 import Map from "src/components/Map"
-//import ReactCSSTransitionGroup from 'react-transition-group'; // ES6
 
 interface props {
     onClick(): void;
