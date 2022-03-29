@@ -96,3 +96,26 @@ export const addUser = async function(user: User) {
 
   const response = await axios.request(options);
 }
+
+/**
+ * @param email The email of the user to send the set password link to
+ */
+export const setUserPassword = async function(email: string) {
+  var axios = require("axios").default;
+
+  var options = {
+    method: 'POST',
+    url: `https://${process.env.AUTH0_DOMAIN}/dbconnections/change_password`,
+    headers: {authorization: `Bearer ${process.env.AUTH0_MGMT_API_ACCESS_TOKEN}`,
+    'content-type': 'application/json'},
+    data: {
+      email: email,
+      connection: 'Username-Password-Authentication'
+    }
+  };
+  
+  const response = await axios.request(options);
+
+  console.log('--------------------------------------------------------------');
+  console.log(response);
+}
