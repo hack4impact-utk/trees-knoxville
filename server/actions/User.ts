@@ -6,16 +6,29 @@ import { User } from "utils/types";
  export const getUsers = async function() {
   const axios = require("axios").default;
 
-  const options = {
-    method: 'GET',
-    url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users`,
-    params: {q: 'name:*', search_engine: 'v3'},
-    headers: {authorization: `Bearer ${process.env.AUTH0_MGMT_API_ACCESS_TOKEN}`}
-  };
+  var responseCount = 100;
+  var pageNumber = 0;
+  var allUsers: any[] = [];
 
-  const response = await axios.request(options);
+  // gets all users by continually getting 100 users (max query size) and concating to an array
+  while (responseCount === 100) {
+    const options = {
+      method: 'GET',
+      url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users`,
+      params: {q: 'name:*', search_engine: 'v3', per_page: '100', page: pageNumber},
+      headers: {authorization: `Bearer ${process.env.AUTH0_MGMT_API_ACCESS_TOKEN}`}
+    };
 
-  return response.data;
+    const response = await axios.request(options);
+
+    response.data.map((user: any) => allUsers.push(user));
+
+    pageNumber++;
+
+    responseCount = response.data.length;
+  }
+  
+  return allUsers;
 }
 
 /**
