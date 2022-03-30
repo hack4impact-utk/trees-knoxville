@@ -11,11 +11,13 @@ import { User } from "utils/types";
   var allUsers: any[] = [];
 
   // gets all users by continually getting 100 users (max query size) and concating to an array
+  // sorts by last name (nickname in auth0) in ascending order
   while (responseCount === 100) {
     const options = {
       method: 'GET',
       url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users`,
-      params: {q: 'name:*', search_engine: 'v3', per_page: '100', page: pageNumber},
+      params: {q: 'name:*', search_engine: 'v3',
+       per_page: '100', page: pageNumber, sort:"nickname:1"},
       headers: {authorization: `Bearer ${process.env.AUTH0_MGMT_API_ACCESS_TOKEN}`}
     };
 
@@ -86,6 +88,10 @@ export const addUser = async function(user: User) {
                     symbols: true,
                   });
 
+  // grabs the user's last name for sorting purposes
+  const splitString = user.name?.trim().split(" ");
+  const lastName = splitString![splitString!.length - 1];
+
   const axios = require("axios").default;
 
   const options = {
@@ -96,6 +102,7 @@ export const addUser = async function(user: User) {
     
     data: {
       name: user.name,
+      nickname: lastName,
       email: user.email,
       user_metadata: {
         phone: user.user_metadata!.phone || "",
@@ -129,6 +136,4 @@ export const setUserPassword = async function(email: string) {
   
   const response = await axios.request(options);
 
-  console.log('--------------------------------------------------------------');
-  console.log(response);
 }
