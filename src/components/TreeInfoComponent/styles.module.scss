@@ -51,6 +51,7 @@
     border: 2px solid map-get(abs.$colors, "theme", "primary");
     height: 200px;
     width: 200px;
+    object-fit: cover;
     align-self:center;
     margin: 10px 0px;
     text-align:center;
