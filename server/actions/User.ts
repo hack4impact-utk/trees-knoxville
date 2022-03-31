@@ -54,6 +54,10 @@ export const getUser = async function(id: string) {
  * @param updatedUser A user with updated fields
  */
 export const updateUser = async function(updatedUser: User) {
+  // grabs the user's last name for sorting purposes
+  const splitString = updatedUser.name?.trim().split(" ");
+  const lastName = splitString![splitString!.length - 1];
+
   const axios = require("axios").default;
 
   const options = {
@@ -64,6 +68,7 @@ export const updateUser = async function(updatedUser: User) {
     
     data: {
       name: updatedUser.name,
+      nickname: lastName,
       email: updatedUser.email,
       user_metadata: {
         phone: updatedUser.user_metadata!.phone || "",
