@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tree } from "utils/types";
 import SingleTree from "src/components/SingleTree";
 import { GetStaticPropsContext, NextPage } from "next";
 import { getTrees } from "server/actions/Tree";
 import urls from "utils/urls";
 import TreeTable from "src/components/TreeTable";
-import { MdOutlineSort, MdWatchLater } from "react-icons/md"
 
 interface Props {
     trees: Tree[],
@@ -13,10 +12,31 @@ interface Props {
 
 const AdminTrees: NextPage<Props> = ({ trees }) => {
 
-    // reroutes to specific tree page
-    const onClick = (treeId: string) => {
-        window.location.replace(urls.pages.updateTree(treeId));
+    const [filterTrees, setFilterTrees] = useState(trees);
+
+    
+    const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        addFilter(e.target.value)
+    }
+    
+    const addFilter = (query: string) => {
+        // if there is a query (input field isn't blank), apply a filter. Otherwise, remove all filters
+        if (query) {
+            setFilterTrees(trees.filter((tree) => filter(tree, query)))
+        }
+        else {
+            removeFilter();
+        }
+    }
+
+    const removeFilter = () => {
+        // trees[] holds all trees in the database, so this removes any filters
+        setFilterTrees(trees);
     };
+
+    const filter = (tree: Tree, query: string) => {
+        return tree.species?.toLowerCase().indexOf(query.toLowerCase()) !== -1
+    }
 
     return (
     <div>    
@@ -26,7 +46,8 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
         <h1>Admin Trees Page</h1>
         
         <div>
-            <TreeTable trees={trees}/>
+            <input onChange={handleQueryChange} placeholder="Search"></input>
+            <TreeTable trees={filterTrees}/>
         </div>
     </div>
     );
