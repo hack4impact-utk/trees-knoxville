@@ -7,6 +7,11 @@ export interface Tree {
         latitude?: string,
         longitude?: string,
     };
+    image?: {
+        assetID?: string;
+        url?: string;
+        _id?: string;
+    }
     adopted?: boolean;
     watering?: boolean;
     pruning?: boolean;
