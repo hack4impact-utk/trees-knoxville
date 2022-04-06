@@ -1,15 +1,22 @@
+import React from 'react';
 import { Tree } from "utils/types";
 import Map from "google-map-react";
-import styles from "./Map.module.css"
-import { FunctionComponent } from "react";
 import Marker from "src/components/Marker"
+import TreeInfoComponent from "src/components/TreeInfoComponent";
+import styles from "./styles.module.scss";
 
 interface Trees {
     trees: Tree[];
 }
 
-
-const MapContainer: FunctionComponent<Trees> = ({ trees }) => {
+const MapContainer: React.FC<Trees> = ({ trees }) => {
+    const [treeToDisplay, setTreeToDisplay] = React.useState<Tree>({});
+    const [displayingTree, setDisplayingTree] = React.useState(false);
+    const handleTreeDisplay = (tree: Tree) => {
+        //If a tree isn't currently being displayed, set it to be displayed.
+        if(!displayingTree) setDisplayingTree(true);
+        setTreeToDisplay(tree);
+    }
     return (
         <div className = {styles.Map} >
             <Map
@@ -18,8 +25,9 @@ const MapContainer: FunctionComponent<Trees> = ({ trees }) => {
             defaultZoom={11}
             options={{fullscreenControl: false}}>
                 {trees && trees.map((tree: Tree) => 
-                    <Marker key={tree._id} lat={Number(tree.coordinates?.latitude)} lng={Number(tree.coordinates?.longitude)} />)}
+                    <Marker key={tree._id} lat={Number(tree.coordinates?.latitude)} lng={Number(tree.coordinates?.longitude)} tree={tree} handleTreeDisplay={handleTreeDisplay}/>)}
             </Map>
+            <TreeInfoComponent displayingTree={displayingTree} tree={treeToDisplay} setDisplayingTree={setDisplayingTree}/>
         </div>
     )
 }
