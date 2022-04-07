@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Tree } from "utils/types";
-import SingleTree from "src/components/SingleTree";
 import { GetStaticPropsContext, NextPage } from "next";
 import { getTrees } from "server/actions/Tree";
-import urls from "utils/urls";
 import TreeTable from "src/components/TreeTable";
 
 interface Props {
@@ -12,17 +10,18 @@ interface Props {
 
 const AdminTrees: NextPage<Props> = ({ trees }) => {
 
+    // maintains an array of all trees being displayed
     const [filterTrees, setFilterTrees] = useState(trees);
 
-    
     const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // applies a filter to trees[] based on the current value of the input box
         addFilter(e.target.value)
     }
     
     const addFilter = (query: string) => {
         // if there is a query (input field isn't blank), apply a filter. Otherwise, remove all filters
         if (query) {
-            setFilterTrees(trees.filter((tree) => filter(tree, query)))
+            setFilterTrees(trees.filter((tree) => filter(tree, query)));
         }
         else {
             removeFilter();
@@ -35,7 +34,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
     };
 
     const filter = (tree: Tree, query: string) => {
-        return tree.species?.toLowerCase().indexOf(query.toLowerCase()) !== -1
+        return tree.species?.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     }
 
     return (
@@ -46,7 +45,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
         <h1>Admin Trees Page</h1>
         
         <div>
-            <input onChange={handleQueryChange} placeholder="Search"></input>
+            <input onChange={handleQueryChange} placeholder="Search by species name"></input>
             <TreeTable trees={filterTrees}/>
         </div>
     </div>
