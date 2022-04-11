@@ -26,7 +26,6 @@
     margin: 0 10px 0 0;
     display: flex;
     justify-content: center;
-    align-items: center;
     @include ab.respond-to('small') {
         margin-left: 10px;
     }
