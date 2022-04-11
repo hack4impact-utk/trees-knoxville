@@ -26,10 +26,18 @@
     margin: 0 10px 0 0;
     display: flex;
     justify-content: center;
-
+    align-items: center;
     @include ab.respond-to('small') {
         margin-left: 10px;
     }
+}
+
+.treeImage {
+    border-radius: 50%;
+    border: 2px solid map-get(ab.$colors, "theme", "primary");
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
 }
 
 .hiddenText {
@@ -38,11 +46,6 @@
     }
 }
 
-.placeholderImage {
-    min-width: 50px;
-    width: 50%;
-    height: auto;
-}
 
 .mobileInfo1 {
     // species
