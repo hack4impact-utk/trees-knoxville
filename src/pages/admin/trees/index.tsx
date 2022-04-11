@@ -1,11 +1,9 @@
 import React from "react";
 import { Tree } from "utils/types";
-import SingleTree from "src/components/SingleTree";
 import { GetStaticPropsContext, NextPage } from "next";
 import { getTrees } from "server/actions/Tree";
 import urls from "utils/urls";
 import TreeTable from "src/components/TreeTable";
-import { MdOutlineSort, MdWatchLater } from "react-icons/md"
 
 interface Props {
     trees: Tree[],
@@ -13,18 +11,19 @@ interface Props {
 
 const AdminTrees: NextPage<Props> = ({ trees }) => {
 
-    // reroutes to specific tree page
-    const onClick = (treeId: string) => {
-        window.location.replace(urls.pages.updateTree(treeId));
-    };
-
     return (
     <div>    
         <head>
             <title>Admin Trees | Trees Knoxville</title>
         </head>
         <h1>Admin Trees Page</h1>
-        
+        <div>
+            <select name="filterType">
+                <option value="none" selected>-- Filter by --</option>
+                <option value="age">Age</option>
+                <option value="date">Date</option>
+            </select>
+        </div>
         <div>
             <TreeTable trees={trees}/>
         </div>
