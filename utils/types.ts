@@ -17,6 +17,7 @@ export interface Tree {
     pruning?: boolean;
     datePlanted?: Date;
     published?: boolean;
+    image?: ContentfulImage;
 }
 
 export interface User {

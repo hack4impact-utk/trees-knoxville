@@ -32,6 +32,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-tsc": "^2.0.0",
     "formidable": "^2.0.1",
+    "generate-password": "^1.7.0",
     "google-map-react": "^2.1.10",
     "google-maps-react": "^2.0.6",
     "husky": "^7.0.2",
