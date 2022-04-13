@@ -19,30 +19,46 @@ interface Props {
 }
 
 const AdminTrees: NextPage<Props> = ({ trees }) => {
-    // TODO make date and age boxes invisible when they should be
 
+    // maintains an array of all trees being displayed
+    const [filterTrees, setFilterTrees] = useState(trees);
+    
+    // holds all values that deal with what is being applied to the filter
+    const [values, setValues] = React.useState<stateInterface>({} as stateInterface);
+
+    // used to clear the input fields
+    const minAgeInput  = useRef<HTMLInputElement>(null);
+    const maxAgeInput  = useRef<HTMLInputElement>(null);
+    const minDateInput = useRef<HTMLInputElement>(null);
+    const maxDateInput = useRef<HTMLInputElement>(null);
+
+    // handles changes in filter mode (filter by age, date, or neither)
     const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         if (e.target.value === "age") {
-            // this will always evaluate to true, but is needed to suppress "Object is possibly null" warnings
+            // this condition will always evaluate to true, but is needed to suppress "Object is possibly null" warnings
             if (minDateInput.current && maxDateInput.current) {
+                // clears date range inputs
                 minDateInput.current.value = "";
                 maxDateInput.current.value = "";
             }
             
+            // sets min/max values for dates. Used when switching back to filtering by date
             values.minDate = new Date(0);
             values.maxDate = new Date();
         }
         if (e.target.value === "date") {
             if (minAgeInput.current && maxAgeInput.current) {
+                // clears age range inputs
                 minAgeInput.current.value = "";
                 maxAgeInput.current.value = "";
             }
 
+            // sets min/max values for ages. Used when switching back to filtering by age
             values.minAge = 0;
             values.maxAge = 999;
         }
         else {
-            // this will always evaluate to true, but is needed to suppress "Object is possibly null" warnings
+            // clears age and date range inputs
             if (minDateInput.current && maxDateInput.current) {
                 minDateInput.current.value = "";
                 maxDateInput.current.value = "";
@@ -53,32 +69,31 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
                 maxAgeInput.current.value = "";
             }
 
+            // sets min/max values for dates and ages. Used when switching back to filtering by date or age
             values.minDate = new Date(0);
             values.maxDate = new Date();
             values.minAge = 0;
             values.maxAge = 999;
         }
 
+        // resets the filter
         addSpeciesFilter(values.speciesName);
 
+        // updates the filter type (age, date, or none)
         values.filterType = e.target.value;
     };
 
-    // maintains an array of all trees being displayed
-    const [filterTrees, setFilterTrees] = useState(trees);
-    
-    const [values, setValues] = React.useState<stateInterface>({} as stateInterface);
-
-    const minAgeInput  = useRef<HTMLInputElement>(null);
-    const maxAgeInput  = useRef<HTMLInputElement>(null);
-    const minDateInput = useRef<HTMLInputElement>(null);
-    const maxDateInput = useRef<HTMLInputElement>(null);
-    
+    /* Applies a filter based on species, age, or date. If filtering by age or date,
+     * the species filter is applied as well. If not, filters by only the species name */
 
     const addSpeciesFilter = (speciesName: string) => {
         // if there is a query (input field isn't blank), apply a filter. Otherwise, remove all filters
         if (speciesName) {
             setFilterTrees(trees.filter((tree) => speciesFilter(tree, speciesName)));
+        }
+        else {
+            // trees[] holds all trees in the database, so this resets the filter
+            setFilterTrees(trees);
         }
     }
 
@@ -89,6 +104,8 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
     const addDateFilter = (minDate: Date, maxDate: Date, speciesName: string) => {
         setFilterTrees(trees.filter((tree) => dateFilter(tree, minDate, maxDate, speciesName)));
     };
+
+    // filter functions used in the above three functions
 
     const speciesFilter = (tree: Tree, speciesName: string) => {
         if (speciesName) return tree?.species?.toLowerCase().indexOf(speciesName.toLowerCase()) !== -1;
@@ -107,6 +124,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
         event.persist();
         const target = event.target as HTMLInputElement;
 
+        // if a date input was changed, convert it to a Date type
         if (target.name === "minDate" || target.name === "maxDate") {
             setValues(values => ({...values, [target.name]: new Date(target.value)}));
         }
@@ -114,28 +132,41 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
             setValues(values => ({...values, [target.name]: target.value}));
         }
         
-        
-        
-        
+        /* Applies filters based on which dropdown option is selected and which field was changed.
+         * With the state interface, the values are not available to use until the program leaves the
+         * scope of the function, which is why different function calls must be made with target.value in
+         * different locations. target.name represents which field was changed, target.value is its new value.
+         * For each, if the max/min field is blank, uses the min/max value of that field instead. 
+         * For example, if the minimum date was 4/10/2022 and no maximum date was set, all trees planted
+         * on or after 4/10/2022 would be displayed.
+        */
+       
         if (values.filterType === "age") {
             if (target.name === "minAge") {
+                // minimum age field changed
                 addAgeFilter(Number(target.value), values.maxAge || 1000, values.speciesName);
             }
             else if (target.name === "maxAge") {
+                // maximum age field changed
                 addAgeFilter(values.minAge, Number(target.value) || 1000, values.speciesName);
             }
             else {
+                // species name field changed
                 addAgeFilter(values.minAge, values.maxAge || 1000, target.value);
             }
         }
         else if (values.filterType === "date") {
+            // Date(0) represents a minimum date, Date() repsesents the current date (maximum date)
             if (target.name === "minDate") {
+                // minimum date field changed
                 addDateFilter(new Date(target.value), values.maxDate || new Date(), values.speciesName);
             }
             else if (target.name === "maxDate") {
+                // maximum date field changed
                 addDateFilter(values.minDate || new Date(0), new Date(target.value), values.speciesName);
             }
             else {
+                // species name field changed
                 addDateFilter(values.minDate || new Date(0), values.maxDate || new Date(), target.value);
             }
         }
@@ -158,12 +189,21 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
                 <option value="date">Date</option>
             </select>
 
-        
-            <input name="minAge" type="number" placeholder="start age" onChange={onChange} ref={minAgeInput}></input>
-            <input name="maxAge" type="number" placeholder="end age" onChange={onChange} ref={maxAgeInput}></input>
+            {values.filterType === "age" &&
+                <input name="minAge" type="number" placeholder="start age" onChange={onChange} ref={minAgeInput}/>
+            }
 
-            <input name="minDate" type="date" onChange={onChange} ref={minDateInput}></input>
-            <input name="maxDate" type="date" onChange={onChange} ref={maxDateInput}></input>
+            {values.filterType === "age" && 
+                <input name="maxAge" type="number" placeholder="end age" onChange={onChange} ref={maxAgeInput}/>
+            }
+
+            {values.filterType === "date" &&
+                <input name="minDate" type="date" onChange={onChange} ref={minDateInput}></input>
+            }
+
+            {values.filterType === "date" && 
+                <input name="maxDate" type="date" onChange={onChange} ref={maxDateInput}></input>
+            }
         </div>
         <div>
             <input name="speciesName" placeholder="Search by species name" onChange={onChange}></input>
