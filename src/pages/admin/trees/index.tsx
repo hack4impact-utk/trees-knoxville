@@ -32,7 +32,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
     const minDateInput = useRef<HTMLInputElement>(null);
     const maxDateInput = useRef<HTMLInputElement>(null);
 
-    // handles changes in filter mode (filter by age, date, or neither)
+    // handles changes in filter mode (filter by age, date, or neither). Called when the dropdown menu changes
     const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         if (e.target.value === "age") {
             // this condition will always evaluate to true, but is needed to suppress "Object is possibly null" warnings
@@ -83,43 +83,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
         values.filterType = e.target.value;
     };
 
-    /* Applies a filter based on species, age, or date. If filtering by age or date,
-     * the species filter is applied as well. If not, filters by only the species name */
-
-    const addSpeciesFilter = (speciesName: string) => {
-        // if there is a query (input field isn't blank), apply a filter. Otherwise, remove all filters
-        if (speciesName) {
-            setFilterTrees(trees.filter((tree) => speciesFilter(tree, speciesName)));
-        }
-        else {
-            // trees[] holds all trees in the database, so this resets the filter
-            setFilterTrees(trees);
-        }
-    }
-
-    const addAgeFilter = (minAge: number, maxAge: number, speciesName: string) => {
-        setFilterTrees(trees.filter((tree) => ageFilter(tree, minAge, maxAge, speciesName)));
-    };
-
-    const addDateFilter = (minDate: Date, maxDate: Date, speciesName: string) => {
-        setFilterTrees(trees.filter((tree) => dateFilter(tree, minDate, maxDate, speciesName)));
-    };
-
-    // filter functions used in the above three functions
-
-    const speciesFilter = (tree: Tree, speciesName: string) => {
-        if (speciesName) return tree?.species?.toLowerCase().indexOf(speciesName.toLowerCase()) !== -1;
-        else return true;
-    };
-
-    const ageFilter = (tree: Tree, minAge: number, maxAge: number, speciesName: string) => {
-        return tree?.age! >= minAge && tree?.age! <= maxAge && speciesFilter(tree, speciesName);
-    };
-
-    const dateFilter = (tree: Tree, minDate: Date, maxDate: Date, speciesName: string) => {
-        return new Date(tree?.datePlanted!) >= minDate && new Date(tree?.datePlanted!) <= maxDate && speciesFilter(tree, speciesName)
-    };
-
+    // called when any input field changes
     const onChange = (event: React.SyntheticEvent) => {
         event.persist();
         const target = event.target as HTMLInputElement;
@@ -136,6 +100,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
          * With the state interface, the values are not available to use until the program leaves the
          * scope of the function, which is why different function calls must be made with target.value in
          * different locations. target.name represents which field was changed, target.value is its new value.
+         * If a minimum value was changed, uses the existing maximum value and vice versa.
          * For each, if the max/min field is blank, uses the min/max value of that field instead. 
          * For example, if the minimum date was 4/10/2022 and no maximum date was set, all trees planted
          * on or after 4/10/2022 would be displayed.
@@ -174,7 +139,53 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
             // species name changed, and no other filters should be applied
             addSpeciesFilter(target.value);
         }
+    };
+
+    /* These three functions apply a filter based on species, age, or date. If filtering by age
+     * or date, the species filter is applied as well. If not, filters by only the species name */
+
+    const addSpeciesFilter = (speciesName: string) => {
+        // if there is a query (input field isn't blank), apply a filter. Otherwise, remove all filters
+        if (speciesName) {
+            setFilterTrees(trees.filter((tree) => speciesFilter(tree, speciesName)));
+        }
+        else {
+            // trees[] holds all trees in the database, so this resets the filter
+            setFilterTrees(trees);
+        }
     }
+
+    const addAgeFilter = (minAge: number, maxAge: number, speciesName: string) => {
+        setFilterTrees(trees.filter((tree) => ageFilter(tree, minAge, maxAge, speciesName)));
+    };
+
+    const addDateFilter = (minDate: Date, maxDate: Date, speciesName: string) => {
+        setFilterTrees(trees.filter((tree) => dateFilter(tree, minDate, maxDate, speciesName)));
+    };
+
+    // These three functions below are the filter functions used in the above three functions
+
+    const speciesFilter = (tree: Tree, speciesName: string) => {
+        // if the species input box is not blank, return true if there is a partial match
+        if (speciesName) return tree?.species?.toLowerCase().indexOf(speciesName.toLowerCase()) !== -1;
+        
+        // if the species input box is blank, always return true (we want every species)
+        else return true;
+    };
+
+    const ageFilter = (tree: Tree, minAge: number, maxAge: number, speciesName: string) => {
+        // returns true if tree.age is between minAge and maxAge (inclusive) and there is a partial species name match
+        return (tree?.age! >= minAge && 
+                tree?.age! <= maxAge && 
+                speciesFilter(tree, speciesName));
+    };
+
+    const dateFilter = (tree: Tree, minDate: Date, maxDate: Date, speciesName: string) => {
+        // returns true if tree.datePlanted is between minDate and maxDate and there is a partial species name match
+        return (new Date(tree?.datePlanted!) >= minDate && 
+                new Date(tree?.datePlanted!) <= maxDate && 
+                speciesFilter(tree, speciesName));
+    };
 
     return (
     <div>    
