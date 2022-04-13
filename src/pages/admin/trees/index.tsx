@@ -80,7 +80,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
         addSpeciesFilter(values.speciesName);
 
         // updates the filter type (age, date, or none)
-        values.filterType = e.target.value;
+        setValues(values => ({...values, [e.target.name]: e.target.value}));
     };
 
     // called when any input field changes
