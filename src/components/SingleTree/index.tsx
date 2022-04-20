@@ -28,7 +28,7 @@ const SingleTree: NextPage<Props> = ({ tree }) => {
     return (
     <div className={styles.container}>
         <div className={styles.imageContainer}>
-                <img className={styles.placeholderImage} src="/defaultTreeImage.png"/>
+                <img className={styles.treeImage} src={tree && tree.image ? tree.image.url : "/defaultTreeImage.png"}/>
         </div>
         <div className={styles.row}>  
             
