@@ -48,6 +48,39 @@ export async function uploadImage(image: formidable.File) {
 }
 
 /**
+ * @param treeEntry Tree Entry to be uploaded to Contentful.
+ */
+ export async function createTreeEntry(treeEntry: string) {
+    const space = await client.getSpace(process.env.CONTENTFUL_SPACE as string);
+    const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT as string);
+    const entry = await environment.createEntry("treeEntry", {
+        fields: {
+            // title: {
+            //     "en-US": treeEntry.title,
+            // },
+            // description: {
+            //     "en-US": treeEntry.description,
+            // },
+            // category: {
+            //     "en-US": treeEntry.category,
+            // },
+            // body: {
+            //     "en-US": treeEntry,
+            // },
+            // reviewed: {
+            //     "en-US": false,
+            // },
+            // image: {
+            //     "en-US": treeEntry.image,
+            // },
+        },
+    });
+
+    await entry.publish();
+    if (!entry) throw new Error("Error creating tree entry.");
+}
+
+/**
  * @param ID ID of the Contentful Asset to be deleted.
  */
 export async function deleteAssetByID(ID: string) {

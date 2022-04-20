@@ -3,6 +3,7 @@ import { Tree } from "utils/types";
 import React from "react";
 import { getTree } from "server/actions/Tree";
 import UpsertTreeForm from "src/components/UpsertTreeForm";
+import TreeEntryForm from "src/components/TreeEntryForm";
 
 interface Props {
     tree: Tree,
@@ -16,6 +17,7 @@ const AdminEdit: NextPage<Props> = ({ tree }) => {
         </head>
         <h1>Admin Edit Page</h1>
         <UpsertTreeForm upsertTree={tree} />
+        <TreeEntryForm />
     </div>
     );
 }
