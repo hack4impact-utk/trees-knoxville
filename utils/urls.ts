@@ -19,5 +19,8 @@ export default {
             index: `/api/auth/users/`,
             user: (userId: string) => `/api/auth/users/${userId}`
         },
+        contentful: {
+            treeEntries: (treeId: string) => `/api/contentful/${treeId}`
+        },
     },
 }

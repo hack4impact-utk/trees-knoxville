@@ -10,7 +10,7 @@ export const config = {
     },
 };
 
-// @route   PUT  /api/events/admin/trees/[treeId] - Updates a tree from form data
+// @route   PUT  /api/admin/trees/[treeId] - Updates a tree from form data
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
         
