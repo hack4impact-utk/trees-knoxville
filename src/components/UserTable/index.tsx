@@ -7,7 +7,7 @@ import urls from "utils/urls";
 
 
 interface Props {
-    users: [];
+    users: User[];
 }
 
 const UserTable: NextPage<Props> = ({ users }) => {
