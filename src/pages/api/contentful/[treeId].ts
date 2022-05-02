@@ -8,11 +8,13 @@ import { createTreeEntry } from "server/actions/Contentful";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
         if (req.method === "POST") {
-            const r = await createTreeEntry(req.body);
-
+            const treeId = req.query.treeId as string;
+            const entryId = await createTreeEntry(req.body);
             res.status(200).json({
                 success: true,
+                entryId: entryId,
             });
+            
         }
 
         if (req.method === "GET") {

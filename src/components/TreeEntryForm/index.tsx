@@ -1,4 +1,5 @@
 import React from "react";
+import { getTree, updateTree } from "server/actions/Tree";
 import { Tree } from "utils/types";
 import urls from "utils/urls";
 
@@ -17,7 +18,41 @@ const TreeEntryForm: React.FC<Props> = ({ tree }) => {
             const r = await fetch(urls.api.contentful.treeEntry(tree._id as string), {
                 method: "POST",
                 body: entryText,
+                
             }); 
+            const data = await r.json();
+            const entryId = data.entryId;
+
+            // if there are no entries for a tree, create an array. Otherwise, push onto it
+            if (!tree.entries) {
+                tree.entries = [entryId];
+            }
+            else {
+                tree.entries.push(entryId);
+            }
+
+            // updates the tree in mongo
+            const fd = new FormData();
+            let key: string;
+            let key2: string;
+            for (key in tree) {
+                if (typeof tree[key] === "string") {
+                    fd.append(key, tree[key] as string);
+                }
+                else if (key === "coordinates") {
+                    for (key2 in tree[key]) {
+                        fd.append(key2, tree[key][key2] as string);
+                    }
+                }
+                else {
+                    fd.append(key, tree[key] as Blob);
+                }
+            }
+            
+            const response = await fetch(urls.api.trees.updateTree(tree._id as string), {
+                method: "PUT",
+                body: fd,
+            });
         }
     };
 

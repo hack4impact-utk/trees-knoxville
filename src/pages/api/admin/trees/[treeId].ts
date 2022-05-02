@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
         
         if (req.method === "PUT") {
-
+            
             const form = new formidable.IncomingForm();
             const id = req.query.treeId as string;
 
@@ -33,6 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     watering: fields.watering,
                     pruning: fields.pruning,
                     published: fields.published,   
+                    entries: fields.entries,
                 }
                 
                 // ensures coordinates are valid
@@ -52,7 +53,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }
                 
                 await updateTree({ _id: id }, updatedTree);
-                
                 res.status(200).json({
                     success: true,
                     payload: {}
