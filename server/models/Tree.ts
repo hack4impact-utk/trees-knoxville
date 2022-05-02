@@ -62,10 +62,10 @@ export const TreeSchema = new Schema({
         required: false,
     },
 
-    entries: [{
-        type: String,
+    entries: {
+        type: [String],
         required: false,
-    }]
+    },
 });
 
 export interface TreeDocument extends Omit<Tree, "_id">, Document {}

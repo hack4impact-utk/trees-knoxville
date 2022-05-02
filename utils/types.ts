@@ -13,6 +13,7 @@ export interface Tree {
     datePlanted?: Date;
     published?: boolean;
     image?: ContentfulImage;
+    entries?: string[];
 }
 
 export interface User {
