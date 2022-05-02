@@ -1,8 +1,12 @@
 import React from "react";
-import { createTreeEntry } from "server/actions/Contentful";
+import { Tree } from "utils/types";
+import urls from "utils/urls";
 
+interface Props {
+    tree: Tree,
+}
 
-const TreeEntryForm = () => {
+const TreeEntryForm: React.FC<Props> = ({ tree }) => {
 
     const [entryText, setEntryText] = React.useState("");
 
@@ -10,7 +14,10 @@ const TreeEntryForm = () => {
         e.preventDefault();
         
         if (entryText) {
-            await createTreeEntry(entryText);
+            const r = await fetch(urls.api.contentful.treeEntry(tree._id as string), {
+                method: "POST",
+                body: entryText,
+            }); 
         }
     };
 
@@ -24,7 +31,7 @@ const TreeEntryForm = () => {
             <span>Tree Update</span>
             <form onSubmit={handleSubmit}>
                 <textarea name="paragraph_text" cols="50" Rows="10" onChange={handleEntryChange}></textarea>
-                <input name="texty" type="submit" value="Submit"></input>
+                <input type="submit" value="Submit"></input>
             </form>
             
         </div>
