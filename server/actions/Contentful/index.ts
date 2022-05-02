@@ -51,32 +51,27 @@ export async function uploadImage(image: formidable.File) {
  * @param treeEntry Tree Entry to be uploaded to Contentful.
  */
  export async function createTreeEntry(treeEntry: string) {
+    // TODO put the content ID in mongo. update tree type and schema
     const space = await client.getSpace(process.env.CONTENTFUL_SPACE as string);
     const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT as string);
     const entry = await environment.createEntry("treeEntry", {
         fields: {
-            // title: {
-            //     "en-US": treeEntry.title,
-            // },
-            // description: {
-            //     "en-US": treeEntry.description,
-            // },
-            // category: {
-            //     "en-US": treeEntry.category,
-            // },
-            // body: {
-            //     "en-US": treeEntry,
-            // },
-            // reviewed: {
-            //     "en-US": false,
-            // },
-            // image: {
-            //     "en-US": treeEntry.image,
-            // },
+            user: {
+                "en-US": "test user", 
+            },
+            date: {
+                "en-US": new Date(),
+            },
+            entry: {
+                "en-US": treeEntry,
+            },
         },
+        
     });
 
-    await entry.publish();
+    const response = await entry.publish();
+
+    // takes the ID of the newly created entry and puts it into mongo
     if (!entry) throw new Error("Error creating tree entry.");
 }
 
