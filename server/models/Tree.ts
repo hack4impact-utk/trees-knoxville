@@ -61,6 +61,11 @@ export const TreeSchema = new Schema({
         type: ContentfulImageSchema,
         required: false,
     },
+
+    entries: [{
+        type: String,
+        required: false,
+    }]
 });
 
 export interface TreeDocument extends Omit<Tree, "_id">, Document {}

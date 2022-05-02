@@ -17,7 +17,7 @@ const AdminEdit: NextPage<Props> = ({ tree }) => {
         </head>
         <h1>Admin Edit Page</h1>
         <UpsertTreeForm upsertTree={tree} />
-        <TreeEntryForm />
+        <TreeEntryForm tree={tree}/>
     </div>
     );
 }
