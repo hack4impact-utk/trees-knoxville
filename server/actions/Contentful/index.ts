@@ -1,7 +1,7 @@
 import { createClient } from "contentful-management";
 import formidable from "formidable";
 import fs from "fs";
-import { Tree } from "utils/types";
+import { ContentfulEntry, Tree } from "utils/types";
 import { getTree, updateTree } from "../Tree";
 //Code comes directly from https://github.com/hack4impact-utk/mindversity-website/blob/develop/server/actions/Contentful.ts
 const client = createClient({
@@ -55,7 +55,6 @@ export async function uploadImage(image: formidable.File) {
  * @returns the ID of the entry created in contentful
  */
  export async function createTreeEntry(treeEntry: string) {
-    // TODO put the content ID in mongo. update tree type and schema
     const space = await client.getSpace(process.env.CONTENTFUL_SPACE as string);
     const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT as string);
     const entry = await environment.createEntry("treeEntry", {
@@ -80,6 +79,20 @@ export async function uploadImage(image: formidable.File) {
     // returns the contentful ID of the newly created entry
     const entryId: string = response.sys.id;
     return entryId;
+}
+
+/**
+ * @param entryId The ID of the entry in Contentful.
+ * @returns the entry from contentful
+ */
+export async function getTreeEntry(entryId: string) {
+    const space = await client.getSpace(process.env.CONTENTFUL_SPACE as string);
+    const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT as string);
+    const r = await environment.getEntry(entryId);
+
+    console.log(r);
+    return r;
+    
 }
 
 /**
