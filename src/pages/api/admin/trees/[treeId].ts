@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     watering: fields.watering,
                     pruning: fields.pruning,
                     published: fields.published,   
-                    entries: fields.entries,
+                    entryIds: fields.entryIds,
                 }
                 
                 // ensures coordinates are valid
