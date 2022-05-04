@@ -13,7 +13,8 @@ export interface Tree {
     datePlanted?: Date;
     published?: boolean;
     image?: ContentfulImage;
-    entries?: string[];
+    entryIds?: string[];
+    entries?: ContentfulEntry[];
 }
 
 export interface User {
@@ -29,4 +30,10 @@ export interface User {
 export interface ContentfulImage {
     assetID: string;
     url: string;
+}
+
+export interface ContentfulEntry {
+    user_name: string,
+    entry_date: Date,
+    entry_text: string,
 }
