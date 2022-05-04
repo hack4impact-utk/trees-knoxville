@@ -15,20 +15,19 @@ const TreeEntryForm: React.FC<Props> = ({ tree }) => {
         e.preventDefault();
         
         if (entryText) {
-            const r = await fetch(urls.api.contentful.treeEntry(tree._id as string), {
+            const r = await fetch(urls.api.contentful.index, {
                 method: "POST",
-                body: entryText,
-                
+                body: entryText, 
             }); 
             const data = await r.json();
             const entryId = data.entryId;
 
             // if there are no entries for a tree, create an array. Otherwise, push onto it
-            if (!tree.entries) {
-                tree.entries = [entryId];
+            if (!tree.entryIds) {
+                tree.entryIds = [entryId];
             }
             else {
-                tree.entries.push(entryId);
+                tree.entryIds.push(entryId);
             }
 
             // updates the tree in mongo
