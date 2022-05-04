@@ -62,7 +62,7 @@ export const TreeSchema = new Schema({
         required: false,
     },
 
-    entries: {
+    entryIds: {
         type: [String],
         required: false,
     },
