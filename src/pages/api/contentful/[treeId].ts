@@ -1,24 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { createTreeEntry } from "server/actions/Contentful";
+import { createTreeEntry, getTreeEntry } from "server/actions/Contentful";
+import { ContentfulEntry } from "utils/types";
 
 
 
-// @route   POST  /api/contentful/[treeId] - Adds a entry to a tree
-// @route   GET   /api/contentful/[treeId] - Returns all tree entries for the given tree
+// @route   GET   /api/contentful/[entryId] - Returns entry from contentful with the given Id
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        if (req.method === "POST") {
-            const treeId = req.query.treeId as string;
-            const entryId = await createTreeEntry(req.body);
-            res.status(200).json({
-                success: true,
-                entryId: entryId,
-            });
-            
-        }
-
         if (req.method === "GET") {
-            
+            const entry = await getTreeEntry(req.query.entryId as string);
         }
     } catch (error) {
         console.log(error);
