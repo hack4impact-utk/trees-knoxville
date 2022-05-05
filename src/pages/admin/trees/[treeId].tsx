@@ -5,6 +5,7 @@ import { getTree } from "server/actions/Tree";
 import UpsertTreeForm from "src/components/UpsertTreeForm";
 import TreeEntryForm from "src/components/TreeEntryForm";
 import urls from "utils/urls";
+import { getTreeEntry } from "server/actions/Contentful";
 
 interface Props {
     tree: Tree,
@@ -35,13 +36,26 @@ export async function getServerSideProps(context: NextPageContext) {
         
         if (tree.entryIds && tree.entryIds.length > 0) {
             const entryIds: string[] = tree.entryIds[0].split(',');
-            console.log(entryIds[0]);
-            console.log(urls.api.contentful.treeEntry(entryIds[0]));
-            const r = await fetch(urls.api.contentful.treeEntry(entryIds[0] as string), {
-                method: "GET",
-                body: entryIds[0],
-            }); 
+            
+            tree.entries = [];
+
+            // gets all entries from contentful and puts them in tree.entries
+            await Promise.all(entryIds.map(async (entryId: string) => {
+            const r = await getTreeEntry(entryId);
+                const entry: ContentfulEntry = {
+                    user_name: r.fields.user["en-US"],
+                    entry_date: r.fields.date["en-US"],
+                    entry_text: r.fields.entry["en-US"],
+                };
+
+                if (tree.entries) {
+                    tree.entries.push(entry);
+                }
+            }));
         }
+        
+        console.log(tree.entries);
+        console.log(tree);
 
         return {
             props: {
