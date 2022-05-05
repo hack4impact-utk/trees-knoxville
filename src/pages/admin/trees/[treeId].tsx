@@ -1,9 +1,10 @@
 import { NextPage, NextPageContext } from "next";
-import { Tree } from "utils/types";
+import { ContentfulEntry, Tree } from "utils/types";
 import React from "react";
 import { getTree } from "server/actions/Tree";
 import UpsertTreeForm from "src/components/UpsertTreeForm";
 import TreeEntryForm from "src/components/TreeEntryForm";
+import urls from "utils/urls";
 
 interface Props {
     tree: Tree,
@@ -31,6 +32,16 @@ export async function getServerSideProps(context: NextPageContext) {
 
         // this func is run on server-side, so we can safely fetch the event directly
         const tree: Tree = await getTree({ _id: treeId });
+        
+        if (tree.entryIds && tree.entryIds.length > 0) {
+            const entryIds: string[] = tree.entryIds[0].split(',');
+            console.log(entryIds[0]);
+            console.log(urls.api.contentful.treeEntry(entryIds[0]));
+            const r = await fetch(urls.api.contentful.treeEntry(entryIds[0] as string), {
+                method: "GET",
+                body: entryIds[0],
+            }); 
+        }
 
         return {
             props: {
