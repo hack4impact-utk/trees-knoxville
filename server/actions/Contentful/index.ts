@@ -90,7 +90,6 @@ export async function getTreeEntry(entryId: string) {
     const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT as string);
     const r = await environment.getEntry(entryId);
 
-    console.log(r);
     return r;
     
 }

@@ -3,6 +3,7 @@ import { Tree } from "utils/types";
 import { GetStaticPropsContext, NextPage } from "next";
 import { getTrees } from "server/actions/Tree";
 import TreeTable from "src/components/TreeTable";
+import UpsertTreeForm from "src/components/UpsertTreeForm";
 
 
 interface stateInterface {
@@ -218,6 +219,7 @@ const AdminTrees: NextPage<Props> = ({ trees }) => {
         </div>
         <div>
             <input name="speciesName" placeholder="Search by species name" onChange={onChange}></input>
+            <UpsertTreeForm />
             <TreeTable trees={filterTrees}/>
         </div>
     </div>
