@@ -100,6 +100,17 @@ export async function getTreeEntry(entryId: string) {
 }
 
 /**
+ * @param entryId the ID of the entry to be deleted in Contentful
+ */
+export async function deleteEntryByID(entryId: string) {
+    const space = await client.getSpace(process.env.CONTENTFUL_SPACE as string);
+    const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT as string);
+    const r = await environment.getEntry(entryId);
+
+    r.delete();
+}
+
+/**
  * @param ID ID of the Contentful Asset to be deleted.
  */
 export async function deleteAssetByID(ID: string) {
