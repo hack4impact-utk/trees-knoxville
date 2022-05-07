@@ -51,7 +51,6 @@ export async function uploadImage(image: formidable.File) {
 
 /**
  * @param treeEntry Tree Entry to be uploaded to Contentful.
- * @param treeId    The ID of the tree the entry is associated with
  * @returns the ID of the entry created in contentful
  */
  export async function createTreeEntry(treeEntry: string) {
@@ -91,6 +90,7 @@ export async function getTreeEntry(entryId: string) {
     const r = await environment.getEntry(entryId);
 
     const entry: ContentfulEntry = {
+        id: r.sys.id,
         user_name: r.fields.user["en-US"],
         entry_date: r.fields.date["en-US"],
         entry_text: r.fields.entry["en-US"],
@@ -101,13 +101,22 @@ export async function getTreeEntry(entryId: string) {
 
 /**
  * @param entryId the ID of the entry to be deleted in Contentful
+ * @param tree    the tree that the entry is being removed from
  */
-export async function deleteEntryByID(entryId: string) {
+export async function deleteEntryByID(entryId: string, tree: Tree) {
+    // removes the entry from contentful
     const space = await client.getSpace(process.env.CONTENTFUL_SPACE as string);
     const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT as string);
-    const r = await environment.getEntry(entryId);
+    const entry = await environment.getEntry(entryId);
+    await entry.unpublish();
+    await entry.delete();
 
-    r.delete();
+    // removes the entry Id from mongoDB
+    if (tree.entryIds) {
+        const index = tree.entryIds.indexOf(entryId);
+        tree.entryIds.splice(index, 1);
+        await updateTree({ _id: tree._id }, tree);
+    }
 }
 
 /**
