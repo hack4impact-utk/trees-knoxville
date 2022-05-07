@@ -33,6 +33,7 @@ export interface ContentfulImage {
 }
 
 export interface ContentfulEntry {
+    id: string,
     user_name: string,
     entry_date: Date,
     entry_text: string,
