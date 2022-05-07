@@ -33,33 +33,21 @@ export async function getServerSideProps(context: NextPageContext) {
 
         // this func is run on server-side, so we can safely fetch the event directly
         const tree: Tree = await getTree({ _id: treeId });
+        const tree2: Tree = JSON.parse(JSON.stringify(tree)); // mongo objects are immutable, so make a copy
         
         if (tree.entryIds && tree.entryIds.length > 0) {
             const entryIds: string[] = tree.entryIds[0].split(',');
-            
-            tree.entries = [];
 
             // gets all entries from contentful and puts them in tree.entries
-            await Promise.all(entryIds.map(async (entryId: string) => {
-            const r = await getTreeEntry(entryId);
-                const entry: ContentfulEntry = {
-                    user_name: r.fields.user["en-US"],
-                    entry_date: r.fields.date["en-US"],
-                    entry_text: r.fields.entry["en-US"],
-                };
-
-                if (tree.entries) {
-                    tree.entries.push(entry);
+            tree2.entries = await Promise.all(entryIds.map(async (entryId: string) => {
+                    return await getTreeEntry(entryId);   
                 }
-            }));
-        }
-        
-        console.log(tree.entries);
-        console.log(tree);
+                ));
+            }
 
         return {
             props: {
-                tree: JSON.parse(JSON.stringify(tree)) as Tree,
+                tree: JSON.parse(JSON.stringify(tree2)) as Tree,
             },
         };
     } catch (error) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { getTree, updateTree } from "server/actions/Tree";
-import { Tree } from "utils/types";
+import { ContentfulEntry, Tree } from "utils/types";
 import urls from "utils/urls";
 
 interface Props {
@@ -63,7 +63,16 @@ const TreeEntryForm: React.FC<Props> = ({ tree }) => {
 
     return (
         <div>
-            <span>Tree Update</span>
+            <span>Tree Update</span><br></br>
+            
+            {tree.entries && tree.entries.map((entry: ContentfulEntry) => {
+                return (
+                    <div>
+                        <span>{entry.user_name} at {entry.entry_date}:</span>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;{entry.entry_text}</p>
+                    </div>
+                );
+            })}
             <form onSubmit={handleSubmit}>
                 <textarea name="paragraph_text" cols="50" Rows="10" onChange={handleEntryChange}></textarea>
                 <input type="submit" value="Submit"></input>

@@ -90,8 +90,13 @@ export async function getTreeEntry(entryId: string) {
     const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT as string);
     const r = await environment.getEntry(entryId);
 
-    return r;
-    
+    const entry: ContentfulEntry = {
+        user_name: r.fields.user["en-US"],
+        entry_date: r.fields.date["en-US"],
+        entry_text: r.fields.entry["en-US"],
+    };
+
+    return entry;
 }
 
 /**
