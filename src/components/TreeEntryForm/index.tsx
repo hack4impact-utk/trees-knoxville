@@ -61,13 +61,21 @@ const TreeEntryForm: React.FC<Props> = ({ tree }) => {
         setEntryText(target.value);
     };
 
+    // removes a tree entry on click
+    const deleteTreeEntry = async (entryId: string) => {
+        await fetch(urls.api.contentful.treeEntry(entryId), {
+            method: "DELETE",
+            body: JSON.stringify(tree),
+        });
+    }
+
     return (
         <div>
             <span>Tree Update</span><br></br>
             
             {tree.entries && tree.entries.map((entry: ContentfulEntry) => {
                 return (
-                    <div>
+                    <div key={entry.id} onClick={() => deleteTreeEntry(entry.id)} >
                         <span>{entry.user_name} at {entry.entry_date}:</span>
                         <p>&nbsp;&nbsp;&nbsp;&nbsp;{entry.entry_text}</p>
                     </div>

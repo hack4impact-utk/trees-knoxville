@@ -37,6 +37,7 @@ export async function getServerSideProps(context: NextPageContext) {
         
         if (tree.entryIds && tree.entryIds.length > 0) {
             const entryIds: string[] = tree.entryIds[0].split(',');
+            tree2.entryIds = entryIds;
 
             // gets all entries from contentful and puts them in tree.entries
             tree2.entries = await Promise.all(entryIds.map(async (entryId: string) => {

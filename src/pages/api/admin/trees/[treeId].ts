@@ -53,11 +53,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }
                 
                 await updateTree({ _id: id }, updatedTree);
-                res.status(200).json({
-                    success: true,
-                    payload: {}
-                });
             });            
+            res.status(200).json({
+                success: true,
+                payload: {}
+            });
         }
         
     } catch (error) {
