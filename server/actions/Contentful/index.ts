@@ -106,10 +106,9 @@ export async function getTreeEntry(entryId: string) {
 export async function getTreeEntries(tree: Tree) {
 
     if (tree.entryIds && tree.entryIds.length > 0) {
-        const entryIds: string[] = tree.entryIds[0].split(',');
 
         // gets all entries from contentful and puts them in tree.entries
-        const entries = await Promise.all(entryIds.map(async (entryId: string) => {
+        const entries = await Promise.all(tree.entryIds.map(async (entryId: string) => {
             return await getTreeEntry(entryId);   
         }
         ));
@@ -135,11 +134,6 @@ export async function deleteEntryByID(entryId: string, tree: Tree) {
 
     // removes the entry Id from mongoDB
     if (tree.entryIds) {
-
-        // converts what's in mongo into an actual array
-        const entryIds: string[] = tree.entryIds[0].split(',');
-        tree.entryIds = entryIds;
-
         const index = tree.entryIds.indexOf(entryId);
         tree.entryIds.splice(index, 1);
         await updateTree({ _id: tree._id }, tree);
