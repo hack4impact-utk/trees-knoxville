@@ -1,5 +1,4 @@
 import React from "react";
-import { getTree, updateTree } from "server/actions/Tree";
 import { ContentfulEntry, Tree } from "utils/types";
 import urls from "utils/urls";
 

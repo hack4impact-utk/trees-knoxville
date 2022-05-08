@@ -1,11 +1,10 @@
 import { NextPage, NextPageContext } from "next";
-import { ContentfulEntry, Tree } from "utils/types";
+import { Tree } from "utils/types";
 import React from "react";
 import { getTree } from "server/actions/Tree";
 import UpsertTreeForm from "src/components/UpsertTreeForm";
 import TreeEntryForm from "src/components/TreeEntryForm";
-import urls from "utils/urls";
-import { getTreeEntry } from "server/actions/Contentful";
+import { getTreeEntries } from "server/actions/Contentful";
 
 interface Props {
     tree: Tree,
@@ -35,16 +34,7 @@ export async function getServerSideProps(context: NextPageContext) {
         const tree: Tree = await getTree({ _id: treeId });
         const tree2: Tree = JSON.parse(JSON.stringify(tree)); // mongo objects are immutable, so make a copy
         
-        if (tree.entryIds && tree.entryIds.length > 0) {
-            const entryIds: string[] = tree.entryIds[0].split(',');
-            tree2.entryIds = entryIds;
-
-            // gets all entries from contentful and puts them in tree.entries
-            tree2.entries = await Promise.all(entryIds.map(async (entryId: string) => {
-                    return await getTreeEntry(entryId);   
-                }
-                ));
-            }
+        tree2.entries = await getTreeEntries(tree2);
 
         return {
             props: {
