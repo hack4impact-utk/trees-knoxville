@@ -4,7 +4,6 @@ import React from "react";
 import { getTree } from "server/actions/Tree";
 import UpsertTreeForm from "src/components/UpsertTreeForm";
 import TreeEntryForm from "src/components/TreeEntryForm";
-import { getTreeEntries } from "server/actions/Contentful";
 
 interface Props {
     tree: Tree,
@@ -32,13 +31,10 @@ export async function getServerSideProps(context: NextPageContext) {
 
         // this func is run on server-side, so we can safely fetch the event directly
         const tree: Tree = await getTree({ _id: treeId });
-        const tree2: Tree = JSON.parse(JSON.stringify(tree)); // mongo objects are immutable, so make a copy
-        
-        tree2.entries = await getTreeEntries(tree2);
 
         return {
             props: {
-                tree: JSON.parse(JSON.stringify(tree2)) as Tree,
+                tree: JSON.parse(JSON.stringify(tree)) as Tree,
             },
         };
     } catch (error) {

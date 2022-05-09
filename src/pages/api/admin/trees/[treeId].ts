@@ -32,10 +32,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     adopted: fields.adopted,
                     watering: fields.watering,
                     pruning: fields.pruning,
-                    published: fields.published,   
-                    entryIds: fields.entryIds.split(','),
+                    published: fields.published,
+                    entries: JSON.parse(fields.entries),   
                 }
-                
+                              
                 // ensures coordinates are valid
                 const numberLat = Number(updatedTree.coordinates?.latitude);
                 const numberLong = Number(updatedTree.coordinates?.longitude);

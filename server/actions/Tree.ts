@@ -1,8 +1,6 @@
 import mongoDB from "server/index";
 import TreeSchema from "server/models/Tree";
-import { Types } from "mongoose";
 import { Tree } from "utils/types";
-import TreeModel from "server/models/Tree";
 
 
 /**

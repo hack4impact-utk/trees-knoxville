@@ -1,7 +1,7 @@
 import { createClient } from "contentful-management";
 import formidable from "formidable";
 import fs from "fs";
-import { ContentfulEntry, Tree } from "utils/types";
+import { Tree } from "utils/types";
 import { getTree, updateTree } from "../Tree";
 //Code comes directly from https://github.com/hack4impact-utk/mindversity-website/blob/develop/server/actions/Contentful.ts
 const client = createClient({
@@ -50,92 +50,18 @@ export async function uploadImage(image: formidable.File) {
 }
 
 /**
- * @param treeEntry Tree Entry to be uploaded to Contentful.
- * @returns the ID of the entry created in contentful
- */
- export async function createTreeEntry(treeEntry: string) {
-    const space = await client.getSpace(process.env.CONTENTFUL_SPACE as string);
-    const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT as string);
-    const entry = await environment.createEntry("treeEntry", {
-        fields: {
-            user: {
-                "en-US": "test user", 
-            },
-            date: {
-                "en-US": new Date(),
-            },
-            entry: {
-                "en-US": treeEntry,
-            },
-        },
-        
-    });
-
-    const response = await entry.publish();
-
-    if (!entry) throw new Error("Error creating tree entry.");
-    
-    // returns the contentful ID of the newly created entry
-    const entryId: string = response.sys.id;
-    return entryId;
-}
-
-/**
- * @param entryId The ID of the entry in Contentful.
- * @returns the entry from contentful
- */
-export async function getTreeEntry(entryId: string) {
-    const space = await client.getSpace(process.env.CONTENTFUL_SPACE as string);
-    const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT as string);
-    const r = await environment.getEntry(entryId);
-
-    const entry: ContentfulEntry = {
-        id: r.sys.id,
-        user_name: r.fields.user["en-US"],
-        entry_date: r.fields.date["en-US"],
-        entry_text: r.fields.entry["en-US"],
-    };
-
-    return entry;
-}
-
-/**
- * @param tree the tree to return all contentful entries for
- * @returns all contentful entries associated with the given tree
- */
-export async function getTreeEntries(tree: Tree) {
-
-    if (tree.entryIds && tree.entryIds.length > 0) {
-
-        // gets all entries from contentful and puts them in tree.entries
-        const entries = await Promise.all(tree.entryIds.map(async (entryId: string) => {
-            return await getTreeEntry(entryId);   
-        }
-        ));
-
-        return entries;
-    }
-    else {
-        return [];
-    }
-}
-
-/**
  * @param entryId the ID of the entry to be deleted in Contentful
  * @param tree    the tree that the entry is being removed from
  */
 export async function deleteEntryByID(entryId: string, tree: Tree) {
-    // removes the entry from contentful
-    const space = await client.getSpace(process.env.CONTENTFUL_SPACE as string);
-    const environment = await space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT as string);
-    const entry = await environment.getEntry(entryId);
-    await entry.unpublish();
-    await entry.delete();
 
     // removes the entry Id from mongoDB
-    if (tree.entryIds) {
-        const index = tree.entryIds.indexOf(entryId);
-        tree.entryIds.splice(index, 1);
+    if (tree.entries) {
+
+        tree.entries = tree.entries.filter((entry) => {
+            return entry.id != entryId;
+        })
+        
         await updateTree({ _id: tree._id }, tree);
     }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { ContentfulEntry, Tree } from "utils/types";
+import { Entry, Tree } from "utils/types";
 import urls from "utils/urls";
 
 interface Props {
@@ -14,20 +14,21 @@ const TreeEntryForm: React.FC<Props> = ({ tree }) => {
         e.preventDefault();
         
         if (entryText) {
-            const r = await fetch(urls.api.contentful.index, {
-                method: "POST",
-                body: entryText, 
-            }); 
-            const data = await r.json();
-            const entryId = data.entryId;
+
+            const entry: Entry = {
+                id: entryText, // THIS IS A PLACEHOLDER. GENERATE OBJECTID HERE
+                user_name: "PLACEHOLDER USER",
+                entry_date: new Date(),
+                entry_text: entryText,
+            }
             
             // if there are no entries for a tree, create an array. Otherwise, push onto it
-            if (tree.entryIds?.length == 0) {
-                tree.entryIds = [];
-                tree.entryIds.push(entryId);
+            if (!tree.entries) {
+                tree.entries = [];
+                tree.entries.push(entry);
             }
             else {
-                tree.entryIds?.push(entryId);
+                tree.entries.push(entry);
             }
 
             // updates the tree in mongo
@@ -43,11 +44,14 @@ const TreeEntryForm: React.FC<Props> = ({ tree }) => {
                         fd.append(key2, tree[key][key2] as string);
                     }
                 }
+                else if (key === "entries") {
+                    fd.append(key, JSON.stringify(tree[key]))
+                }
                 else {
                     fd.append(key, tree[key] as Blob);
                 }
             }
-            
+                  
             const response = await fetch(urls.api.trees.updateTree(tree._id as string), {
                 method: "PUT",
                 body: fd,
@@ -72,10 +76,10 @@ const TreeEntryForm: React.FC<Props> = ({ tree }) => {
         <div>
             <span>Tree Update</span><br></br>
             
-            {tree.entries && tree.entries.map((entry: ContentfulEntry) => {
+            {tree.entries && tree.entries.map((entry: Entry) => {
                 return (
                     <div key={entry.id} onClick={() => deleteTreeEntry(entry.id)} >
-                        <span>{entry.user_name} at {entry.entry_date}:</span>
+                        <span>{entry.user_name} at {entry.entry_date.toString()}:</span>
                         <p>&nbsp;&nbsp;&nbsp;&nbsp;{entry.entry_text}</p>
                     </div>
                 );

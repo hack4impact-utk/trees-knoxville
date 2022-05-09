@@ -64,6 +64,9 @@ const UpsertTreeForm: React.FC<Props> = ({ upsertTree }) => {
                     fd.append(key2, newTree[key][key2] as string);
                 }
             }
+            else if (key === "entries") {
+                fd.append(key, JSON.stringify(tree[key]))
+            }
             else {
                 fd.append(key, newTree[key] as Blob);
             }

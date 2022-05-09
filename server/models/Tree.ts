@@ -1,6 +1,7 @@
 import { model, models, Model, Schema, Document } from "mongoose";
 import { Tree } from "utils/types";
 import ContentfulImageSchema from "./ContentfulImageSchema";
+import EntrySchema from "./EntrySchema";
 
 export const TreeSchema = new Schema({
 
@@ -62,8 +63,8 @@ export const TreeSchema = new Schema({
         required: false,
     },
 
-    entryIds: {
-        type: [String],
+    entries: {
+        type: [EntrySchema],
         required: false,
     },
 });
