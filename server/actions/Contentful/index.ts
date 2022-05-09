@@ -1,8 +1,6 @@
 import { createClient } from "contentful-management";
 import formidable from "formidable";
 import fs from "fs";
-import { Tree } from "utils/types";
-import { getTree, updateTree } from "../Tree";
 //Code comes directly from https://github.com/hack4impact-utk/mindversity-website/blob/develop/server/actions/Contentful.ts
 const client = createClient({
     accessToken: process.env.CONTENTFUL_PERSONAL_TOKEN as string,
@@ -46,23 +44,6 @@ export async function uploadImage(image: formidable.File) {
         fs.unlinkSync(image.filepath);
         //The url is returned without the http/https, so it's added here.
         return { url: "https:" + asset.fields.file["en-US"].url, assetID: asset.sys.id };
-    }
-}
-
-/**
- * @param entryId the ID of the entry to be deleted in Contentful
- * @param tree    the tree that the entry is being removed from
- */
-export async function deleteEntryByID(entryId: string, tree: Tree) {
-
-    // removes the entry Id from mongoDB
-    if (tree.entries) {
-
-        tree.entries = tree.entries.filter((entry) => {
-            return entry.id != entryId;
-        })
-        
-        await updateTree({ _id: tree._id }, tree);
     }
 }
 
