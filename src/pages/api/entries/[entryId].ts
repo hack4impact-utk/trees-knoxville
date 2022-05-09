@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { deleteEntryByID } from "server/actions/Entry";
 import { Tree } from "utils/types";
 
-// @route   DELETE /api/entries/[entryId] - Deletes entry from contentful with the given Id
+// @route   DELETE /api/entries/[entryId] - Deletes entry from a tree with the given Id
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
 
