@@ -20,7 +20,7 @@ export default {
             user: (userId: string) => `/api/auth/users/${userId}`
         },
         entries: {
-            treeEntry: (entryId: string) => `/api/entries/${entryId}`
+            treeEntry: (Id: string) => `/api/entries/${Id}` // entryId or treeId depending on method
         },
     },
 }
